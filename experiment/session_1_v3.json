@@ -1,0 +1,2437 @@
+{
+  "id": "session_1",
+  "name": "Session 1 - Practice and Main",
+  "subSessions": [
+    {
+      "id": "cover_story",
+      "name": "Cover Story",
+      "isPractice": false,
+      "theme": {
+        "col1": [
+          "#9fd1ff",
+          "#4ea0e6",
+          "#1c5fa0",
+          "#0a2f55"
+        ],
+        "col2": [
+          "#ffc1b3",
+          "#ff8a78",
+          "#e55e51",
+          "#a53a3b"
+        ],
+        "col3": [
+          "#a8e3d7",
+          "#51b9a6",
+          "#228376",
+          "#0b4a4f"
+        ],
+        "col4": [
+          "rgb(113 219 214 / 90%)",
+          "rgb(230 173 63 / 89%)",
+          "#b87f22",
+          "#6a4a12"
+        ]
+      },
+      "content": {
+        "id": "cover_video",
+        "type": "vimeo-stream",
+        "localizedPath": {
+          "en": {
+            "cohort_a": "1132123282",
+            "cohort_b": "1132123282"
+          },
+          "de": {
+            "cohort_a": "1132123966",
+            "cohort_b": "1132123966"
+          }
+        }
+      },
+      "instructions": [
+        {
+          "id": "prac_intro",
+          "text": "experiments.sessions.session1.instructions.cover_story.intro",
+          "audio": "src/assets/City0/audio/{lang}/instructions/intro.mp3",
+          "images": [
+            "src/assets/City0/images/bus_intro.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prac_tour",
+      "name": "Practice Tour",
+      "isPractice": true,
+      "theme": {
+        "col1": [
+          "#53623C",
+          "#2E4431",
+          "#928C5C",
+          "#4A5D23"
+        ],
+        "col2": [
+          "#8B4513",
+          "#A0522D",
+          "#CD853F",
+          "#DEB887"
+        ],
+        "col3": [
+          "#EEE1A8",
+          "#DFC778",
+          "#F2B743",
+          "#C0A361"
+        ],
+        "col4": [
+          "#292014",
+          "#1b160b",
+          "#2a1f15",
+          "#3d2f1f"
+        ]
+      },
+      "content": {
+        "id": "prac_video",
+        "type": "vimeo-stream",
+        "localizedPath": {
+          "en": {
+            "cohort_a": "1132135253",
+            "cohort_b": "1132135253"
+          },
+          "de": {
+            "cohort_a": "1132135180",
+            "cohort_b": "1132135180"
+          }
+        }
+      },
+      "instructions": [
+        {
+          "id": "prac_gen_instructions",
+          "text": "experiments.sessions.session1.instructions.prac.gen_questions.gen_questions_instructions",
+          "audio": "src/assets/City0/audio/{lang}/instructions/gen_intro.mp3",
+          "images": [
+            "src/assets/City0/images/guide.png",
+            "src/assets/City0/images/bus.png"
+          ]
+        }
+      ],
+      "questionsGroups": [
+        {
+          "id": "prac_gen_questions",
+          "type": "gen",
+          "hasTimeline": true,
+          "questions": [
+            {
+              "id": "prac_gen_1",
+              "type": "question",
+              "text": "experiments.sessions.session1.questions.prac.gen_questions.gen_1",
+              "audio": "src/assets/City0/audio/{lang}/instructions/gen_first.mp3",
+              "eventId": "1",
+              "choices": [
+                {
+                  "id": "gen_choice_1_3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "gen_choice_1_3",
+                    "type": "video",
+                    "path": "src/assets/City0/animations/{lang}/3.mp4"
+                  },
+                  "feedback": "src/assets/City0/audio/{lang}/feedback/gen_incorrect1.mp3"
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "gen_choice_2_2",
+                    "type": "video",
+                    "path": "src/assets/City0/animations/{lang}/2.mp4"
+                  },
+                  "feedback": "src/assets/City0/audio/{lang}/feedback/gen_incorrect1.mp3"
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "gen_choice_3_1",
+                    "type": "video",
+                    "path": "src/assets/City0/animations/{lang}/1.mp4"
+                  },
+                  "feedback": "src/assets/City0/audio/{lang}/feedback/correct.mp3"
+                }
+              ]
+            },
+            {
+              "id": "prac_gen_2",
+              "type": "question",
+              "text": "experiments.sessions.session1.questions.prac.gen_questions.gen_2",
+              "audio": "src/assets/City0/audio/{lang}/instructions/gen_next.mp3",
+              "eventId": "2",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "gen_choice_1_2",
+                    "type": "video",
+                    "path": "src/assets/City0/animations/{lang}/2.mp4"
+                  },
+                  "feedback": {
+                    "correct": {
+                      "id": "feedback_1",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/correct.mp3"
+                    },
+                    "incorrect": {
+                      "id": "feedback_2",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/gen_incorrect2.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "gen_choice_2_1",
+                    "type": "video",
+                    "path": "src/assets/City0/animations/{lang}/1.mp4"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_1",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/gen_incorrect2.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "gen_choice_3_3",
+                    "type": "video",
+                    "path": "src/assets/City0/animations/{lang}/3.mp4"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_3",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/gen_incorrect2.mp3"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "prac_gen_3",
+              "type": "question",
+              "text": "experiments.sessions.session1.questions.prac.gen_questions.gen_3",
+              "audio": "src/assets/City0/audio/{lang}/instructions/gen_next.mp3",
+              "eventId": "3",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "gen_choice_1_1",
+                    "type": "video",
+                    "path": "src/assets/City0/animations/{lang}/1.mp4"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_4",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/gen_incorrect3.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "gen_choice_2_3",
+                    "type": "video",
+                    "path": "src/assets/City0/animations/{lang}/3.mp4"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_5",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/gen_incorrect3.mp3"
+                    },
+                    "correct": {
+                      "id": "feedback_6",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/correct.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "gen_choice_3_2",
+                    "type": "video",
+                    "path": "src/assets/City0/animations/{lang}/2.mp4"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_7",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/gen_incorrect3.mp3"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "coin_1",
+              "type": "interlude",
+              "content": {
+                "id": "coin_1_content",
+                "type": "video",
+                "path": "src/assets/City0/gamify/coin_1.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": "prac_ps_questions",
+          "type": "ps",
+          "hasTimeline": false,
+          "instructions": [
+            {
+              "id": "prac_ps_instructions",
+              "text": "experiments.sessions.session1.instructions.prac.ps_questions.ps_questions_instructions",
+              "audio": "src/assets/City0/audio/{lang}/instructions/ps_intro.mp3",
+              "images": [
+                "src/assets/City0/images/guide.png"
+              ]
+            }
+          ],
+          "questions": [
+            {
+              "id": "prac_ps_1",
+              "type": "question",
+              "text": "experiments.sessions.session1.questions.prac.ps_questions.ps_1",
+              "audio": "src/assets/City0/audio/{lang}/instructions/ps.mp3",
+              "eventId": "2",
+              "choices": [
+                {
+                  "id": "Location 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "2_3",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/2_3.png"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_1",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/ps_incorrect2.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Location 2",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "2_1",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/2_1.png"
+                  },
+                  "feedback": {
+                    "correct": {
+                      "id": "feedback_2",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/correct.mp3"
+                    },
+                    "incorrect": {
+                      "id": "feedback_3",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/ps_incorrect2.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Location 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "2_2",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/2_2.png"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_4",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/ps_incorrect2.mp3"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "prac_ps_2",
+              "type": "question",
+              "text": "experiments.sessions.session1.questions.prac.ps_questions.ps_2",
+              "audio": "src/assets/City0/audio/{lang}/instructions/ps.mp3",
+              "eventId": "3",
+              "choices": [
+                {
+                  "id": "Location 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "3_2",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/3_2.png"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_1",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/ps_incorrect3.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Location 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "3_3",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/3_3.png"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_2",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/ps_incorrect3.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Location 3",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "3_1",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/3_1.png"
+                  },
+                  "feedback": {
+                    "correct": {
+                      "id": "feedback_3",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/correct.mp3"
+                    },
+                    "incorrect": {
+                      "id": "feedback_4",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/ps_incorrect3.mp3"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "prac_ps_3",
+              "type": "question",
+              "text": "experiments.sessions.session1.questions.prac.ps_questions.ps_3",
+              "audio": "src/assets/City0/audio/{lang}/instructions/ps.mp3",
+              "eventId": "1",
+              "choices": [
+                {
+                  "id": "Location 1",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "1_1",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/1_1.png"
+                  },
+                  "feedback": {
+                    "correct": {
+                      "id": "feedback_1",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/correct.mp3"
+                    },
+                    "incorrect": {
+                      "id": "feedback_2",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/ps_incorrect1.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Location 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "1_3",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/1_3.png"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_2",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/ps_incorrect1.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Location 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "1_2",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/1_2.png"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_3",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/ps_incorrect1.mp3"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "coin_2",
+              "type": "interlude",
+              "content": {
+                "id": "coin_2_content",
+                "type": "video",
+                "path": "src/assets/City0/gamify/coin_2.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": "prac_pc_questions",
+          "instructions": [
+            {
+              "id": "pc_questions_instructions",
+              "text": "experiments.sessions.session1.instructions.prac.pc_questions.pc_questions_instructions",
+              "audio": "src/assets/City0/audio/{lang}/instructions/pc_intro.mp3",
+              "images": [
+                "src/assets/City0/images/bus_intro.png"
+              ]
+            }
+          ],
+          "type": "prac_pc",
+          "hasTimeline": true,
+          "questions": [
+            {
+              "id": "pc_1",
+              "type": "question",
+              "text": "experiments.sessions.session1.questions.prac.pc_questions.pc_1",
+              "audio": "src/assets/City0/audio/{lang}/instructions/pc_first.mp3",
+              "eventId": "1",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "2",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/2_1.png"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_1",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/pc_incorrect1.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "1",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/1_1.png"
+                  },
+                  "feedback": {
+                    "correct": {
+                      "id": "feedback_2",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/correct.mp3"
+                    },
+                    "incorrect": {
+                      "id": "feedback_3",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/pc_incorrect1.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "3",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/3_1.png"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_3",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/pc_incorrect1.mp3"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "pc_2",
+              "type": "question",
+              "text": "experiments.sessions.session1.questions.prac.pc_questions.pc_2",
+              "audio": "src/assets/City0/audio/{lang}/instructions/pc_next.mp3",
+              "eventId": "2",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "1",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/1_1.png"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_1",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/pc_incorrect2.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "3",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/3_1.png"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_2",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/pc_incorrect2.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "2",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/2_1.png"
+                  },
+                  "feedback": {
+                    "correct": {
+                      "id": "feedback_3",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/correct.mp3"
+                    },
+                    "incorrect": {
+                      "id": "feedback_4",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/pc_incorrect2.mp3"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "pc_3",
+              "type": "question",
+              "text": "experiments.sessions.session1.questions.prac.pc_questions.pc_3",
+              "audio": "src/assets/City0/audio/{lang}/instructions/pc_next.mp3",
+              "eventId": "3",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "3",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/3_1.png"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_1",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/pc_incorrect3.mp3"
+                    },
+                    "correct": {
+                      "id": "feedback_2",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/correct.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "2",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/2_1.png"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_2",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/pc_incorrect3.mp3"
+                    }
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "1",
+                    "type": "image",
+                    "path": "src/assets/City0/locations/1_1.png"
+                  },
+                  "feedback": {
+                    "incorrect": {
+                      "id": "feedback_3",
+                      "type": "audio",
+                      "path": "src/assets/City0/audio/{lang}/feedback/pc_incorrect3.mp3"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "coin_3",
+              "type": "interlude",
+              "content": {
+                "id": "coin_3_content",
+                "type": "video",
+                "path": "src/assets/City0/gamify/coin_3.mp4"
+              }
+            },
+            {
+              "id": "unlock",
+              "type": "interlude",
+              "content": {
+                "id": "unlock_content",
+                "type": "video",
+                "path": "src/assets/City0/gamify/unlock.mp4"
+              }
+            },
+            {
+              "id": "prac_hint_q",
+              "type": "interlude",
+              "content": {
+                "id": "hint_question",
+                "type": "image",
+                "path": "src/assets/City0/gamify/hint.png"
+              },
+              "text": "experiments.common.interludes.prac_hint_q",
+              "audio": [
+                "src/assets/City0/gamify/audio/{lang}/question.mp3"
+              ]
+            },
+            {
+              "id": "prac_hint_a",
+              "type": "interlude",
+              "content": {
+                "id": "hint_ans",
+                "type": "image",
+                "path": "src/assets/City0/gamify/hint.png"
+              },
+              "text": "experiments.common.interludes.prac_hint_a",
+              "audio": [
+                "src/assets/City0/gamify/audio/{lang}/ans.mp3"
+              ]
+            },
+            {
+              "id": "pinpad",
+              "type": "interlude",
+              "content": {
+                "id": "pinpad",
+                "type": "video",
+                "path": "src/assets/City0/gamify/audio/{lang}/pinpad.mp4"
+              },
+              "text": "experiments.common.interludes.prac_pinpad"
+            },
+            {
+              "id": "prac_attn",
+              "type": "interlude",
+              "content": {
+                "id": "attn",
+                "type": "image",
+                "path": "src/assets/attn_catch/attn/attn_1.png"
+              },
+              "text": "experiments.common.interludes.attn1",
+              "audio": [
+                "src/assets/attn_catch/attn/{lang}/attn_1.mp3"
+              ],
+              "answers": [
+                {
+                  "id": "yes",
+                  "content": {
+                    "id": "yes",
+                    "type": "text",
+                    "text": "experiments.common.interludes.yes"
+                  }
+                },
+                {
+                  "id": "no",
+                  "content": {
+                    "id": "no",
+                    "type": "text",
+                    "text": "experiments.common.interludes.no"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "prac_catch",
+              "type": "interlude",
+              "content": {
+                "id": "catch",
+                "type": "image",
+                "path": "src/assets/attn_catch/catch/catch_1.png"
+              },
+              "text": "experiments.common.interludes.catch1",
+              "audio": [
+                "src/assets/attn_catch/catch/{lang}/catch_1.mp3"
+              ],
+              "answers": "FREE_TEXT"
+            },
+            {
+              "id": "continue",
+              "type": "interlude",
+              "content": {
+                "id": "continu",
+                "type": "video",
+                "path": "src/assets/{world}/common/{lang}/cityExplore.mp4"
+              },
+              "text": "experiments.common.interludes.continue"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "first_city_tour",
+      "name": "first city tour",
+      "isPractice": false,
+      "theme": {
+        "col1": [
+          "#9fd1ff",
+          "#4ea0e6",
+          "#1c5fa0",
+          "#0a2f55"
+        ],
+        "col2": [
+          "#ffc1b3",
+          "#ff8a78",
+          "#e55e51",
+          "#a53a3b"
+        ],
+        "col3": [
+          "#a8e3d7",
+          "#51b9a6",
+          "#228376",
+          "#0b4a4f"
+        ],
+        "col4": [
+          "rgb(113 219 214 / 90%)",
+          "rgb(230 173 63 / 89%)",
+          "#b87f22",
+          "#6a4a12"
+        ]
+      },
+      "content": {
+        "id": "first_city_video",
+        "type": "vimeo-stream",
+        "localizedPath": {
+          "en": {
+            "cohort_a": "1133663875",
+            "cohort_b": "1133654737"
+          },
+          "de": {
+            "cohort_a": "1133797283",
+            "cohort_b": "1133837055"
+          }
+        }
+      },
+      "instructions": [
+        {
+          "id": "first_city_gen_instructions",
+          "text": "experiments.common.instructions.gen_intro",
+          "audio": "src/assets/{world}/City{num}/audio/{lang}/gen_intro.mp3",
+          "images": [
+            "src/assets/{world}/City{num}/images/guide.png",
+            "src/assets/{world}/City{gen_num}/images/submarine.png"
+          ]
+        }
+      ],
+      "questionsGroups": [
+        {
+          "id": "first_city_gen_questions",
+          "type": "gen",
+          "hasTimeline": true,
+          "questions": [
+            {
+              "id": "first_city_gen_1",
+              "type": "question",
+              "text": "experiments.common.questions.gen.first",
+              "audio": "src/assets/{world}/City{gen_num}/audio/{lang}/gen_first.mp3",
+              "eventId": "7",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "7",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/7.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "10",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/10.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "8",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/8.mp4"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_gen_2",
+              "type": "question",
+              "text": "experiments.common.questions.gen.next",
+              "audio": "src/assets/{world}/City{gen_num}/audio/{lang}/gen_next.mp3",
+              "eventId": "8",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "10",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/10.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "8",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/8.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "7",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/7.mp4"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_gen_3",
+              "type": "question",
+              "text": "experiments.common.questions.gen.next",
+              "audio": "src/assets/{world}/City{gen_num}/audio/{lang}/gen_next.mp3",
+              "eventId": "9",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "9",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/9.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "11",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/11.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "12",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/12.mp4"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_gen_4",
+              "type": "question",
+              "text": "experiments.common.questions.gen.next",
+              "audio": "src/assets/{world}/City{gen_num}/audio/{lang}/gen_next.mp3",
+              "eventId": "10",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "8",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/8.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "7",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/7.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "10",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/10.mp4"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_gen_5",
+              "type": "question",
+              "text": "experiments.common.questions.gen.next",
+              "audio": "src/assets/{world}/City{gen_num}/audio/{lang}/gen_next.mp3",
+              "eventId": "11",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "12",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/12.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "9",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/9.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "11",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/11.mp4"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_gen_6",
+              "type": "question",
+              "text": "experiments.common.questions.gen.next",
+              "audio": "src/assets/{world}/City{gen_num}/audio/{lang}/gen_next.mp3",
+              "eventId": "12",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "11",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/11.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "12",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/12.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "9",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/9.mp4"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_gen_flag",
+              "type": "interlude",
+              "content": {
+                "id": "gen_flag",
+                "type": "image",
+                "path": "src/assets/{world}/City{gen_num}/images/flag.png"
+              },
+              "text": "experiments.common.questions.gen.middle",
+              "audio": [
+                "src/assets/{world}/City{gen_num}/audio/{lang}/flag.mp3"
+              ]
+            },
+            {
+              "id": "first_city_gen_7",
+              "type": "question",
+              "text": "experiments.common.questions.gen.next",
+              "audio": "src/assets/{world}/City{gen_num}/audio/{lang}/gen_next.mp3",
+              "eventId": "1",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "2",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/2.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "1",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/1.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "4",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/4.mp4"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_gen_8",
+              "type": "question",
+              "text": "experiments.common.questions.gen.next",
+              "audio": "src/assets/{world}/City{gen_num}/audio/{lang}/gen_next.mp3",
+              "eventId": "2",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "1",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/1.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "4",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/4.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "2",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/2.mp4"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_gen_9",
+              "type": "question",
+              "text": "experiments.common.questions.gen.next",
+              "audio": "src/assets/{world}/City{gen_num}/audio/{lang}/gen_next.mp3",
+              "eventId": "3",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "5",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/5.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "3",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/3.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "6",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/6.mp4"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_gen_10",
+              "type": "question",
+              "text": "experiments.common.questions.gen.next",
+              "audio": "src/assets/{world}/City{gen_num}/audio/{lang}/gen_next.mp3",
+              "eventId": "4",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "4",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/4.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "2",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/2.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "1",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/1.mp4"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_gen_11",
+              "type": "question",
+              "text": "experiments.common.questions.gen.next",
+              "audio": "src/assets/{world}/City{gen_num}/audio/{lang}/gen_next.mp3",
+              "eventId": "5",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "3",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/3.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "6",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/6.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "5",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/5.mp4"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_gen_12",
+              "type": "question",
+              "text": "experiments.common.questions.gen.next",
+              "audio": "src/assets/{world}/City{gen_num}/audio/{lang}/gen_next.mp3",
+              "eventId": "6",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "6",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/6.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "5",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/5.mp4"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "3",
+                    "type": "video",
+                    "path": "src/assets/{world}/City{gen_num}/animations/{lang}/3.mp4"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_gen_attn",
+              "type": "interlude",
+              "content": {
+                "id": "gen_attn",
+                "type": "image",
+                "path": "src/assets/attn_catch/attn/attn_2.png"
+              },
+              "text": "experiments.common.interludes.attn2",
+              "audio": [
+                "src/assets/attn_catch/attn/{lang}/attn_2.mp3"
+              ],
+              "answers": [
+                {
+                  "id": "yes",
+                  "content": {
+                    "id": "yes",
+                    "type": "text",
+                    "text": "experiments.common.interludes.yes"
+                  }
+                },
+                {
+                  "id": "no",
+                  "content": {
+                    "id": "no",
+                    "type": "text",
+                    "text": "experiments.common.interludes.no"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_gen_catch",
+              "type": "interlude",
+              "content": {
+                "id": "gen_catch",
+                "type": "image",
+                "path": "src/assets/attn_catch/catch/catch_2.png"
+              },
+              "text": "experiments.common.interludes.catch2",
+              "audio": [
+                "src/assets/attn_catch/catch/{lang}/catch_2.mp3"
+              ],
+              "answers": "FREE_TEXT"
+            },
+            {
+              "id": "first_city_coin_1",
+              "type": "interlude",
+              "content": {
+                "id": "coin 1",
+                "type": "video",
+                "path": "src/assets/{world}/City1/gamify/coin_1.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": "first_city_ps_questions",
+          "type": "ps",
+          "hasTimeline": false,
+          "instructions": [
+            {
+              "id": "first_city_ps_instructions",
+              "text": "experiments.common.instructions.ps_intro",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/ps_intro.mp3",
+              "images": [
+                "src/assets/{world}/City{num}/images/guide.png"
+              ]
+            }
+          ],
+          "questions": [
+            {
+              "id": "first_city_ps_1",
+              "type": "question",
+              "text": "experiments.common.questions.ps.prompt",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/ps.mp3",
+              "eventId": "7",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "content": {
+                    "id": "7_2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/7_2.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 2",
+                  "content": {
+                    "id": "7_1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/7_1.png"
+                  },
+                  "isCorrect": true
+                },
+                {
+                  "id": "Choice 3",
+                  "content": {
+                    "id": "7_3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/7_3.png"
+                  },
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "id": "first_city_ps_2",
+              "type": "question",
+              "text": "experiments.common.questions.ps.prompt",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/ps.mp3",
+              "eventId": "10",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "content": {
+                    "id": "10_1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/10_1.png"
+                  },
+                  "isCorrect": true
+                },
+                {
+                  "id": "Choice 2",
+                  "content": {
+                    "id": "10_2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/10_2.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 3",
+                  "content": {
+                    "id": "10_3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/10_3.png"
+                  },
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "id": "first_city_ps_3",
+              "type": "question",
+              "text": "experiments.common.questions.ps.prompt",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/ps.mp3",
+              "eventId": "2",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "content": {
+                    "id": "2_1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/2_1.png"
+                  },
+                  "isCorrect": true
+                },
+                {
+                  "id": "Choice 2",
+                  "content": {
+                    "id": "2_2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/2_2.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 3",
+                  "content": {
+                    "id": "2_3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/2_3.png"
+                  },
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "id": "first_city_ps_4",
+              "type": "question",
+              "text": "experiments.common.questions.ps.prompt",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/ps.mp3",
+              "eventId": "11",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "content": {
+                    "id": "11_3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/11_3.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 2",
+                  "content": {
+                    "id": "11_2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/11_2.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 3",
+                  "content": {
+                    "id": "11_1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/11_1.png"
+                  },
+                  "isCorrect": true
+                }
+              ]
+            },
+            {
+              "id": "first_city_ps_5",
+              "type": "question",
+              "text": "experiments.common.questions.ps.prompt",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/ps.mp3",
+              "eventId": "9",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "content": {
+                    "id": "9_3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/9_3.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 2",
+                  "content": {
+                    "id": "9_2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/9_2.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 3",
+                  "content": {
+                    "id": "9_1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/9_1.png"
+                  },
+                  "isCorrect": true
+                }
+              ]
+            },
+            {
+              "id": "first_city_ps_6",
+              "type": "question",
+              "text": "experiments.common.questions.ps.prompt",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/ps.mp3",
+              "eventId": "12",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "content": {
+                    "id": "12_2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/12_2.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 2",
+                  "content": {
+                    "id": "12_1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/12_1.png"
+                  },
+                  "isCorrect": true
+                },
+                {
+                  "id": "Choice 3",
+                  "content": {
+                    "id": "12_3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/12_3.png"
+                  },
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "id": "first_city_ps_7",
+              "type": "question",
+              "text": "experiments.common.questions.ps.prompt",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/ps.mp3",
+              "eventId": "4",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "content": {
+                    "id": "4_1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/4_1.png"
+                  },
+                  "isCorrect": true
+                },
+                {
+                  "id": "Choice 2",
+                  "content": {
+                    "id": "4_2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/4_2.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 3",
+                  "content": {
+                    "id": "4_3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/4_3.png"
+                  },
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "id": "first_city_ps_8",
+              "type": "question",
+              "text": "experiments.common.questions.ps.prompt",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/ps.mp3",
+              "eventId": "8",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "content": {
+                    "id": "8_2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/8_2.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 2",
+                  "content": {
+                    "id": "8_1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/8_1.png"
+                  },
+                  "isCorrect": true
+                },
+                {
+                  "id": "Choice 3",
+                  "content": {
+                    "id": "8_3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/8_3.png"
+                  },
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "id": "first_city_ps_9",
+              "type": "question",
+              "text": "experiments.common.questions.ps.prompt",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/ps.mp3",
+              "eventId": "5",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "content": {
+                    "id": "5_3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/5_3.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 2",
+                  "content": {
+                    "id": "5_2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/5_2.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 3",
+                  "content": {
+                    "id": "5_1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/5_1.png"
+                  },
+                  "isCorrect": true
+                }
+              ]
+            },
+            {
+              "id": "first_city_ps_10",
+              "type": "question",
+              "text": "experiments.common.questions.ps.prompt",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/ps.mp3",
+              "eventId": "1",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "content": {
+                    "id": "1_1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/1_1.png"
+                  },
+                  "isCorrect": true
+                },
+                {
+                  "id": "Choice 2",
+                  "content": {
+                    "id": "1_2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/1_2.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 3",
+                  "content": {
+                    "id": "1_3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/1_3.png"
+                  },
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "id": "first_city_ps_11",
+              "type": "question",
+              "text": "experiments.common.questions.ps.prompt",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/ps.mp3",
+              "eventId": "3",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "content": {
+                    "id": "3_3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/3_3.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 2",
+                  "content": {
+                    "id": "3_2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/3_2.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 3",
+                  "content": {
+                    "id": "3_1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/3_1.png"
+                  },
+                  "isCorrect": true
+                }
+              ]
+            },
+            {
+              "id": "first_city_ps_12",
+              "type": "question",
+              "text": "experiments.common.questions.ps.prompt",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/ps.mp3",
+              "eventId": "6",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "content": {
+                    "id": "6_2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/6_2.png"
+                  },
+                  "isCorrect": false
+                },
+                {
+                  "id": "Choice 2",
+                  "content": {
+                    "id": "6_1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/6_1.png"
+                  },
+                  "isCorrect": true
+                },
+                {
+                  "id": "Choice 3",
+                  "content": {
+                    "id": "6_3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/6_3.png"
+                  },
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "id": "first_city_ps_attn",
+              "type": "interlude",
+              "content": {
+                "id": "ps_attn",
+                "type": "image",
+                "path": "src/assets/attn_catch/attn/attn_3.png"
+              },
+              "text": "experiments.common.interludes.attn3",
+              "audio": [
+                "src/assets/attn_catch/attn/{lang}/attn_3.mp3"
+              ],
+              "answers": [
+                {
+                  "id": "yes",
+                  "content": {
+                    "id": "yes",
+                    "type": "text",
+                    "text": "experiments.common.interludes.yes"
+                  }
+                },
+                {
+                  "id": "no",
+                  "content": {
+                    "id": "no",
+                    "type": "text",
+                    "text": "experiments.common.interludes.no"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_ps_catch",
+              "type": "interlude",
+              "content": {
+                "id": "ps_catch",
+                "type": "image",
+                "path": "src/assets/attn_catch/catch/catch_3.png"
+              },
+              "text": "experiments.common.interludes.catch3",
+              "audio": [
+                "src/assets/attn_catch/catch/{lang}/catch_3.mp3"
+              ],
+              "answers": "FREE_TEXT"
+            },
+            {
+              "id": "first_city_coin_2",
+              "type": "interlude",
+              "content": {
+                "id": "coin_2",
+                "type": "video",
+                "path": "src/assets/{world}/City1/gamify/coin_2.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": "first_city_pc_questions",
+          "instructions": [
+            {
+              "id": "first_city_pc_questions_instructions",
+              "text": "experiments.common.instructions.pc_intro",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/pc_intro.mp3",
+              "images": [
+                "src/assets/{world}/City{num}/images/submarine.png"
+              ]
+            }
+          ],
+          "type": "pc",
+          "hasTimeline": true,
+          "questions": [
+            {
+              "id": "first_city_pc_1",
+              "type": "question",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/pc_first.mp3",
+              "text": "experiments.common.questions.pc.first",
+              "eventId": "7",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "8",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/8_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "7",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/7_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "10",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/10_1.png"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_pc_2",
+              "type": "question",
+              "text": "experiments.common.questions.pc.next",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/pc_next.mp3",
+              "eventId": "8",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "7",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/7_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "10",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/10_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "8",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/8_1.png"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_pc_3",
+              "type": "question",
+              "text": "experiments.common.questions.pc.next",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/pc_next.mp3",
+              "eventId": "9",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "12",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/12_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "11",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/11_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "9",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/9_1.png"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_pc_4",
+              "type": "question",
+              "text": "experiments.common.questions.pc.next",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/pc_next.mp3",
+              "eventId": "10",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "10",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/10_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "8",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/8_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "7",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/7_1.png"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_pc_5",
+              "type": "question",
+              "text": "experiments.common.questions.pc.next",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/pc_next.mp3",
+              "eventId": "11",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "11",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/11_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "9",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/9_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "12",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/12_1.png"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_pc_6",
+              "type": "question",
+              "text": "experiments.common.questions.pc.next",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/pc_next.mp3",
+              "eventId": "12",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "9",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/9_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "12",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/12_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "11",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/11_1.png"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_pc_flag",
+              "type": "interlude",
+              "content": {
+                "id": "pc_flag",
+                "type": "image",
+                "path": "src/assets/{world}/City{num}/images/flag.png"
+              },
+              "text": "experiments.common.questions.pc.middle",
+              "audio": [
+                "src/assets/{world}/City{num}/audio/{lang}/flag.mp3"
+              ]
+            },
+            {
+              "id": "first_city_pc_7",
+              "type": "question",
+              "text": "experiments.common.questions.pc.next",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/pc_next.mp3",
+              "eventId": "1",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/2_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/1_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "4",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/4_1.png"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_pc_8",
+              "type": "question",
+              "text": "experiments.common.questions.pc.next",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/pc_next.mp3",
+              "eventId": "2",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/1_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "4",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/4_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/2_1.png"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_pc_9",
+              "type": "question",
+              "text": "experiments.common.questions.pc.next",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/pc_next.mp3",
+              "eventId": "3",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/3_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "6",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/6_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "5",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/5_1.png"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_pc_10",
+              "type": "question",
+              "text": "experiments.common.questions.pc.next",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/pc_next.mp3",
+              "eventId": "4",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "4",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/4_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "2",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/2_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "1",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/1_1.png"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_pc_11",
+              "type": "question",
+              "text": "experiments.common.questions.pc.next",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/pc_next.mp3",
+              "eventId": "5",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "6",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/6_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "5",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/5_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/3_1.png"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_pc_12",
+              "type": "question",
+              "text": "experiments.common.questions.pc.next",
+              "audio": "src/assets/{world}/City{num}/audio/{lang}/pc_next.mp3",
+              "eventId": "6",
+              "choices": [
+                {
+                  "id": "Choice 1",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "5",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/5_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 2",
+                  "isCorrect": false,
+                  "content": {
+                    "id": "3",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/3_1.png"
+                  }
+                },
+                {
+                  "id": "Choice 3",
+                  "isCorrect": true,
+                  "content": {
+                    "id": "6",
+                    "type": "image",
+                    "path": "src/assets/{world}/City{num}/locations/6_1.png"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_pc_attn",
+              "type": "interlude",
+              "content": {
+                "id": "pc_attn",
+                "type": "image",
+                "path": "src/assets/attn_catch/attn/attn_4.png"
+              },
+              "text": "experiments.common.interludes.attn4",
+              "audio": [
+                "src/assets/attn_catch/attn/{lang}/attn_4.mp3"
+              ],
+              "answers": [
+                {
+                  "id": "yes",
+                  "content": {
+                    "id": "yes",
+                    "type": "text",
+                    "text": "experiments.common.interludes.yes"
+                  }
+                },
+                {
+                  "id": "no",
+                  "content": {
+                    "id": "no",
+                    "type": "text",
+                    "text": "experiments.common.interludes.no"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "first_city_pc_catch",
+              "type": "interlude",
+              "content": {
+                "id": "pc_catch",
+                "type": "image",
+                "path": "src/assets/attn_catch/catch/catch_4.png"
+              },
+              "text": "experiments.common.interludes.catch4",
+              "audio": [
+                "src/assets/attn_catch/catch/{lang}/catch_4.mp3"
+              ],
+              "answers": "FREE_TEXT"
+            },
+            {
+              "id": "first_city_pc_coin_3",
+              "type": "interlude",
+              "content": {
+                "id": "coin_3",
+                "type": "video",
+                "path": "src/assets/{world}/City1/gamify/coin_3.mp4"
+              }
+            },
+            {
+              "id": "unlock",
+              "type": "interlude",
+              "content": {
+                "id": "unlock_content",
+                "type": "video",
+                "path": "src/assets/{world}/City1/gamify/unlock.mp4"
+              }
+            },
+            {
+              "id": "first_city_pinpad",
+              "type": "interlude",
+              "content": {
+                "id": "pinpad_content",
+                "type": "video",
+                "path": "src/assets/{world}/City1/gamify/audio/{lang}/pinpad.mp4"
+              },
+              "text": "experiments.common.interludes.first_pinpad"
+            },
+            {
+              "id": "first_city_next_session",
+              "type": "interlude",
+              "content": {
+                "id": "next_session",
+                "type": "image",
+                "path": "src/assets/{world}/cover/cover.png"
+              },
+              "text": "experiments.common.interludes.next_session",
+              "audio": [
+                "src/assets/{world}/cover/{lang}/nextSession.mp3"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

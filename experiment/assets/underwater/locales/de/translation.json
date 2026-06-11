@@ -1,0 +1,517 @@
+{
+  "app": {
+    "title": "City Tour Study / Stadtrundgang-Studie",
+    "subtitle": "Explore magical cities and answer questions about your journey / Entdecken Sie magische Städte und beantworten Sie Fragen zu Ihrer Reise"
+  },
+  "language": {
+    "selector": "Language / Sprache"
+  },
+  "countries": {
+    "unitedStates": "United States / Vereinigte Staaten",
+    "germany": "Germany / Deutschland"
+  },
+  "participants": {
+    "adult": "Adult / Erwachsener",
+    "child": "Child / Kind"
+  },
+  "start": {
+    "country": "Country / Land",
+    "participant": "Participant Type / Teilnehmertyp",
+    "childNote": "Children should be accompanied by their parents or guardians during the questionnaire. / Kinder sollten während des Fragebogens von ihren Eltern oder Erziehungsberechtigten begleitet werden.",
+    "continue": "Continue / Weiter"
+  },
+  "consent": {
+    "title": "Einverständniserklärung",
+    "accept": "Ich stimme zu",
+    "decline": "Ich stimme nicht zu",
+    "continueNote": "Bitte klicken Sie nach dem Lesen auf \"Ich stimme zu\", um fortzufahren.",
+    "de": {
+      "adult": {
+        "title": "Studieninformationen und Einverständniserklärung",
+        "intro": "Vielen Dank für Ihr Interesse an der Teilnahme an unserer Studie zur Gedächtnisentwicklung. Bitte nehmen Sie sich Zeit, diesen Text sorgfältig durchzulesen.",
+        "aim": {
+          "title": "1. Ziel der Studie",
+          "content": "Diese Studie ist ein Forschungsprojekt des Max-Planck-Instituts (MPI) für Bildungsforschung in Berlin. Ziel dieser Studie ist es, die Entwicklung der Gedächtnisleistungen im Kindesalter und im Erwachsenenalter zu untersuchen."
+        },
+        "procedure": {
+          "title": "2. Ablauf und Inhalt der Studie",
+          "content": "Sie werden gebeten, an einer einfachen Aufgabe teilzunehmen, bei der Sie sich Videos ansehen, die jeweils eine Führung durch eine magische Stadt bieten. Die Studie besteht aus drei Sitzungen, die 48 bis 72 Stunden (2–3 Tage) nach der vorherigen Sitzung stattfinden.",
+          "details": [
+            "In jeder Sitzung sehen Sie sich ein kurzes Stadtrundgangsvideo von etwa sechs Minuten Länge an und beantworten anschließend Fragen zu den Orten, die Sie gesehen haben.",
+            "Auf jede Tour folgen drei Fragenreihen mit jeweils 12 Fragen (insgesamt 36 pro Tour).",
+            "Am Ende der dritten Sitzung beantworten Sie zusätzlich 84 Fragen zu den beiden zuvor besuchten Städten.",
+            "Jede Sitzung dauert voraussichtlich etwa 45 Minuten.",
+            "Die Studie sollte mit einem Laptop mit zuverlässiger Internetverbindung durchgeführt werden (keine Mobiltelefone oder Tablets).",
+            "Es wird erwartet, dass Sie die Fragen selbstständig und ohne Hilfe von Familienangehörigen oder Freunden beantworten."
+          ]
+        },
+        "dataProcessing": {
+          "title": "3. Was geschieht mit den gesammelten Daten?",
+          "content": "Die gesammelten Daten werden ausschließlich zu Forschungszwecken verwendet. Die Studiendaten werden unter einer individuellen Codenummer gespeichert. Nach Abschluss der Datenerhebung wird der individuelle anonymisierte Code, der die Kontaktdaten mit den Aufgabendaten verknüpft, gelöscht. Dadurch ist es unmöglich, die Studiendaten in Zukunft mit Ihnen in Verbindung zu bringen. Die Studiendaten können zur gemeinsamen Analyse an Kooperationspartner weitergegeben werden. Die Studiendaten können auch über Forschungsdatenbanken (Open Science Framework) oder wissenschaftliche Publikationen (in der Regel über das Internet) öffentlich zugänglich gemacht werden. Dies ermöglicht es anderen Forschern, die Ergebnisse zu überprüfen oder zu replizieren, und verbessert die Qualität der wissenschaftlichen Forschung. Die Studiendaten können auch für neue Forschungsfragen verwendet werden, die über die Zwecke dieser speziellen Studie hinausgehen. Studiendaten werden nur ohne individuelle IDs oder Daten, mit denen Personen identifiziert werden können, übertragen oder öffentlich zugänglich gemacht."
+        },
+        "risks": {
+          "title": "4. Risiken und Entschädigung für die Teilnahme an der Studie",
+          "risks": "Es sind keine Risiken bekannt.",
+          "compensation": "Diese Studie besteht aus drei Sitzungen von jeweils 45 Minuten Dauer, insgesamt also etwa 2 Stunden und 15 Minuten. Sie erhalten eine Vergütung von 13 € pro Stunde sowie einen Bonus von 5,75 € für die Teilnahme an allen drei Sitzungen, insgesamt also 35 €. Jede Sitzung muss 48 bis 72 Stunden (2–3 Tage) nach der vorherigen Sitzung stattfinden. Bitte beachten Sie, dass Sie jederzeit aus der Studie ausscheiden können. Wenn Sie eine Aufgabe nicht innerhalb von 48 bis 72 Stunden (2 bis 3 Tagen) nach der vorherigen Sitzung abschließen, gilt dies ebenfalls als Ausscheiden aus der Studie. In solchen Fällen erhalten Sie nur eine Teilzahlung entsprechend der Zeit, die Sie teilgenommen haben. Wenn Sie beispielsweise Sitzung 1, aber nicht die Sitzungen 2 und 3 absolvieren, erhalten Sie eine Vergütung von 10 € (aufgerundet von 9,75 € für eine 45-minütige Teilnahme). Wenn Sie die Sitzungen 1 und 2, aber nicht Sitzung 3 absolvieren, erhalten Sie eine Vergütung von 20 € ( , aufgerundet von 19,50 € für eine 90-minütige Teilnahme). Wenn Sie die Aufgabe während der Sitzung abbrechen, werden Sie proportional zur Zeit, die Sie für jede 30-minütige Einheit absolviert haben, bezahlt. Am Ende der Studie werden Sie gebeten, Ihre Zahlungsinformationen über LimeSurvey anzugeben. Die Zahlung erfolgt per Banküberweisung."
+        },
+        "legal": {
+          "title": "5. Rechtsgrundlage",
+          "content": "Die Rechtsgrundlage für die Verarbeitung Ihrer Daten ist Ihre Einwilligung gemäß Artikel 6 Absatz 1 Buchstabe a der DSGVO. Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen. Sie können Ihre Einwilligung zur Verarbeitung und Nutzung Ihrer Daten jederzeit ohne negative Folgen widerrufen. Bitte beachten Sie, dass es nach dem Löschen der Codeliste nicht mehr möglich ist, Ihren browserbasierten Aufgaben-Zugangscode mit Ihren Studiendaten zu verknüpfen.",
+          "contact": "Bei Fragen oder Bedenken wenden Sie sich bitte an: Dr. Ying Lin (<strong>raven-study@mpib-berlin.mpg.de</strong>)."
+        },
+        "rights": {
+          "title": "6. Rechte der betroffenen Person",
+          "list": [
+            "Recht auf Auskunft, Art. 15 DSGVO",
+            "Recht auf Berichtigung, Art. 16 DSGVO",
+            "Recht auf Löschung, Art. 17 DSGVO",
+            "Recht auf Datenübertragbarkeit, Art. 20 DSGVO",
+            "Recht auf Einschränkung der Verarbeitung, Art. 18 DSGVO",
+            "Widerspruchsrecht gegen die Verarbeitung oder Nutzung von Daten, Art. 21 DSGVO"
+          ],
+          "complaint": "Schließlich können Sie sich bei der zuständigen Datenschutzbehörde über eine Ihrer Meinung nach rechtswidrige Datenverarbeitung beschweren. Die zuständige Behörde für die Max-Planck-Gesellschaft ist die Bayerische Datenschutzbehörde, Postfach 606, 91511 Ansbach, Deutschland."
+        },
+        "voluntary": {
+          "title": "7. Die Teilnahme ist freiwillig",
+          "content": "Die Teilnahme an dieser Studie ist freiwillig. Sie können jederzeit ohne Angabe von Gründen und ohne negative Folgen aus der Studie ausscheiden. Sie können Ihre Einwilligung zur Datenverarbeitung und -nutzung auch jederzeit mit Wirkung für die Zukunft und ohne negative Folgen widerrufen. Wenden Sie sich dazu bitte an Dr. Ying Lin unter raven-study@mpib-berlin.mpg.de. Bitte beachten Sie, dass keine personenbezogenen Daten erhoben werden und Ihre Studiendaten daher nicht mit Ihnen in Verbindung gebracht werden können. Ein Widerruf Ihrer Einwilligung ist daher nicht möglich."
+        },
+        "consent": {
+          "title": "8. Einwilligung zur Teilnahme an der Studie",
+          "list": [
+            "Ich wurde über die Studie zur Gedächtnisentwicklung, ihren Ablauf, ihre Bedeutung, ihren Umfang und ihre Risiken informiert und habe die Studieninformationen gelesen und verstanden.",
+            "Ich hatte Gelegenheit, alle Fragen zu klären.",
+            "Ich habe das Recht, jederzeit weitere Informationen über die Studie anzufordern.",
+            "Ich stimme freiwillig zu, an der Studie wie in den Studieninformationen beschrieben teilzunehmen.",
+            "Ich wurde darüber informiert, dass ich jederzeit ohne Nachteile aus dieser Studie ausscheiden kann."
+          ]
+        },
+        "dataConsent": {
+          "title": "9. Einverständniserklärung gemäß Datenschutzgesetz",
+          "list": [
+            "Ich habe die Studieninformationen gelesen und verstanden.",
+            "Ich wurde darüber informiert, dass meine Einwilligung freiwillig ist und dass ich sie vor der Löschung der Codeliste widerrufen kann. Ich wurde auch über meine weiteren Rechte auf Auskunft, Berichtigung, Löschung, Datenübertragbarkeit sowie Beschwerde- und Kontaktmöglichkeiten informiert.",
+            "Ich stimme der Erhebung, Verarbeitung und Auswertung meiner Daten durch das Max-Planck-Institut für Bildungsforschung im Rahmen des Forschungsprojekts der Gedächtnisentwicklungsstudie zu.",
+            "Die erhobenen Daten dürfen vom Max-Planck-Institut für Bildungsforschung im Rahmen wissenschaftlicher Forschung für den erläuterten Zweck verwendet werden.",
+            "Ich stimme zu, dass Forschungsdaten ohne Nennung meines Namens für die Veröffentlichung von Forschungsergebnissen in wissenschaftlichen Zeitschriften zu deren Überprüfung (Reanalysen) gespeichert werden.",
+            "Ich stimme zu, dass meine anonymisierten Forschungsdaten für verwandte Forschungsfragen zu wissenschaftlichen Zwecken, wie in den Studieninformationen beschrieben, analysiert werden dürfen.",
+            "Ich stimme zu, dass meine anonymisierten Forschungsdaten auch nach Beendigung der Studie für wissenschaftliche Analysen, wie in den Studieninformationen beschrieben, zur Verfügung stehen.",
+            "Ich stimme zu, dass meine anonymisierten Forschungsdaten wie in den Studieninformationen beschrieben auf die Open Science Framework-Plattform hochgeladen und weltweit genutzt werden dürfen.",
+            "Ich stimme zu, dass meine anonymisierten Forschungsdaten für wissenschaftliche Analysen auf der Open Science Framework-Plattform, wie in den Studieninformationen beschrieben, auch nach Beendigung der Studie zur Verfügung stehen."
+          ]
+        }
+      },
+      "child": {
+        "title": "Studieninformationen und Einverständniserklärung",
+        "intro": "Vielen Dank für Ihr Interesse an der Teilnahme an unserer Studie zur Gedächtnisentwicklung. Bitte nehmen Sie sich Zeit, diesen Text sorgfältig durchzulesen.",
+        "aim": {
+          "title": "1. Ziel der Studie",
+          "content": "Diese Studie ist ein Forschungsprojekt des Max-Planck-Instituts (MPI) für Bildungsforschung in Berlin. Ziel dieser Studie ist es, die Entwicklung der Gedächtnisleistungen im Kindesalter und im Erwachsenenalter zu untersuchen."
+        },
+        "procedure": {
+          "title": "2. Ablauf und Inhalt der Studie",
+          "content": "Ihr Kind wird gebeten, an einer einfachen Aufgabe teilzunehmen, bei der es sich Videos ansieht, die jeweils eine Führung durch eine magische Stadt bieten. Die Studie besteht aus drei Sitzungen, die 48 bis 72 Stunden (2–3 Tage) nach der vorherigen Sitzung stattfinden.",
+          "details": [
+            "In jeder Sitzung sieht sich Ihr Kind ein kurzes Stadtrundgangsvideo von etwa sechs Minuten Länge an und beantwortet anschließend Fragen zu den Orten, die es gesehen hat.",
+            "Auf jede Tour folgen drei Fragenreihen mit jeweils 12 Fragen (insgesamt 36 pro Tour).",
+            "Am Ende der dritten Sitzung beantwortet Ihr Kind zusätzlich 84 Fragen zu den beiden zuvor besuchten Städten.",
+            "Jede Sitzung dauert voraussichtlich etwa 45 Minuten.",
+            "Die Studie sollte mit einem Laptop mit zuverlässiger Internetverbindung durchgeführt werden (keine Mobiltelefone oder Tablets).",
+            "Von den Kindern wird erwartet, dass sie die Fragen selbstständig und ohne Hilfe von Familienangehörigen oder Freunden beantworten. Eltern dürfen nur bei technischen Aspekten wie Mausklicks und der Einstellung der Lautstärke/Bildschirmhelligkeit helfen."
+          ]
+        },
+        "dataProcessing": {
+          "title": "3. Was geschieht mit den gesammelten Daten?",
+          "content": "Die gesammelten Daten werden ausschließlich zu Forschungszwecken verwendet. Die Studiendaten werden unter einer individuellen Codenummer gespeichert. Nach Abschluss der Datenerhebung wird der individuelle anonymisierte Code, der die Kontaktdaten mit den Aufgabendaten verknüpft, gelöscht. Dadurch ist es unmöglich, die Studiendaten in Zukunft mit Ihnen in Verbindung zu bringen. Die Studiendaten können zur gemeinsamen Analyse an Kooperationspartner weitergegeben werden. Die Studiendaten können auch über Forschungsdatenbanken (Open Science Framework) oder wissenschaftliche Publikationen (in der Regel über das Internet) öffentlich zugänglich gemacht werden. Dies ermöglicht es anderen Forschern, die Ergebnisse zu überprüfen oder zu replizieren, und verbessert die Qualität der wissenschaftlichen Forschung. Die Studiendaten können auch für neue Forschungsfragen verwendet werden, die über die Zwecke dieser speziellen Studie hinausgehen. Studiendaten werden nur ohne individualisierte IDs oder Daten, mit denen Personen identifiziert werden können, übertragen oder öffentlich zugänglich gemacht."
+        },
+        "risks": {
+          "title": "4. Risiken und Entschädigung für die Teilnahme an der Studie",
+          "risks": "Es sind keine Risiken bekannt.",
+          "compensation": "Diese Studie besteht aus drei Sitzungen von jeweils 45 Minuten Dauer, insgesamt also etwa 2 Stunden und 15 Minuten. Ihr Kind erhält eine Vergütung von 13 € pro Stunde sowie einen Bonus von 5,75 € für die Teilnahme an allen drei Sitzungen, insgesamt also 35 €. Jede Sitzung muss 48 bis 72 Stunden (2–3 Tage) nach der vorherigen Sitzung stattfinden. Bitte beachten Sie, dass Sie und Ihr Kind jederzeit aus der Studie ausscheiden können. Wenn eine Aufgabe nicht innerhalb von 48 bis 72 Stunden (2 bis 3 Tagen) nach der vorherigen Sitzung abgeschlossen wird, gilt dies ebenfalls als Ausscheiden aus der Studie. In solchen Fällen erhält Ihr Kind nur eine Teilzahlung entsprechend der Zeit, die es teilgenommen hat. Wenn Ihr Kind beispielsweise Sitzung 1, aber nicht die Sitzungen 2 und 3 absolviert, erhält es eine Vergütung von 10 € (aufgerundet von 9,75 € für eine 45-minütige Teilnahme). Wenn Ihr Kind die Sitzungen 1 und 2, aber nicht Sitzung 3 absolviert, erhält es eine Vergütung von 20 € (aufgerundet von 19,50 € für eine 90-minütige Teilnahme). Wenn Ihr Kind die Aufgabe während der Sitzung abgebrochen hat, wird es proportional zur absolvierten Zeit für jede angefangene 30 Minuten bezahlt. Am Ende der Studie werden Sie gebeten, Ihre Zahlungsinformationen über LimeSurvey anzugeben. Die Zahlung erfolgt per Banküberweisung."
+        },
+        "legal": {
+          "title": "5. Rechtsgrundlage",
+          "content": "Die Rechtsgrundlage für die Verarbeitung Ihrer Daten ist Ihre Einwilligung gemäß Artikel 6 Absatz 1 Buchstabe a der DSGVO. Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen. Sie können Ihre Einwilligung zur Verarbeitung und Nutzung Ihrer Daten jederzeit ohne negative Folgen widerrufen. Bitte beachten Sie, dass es nach dem Löschen der Codeliste nicht mehr möglich ist, Ihren browserbasierten Aufgaben-Zugangscode mit Ihren Studiendaten zu verknüpfen.",
+          "contact": "Bei Fragen oder Bedenken wenden Sie sich bitte an: Dr. Ying Lin (<strong>raven-study@mpib-berlin.mpg.de</strong>)."
+        },
+        "rights": {
+          "title": "6. Rechte der betroffenen Person",
+          "intro": "Sie haben folgende Rechte in Bezug auf die personenbezogenen Daten Ihres Kindes:",
+          "list": [
+            "Recht auf Auskunft, Art. 15 DSGVO",
+            "Recht auf Berichtigung, Art. 16 DSGVO",
+            "Recht auf Löschung, Art. 17 DSGVO",
+            "Recht auf Datenübertragbarkeit, Art. 20 DSGVO",
+            "Recht auf Einschränkung der Verarbeitung, Art. 18 DSGVO",
+            "Widerspruchsrecht gegen die Verarbeitung oder Nutzung von Daten, Art. 21 DSGVO"
+          ],
+          "complaint": "Schließlich können Sie sich bei der zuständigen Datenschutzbehörde über eine Ihrer Meinung nach rechtswidrige Datenverarbeitung beschweren. Die zuständige Behörde für die Max-Planck-Gesellschaft ist die Bayerische Datenschutzbehörde, Postfach 606, 91511 Ansbach, Deutschland."
+        },
+        "voluntary": {
+          "title": "7. Die Teilnahme ist freiwillig",
+          "content": "Die Teilnahme an dieser Studie ist freiwillig. Sie können jederzeit ohne Angabe von Gründen und ohne negative Folgen aus der Studie ausscheiden. Sie können Ihre Einwilligung zur Datenverarbeitung und -nutzung auch jederzeit mit Wirkung für die Zukunft und ohne negative Folgen widerrufen. Wenden Sie sich dazu bitte an Dr. Ying Lin unter raven-study@mpib-berlin.mpg.de. Bitte beachten Sie, dass keine personenbezogenen Daten erhoben werden und Ihre Studiendaten daher nicht mit Ihnen in Verbindung gebracht werden können. Ein Widerruf Ihrer Einwilligung ist daher nicht möglich."
+        },
+        "consent": {
+          "title": "8. Einwilligung zur Teilnahme an der Studie",
+          "list": [
+            "Ich wurde über die Studie zur Gedächtnisentwicklung, ihren Ablauf, ihre Bedeutung, ihren Umfang und ihre Risiken informiert und habe die Studieninformationen gelesen und verstanden.",
+            "Ich hatte Gelegenheit, alle Fragen zu klären.",
+            "Ich habe das Recht, jederzeit weitere Informationen über die Studie anzufordern.",
+            "Ich stimme freiwillig zu, mein Kind zur Teilnahme an der Studie gemäß den Studieninformationen anzumelden.",
+            "Ich wurde darüber informiert, dass ich jederzeit ohne Nachteile aus dieser Studie ausscheiden kann."
+          ]
+        },
+        "dataConsent": {
+          "title": "9. Einverständniserklärung gemäß Datenschutzgesetz",
+          "list": [
+            "Ich habe die Studieninformationen gelesen und verstanden.",
+            "Ich wurde darüber informiert, dass meine Einwilligung freiwillig ist und dass ich sie vor der Löschung der Codeliste widerrufen kann. Ich wurde auch über meine weiteren Rechte auf Auskunft, Berichtigung, Löschung, Datenübertragbarkeit sowie Beschwerde- und Kontaktmöglichkeiten informiert.",
+            "Ich stimme der Erhebung, Verarbeitung und Auswertung der Daten meines Kindes durch das Max-Planck-Institut für Bildungsforschung im Rahmen des Forschungsprojekts zur Gedächtnisentwicklung zu.",
+            "Die erhobenen Daten dürfen vom Max-Planck-Institut für Bildungsforschung im Rahmen wissenschaftlicher Forschung für den erläuterten Zweck verwendet werden.",
+            "Ich stimme zu, dass Forschungsdaten ohne Nennung des Namens meines Kindes für die Veröffentlichung von Forschungsergebnissen in wissenschaftlichen Zeitschriften zu deren Überprüfung (Reanalysen) gespeichert werden.",
+            "Ich stimme zu, dass die anonymisierten Forschungsdaten meines Kindes für verwandte Forschungsfragen zu wissenschaftlichen Zwecken, wie in den Studieninformationen beschrieben, analysiert werden.",
+            "Ich stimme zu, dass die anonymisierten Forschungsdaten meines Kindes auch nach Beendigung der Studie für wissenschaftliche Analysen, wie in den Studieninformationen beschrieben, zur Verfügung stehen.",
+            "Ich stimme zu, dass die anonymisierten Forschungsdaten meines Kindes wie in den Studieninformationen beschrieben auf die Open Science Framework-Plattform hochgeladen und weltweit genutzt werden dürfen.",
+            "Ich stimme zu, dass die anonymisierten Forschungsdaten meines Kindes auch nach Beendigung der Studie für wissenschaftliche Analysen auf der Open Science Framework-Plattform, wie in den Studieninformationen beschrieben, zur Verfügung stehen."
+          ]
+        }
+      }
+    }
+  },
+  "instructions": {
+    "continue": "Weiter",
+    "startQuestions": "Fragen starten",
+    "nextInstruction": "Nächste Anweisung",
+    "de": {
+      "adult": {
+        "title": "Studienanweisungen",
+        "intro": "Bitte lesen Sie die folgenden Anweisungen sorgfältig durch. Ihre Mitarbeit ist für den Fortschritt der Wissenschaft im Bereich der Gedächtnisentwicklung von entscheidender Bedeutung.",
+        "before": {
+          "title": "Bevor Sie mit der Studie beginnen, gehen Sie bitte wie folgt vor:",
+          "list": [
+            "Vergrößern Sie das Browserfenster auf Vollbild.",
+            "Stellen Sie sicher, dass Sie bequem sitzen und zum Computerbildschirm schauen.",
+            "Stellen Sie die Helligkeit Ihres Computers auf ein angenehmes Niveau ein (je heller, desto besser).",
+            "Stellen Sie die Lautstärke auf ein angenehmes Niveau ein (die Animationen enthalten Audio).",
+            "Stellen Sie sicher, dass die Umgebung während der gesamten Sitzung (ca. 45 Minuten) ruhig und frei von Ablenkungen ist.",
+            "<strong>Wenn Sie Kopfhörer verwenden, halten Sie sie während der gesamten Sitzung eingesteckt und an und entfernen Sie sie nur während der Pausen.</strong>",
+            "Stellen Sie sicher, dass Ihr Laptop während der gesamten Sitzung aufgeladen ist."
+          ]
+        },
+        "procedure": {
+          "title": "Ablauf der Studie:",
+          "list": [
+            "Zunächst sehen Sie sich eine etwa 6-minütige Animation an.",
+            "Anschließend beantworten Sie Fragen zu dem, was Sie gesehen haben. Zu jeder Frage werden drei Antwortmöglichkeiten angezeigt, die von links nach rechts am unteren Bildschirmrand erscheinen.",
+            "Klicken Sie mit der Maus auf das Bild, das Ihrer Wahl entspricht.",
+            "Das Bildschirm wird automatisch im Vollbildmodus starten. Bitte halten Sie es im Vollbildmodus für die gesamte Sitzung."
+          ]
+        },
+        "important": {
+          "title": "Wichtig:",
+          "list": [
+            "Das Hauptziel unserer Forschung ist es, dass Sie aufmerksam zuschauen und alle Fragen <strong>selbstständig</strong> beantworten.",
+            "Sie können die Studie jederzeit abbrechen, wenn Sie sich unwohl fühlen, belastet sind oder die Teilnahme beenden möchten.",
+            "Platzhalter (wird Erwachsenen nicht angezeigt).",
+            "Sie können zwischen den Teilaufgaben innerhalb jeder Sitzung eine Pause (von bis zu 5 Minuten) einlegen (3 Pausen in den Sitzungen 1 und 2 und 5 Pausen in Sitzung 3)."
+          ]
+        },
+        "troubleshooting": {
+          "title": "Fehlerbehebung:",
+          "list": [
+            "Wenn Sie die Webseite versehentlich schließen, öffnen Sie sie bitte <strong>sofort</strong> wieder und geben Sie Ihre Teilnehmenden-ID erneut ein. Die Webseite sollte Sie automatisch an die Stelle zurückleiten, an der Sie aufgehört haben.",
+            "Aktualisieren Sie die Seite bitte <strong>nur</strong>, wenn das Fenster bei 'Video lädt...' stecken bleibt oder wenn ein Video/Bild nicht erscheint.",
+            "Wenn Sie nicht an die richtige Stelle zurückkehren können oder die Seite nicht korrekt weiterleitet, wenden Sie sich bitte per E-Mail an das Forschungsteam: <strong>raven-study@mpib-berlin.mpg.de</strong>.",
+            "Bitte beachten Sie, dass Sie aufgrund der Art dieser Studie, <strong>wenn Sie nicht innerhalb von 3 Minuten an den Punkt zurückkehren können, an dem Sie aufgehört haben, als nicht teilnehmend an der Sitzung (bzw. an der Studie) gelten</strong>. Um dieses Problem zu vermeiden, achten Sie bitte darauf, die Webseite während der Sitzung nicht zu schließen oder neu zu laden."
+          ]
+        },
+        "note": "Wichtiger Hinweis: Das Verlassen des Vollbildmodus während der Sitzung oder das Nichtabschließen der Studie innerhalb von 48–72 Stunden nach der vorherigen Sitzung wird als Rücktritt vom Experiment betrachtet.",
+        "thankYou": "Vielen Dank für Ihre Unterstützung! Ihre Teilnahme ist für den Fortschritt unserer Forschung zur Gedächtnisentwicklung von entscheidender Bedeutung."
+      },
+      "child": {
+        "title": "Studienanweisungen für Eltern",
+        "intro": "Bitte lesen Sie die folgenden Anweisungen sorgfältig durch. Ihre Mitarbeit ist für den Fortschritt der Wissenschaft im Bereich der Gedächtnisentwicklung von entscheidender Bedeutung.",
+        "before": {
+          "title": "Bevor Sie mit der Studie beginnen, gehen Sie bitte wie folgt vor:",
+          "list": [
+            "Vergrößern Sie das Browserfenster auf Vollbild.",
+            "Stellen Sie sicher, dass Ihr Kind bequem sitzt und zum Computerbildschirm blickt.",
+            "Stellen Sie die Helligkeit Ihres Computers auf ein angenehmes Niveau ein (je heller, desto besser).",
+            "Stellen Sie die Lautstärke auf eine angenehme Stufe ein (die Animationen enthalten Audio).",
+            "Sorgen Sie dafür, dass die Umgebung während der gesamten Sitzung (ca. 45 Minuten) ruhig und frei von Ablenkungen ist.",
+            "<strong>Wenn Sie Kopfhörer verwenden, halten Sie sie während der gesamten Sitzung an und entfernen Sie sie nur während der Pausen.</strong>",
+            "Stellen Sie sicher, dass Ihr Laptop während der gesamten Sitzung aufgeladen ist."
+          ]
+        },
+        "procedure": {
+          "title": "Ablauf der Studie:",
+          "list": [
+            "Zunächst sieht sich Ihr Kind etwa 6 Minuten lang eine Animation an.",
+            "Anschließend beantwortet es Fragen zu dem Gesehenen. Zu jeder Frage werden drei Antwortmöglichkeiten angezeigt, die von links nach rechts am unteren Bildschirmrand erscheinen.",
+            "Klicken Sie mit der Maus auf das Bild, das der Auswahl Ihres Kindes entspricht.",
+            "Das Bildschirm wird automatisch im Vollbildmodus starten. Bitte halten Sie es im Vollbildmodus für die gesamte Sitzung."
+          ]
+        },
+        "important": {
+          "title": "Wichtig:",
+          "list": [
+            "<strong>Helfen Sie Ihrem Kind nicht bei der Beantwortung der Fragen. Es ist zu erwarten, dass es in den Animationen auf neue Wörter oder unbekannte Inhalte stößt. Bitte erklären Sie nichts, benennen Sie nichts und beeinflussen Sie die Aufmerksamkeit Ihres Kindes in keiner Weise.</strong>",
+            "Das Hauptziel unserer Forschung ist es, dass Ihr Kind aufmerksam zusieht und alle Fragen <strong>selbstständig</strong> beantwortet.",
+            "Sie sollten die Studie jederzeit unterbrechen, wenn sich Ihr Kind unwohl oder gestresst fühlt oder die Studie abbrechen möchte.",
+            "Ihr Kind kann zwischen den Teilaufgaben innerhalb jeder Sitzung eine Pause (von bis zu 5 Minuten) einlegen (3 Pausen in den Sitzungen 1 und 2 und 5 Pausen in Sitzung 3).",
+            "Wichtiger Hinweis: Das Verlassen des Vollbildmodus während der Sitzung oder das Nichtabschließen der Studie innerhalb von 48 bis 72 Stunden nach der vorherigen Sitzung wird als Rückzug aus dem Experiment gewertet."
+          ]
+        },
+        "troubleshooting": {
+          "title": "Fehlerbehebung:",
+          "list": [
+            "Wenn Sie oder Ihr Kind die Webseite versehentlich schließen, öffnen Sie sie bitte <strong>sofort</strong> wieder und geben Sie die Teilnehmenden-ID erneut ein. Die Webseite sollte Sie automatisch an die Stelle zurückleiten, an der Sie aufgehört haben.",
+            "Aktualisieren Sie die Seite bitte <strong>nur</strong>, wenn das Fenster bei 'Video lädt...' stecken bleibt oder wenn ein Video/Bild nicht erscheint.",
+            "Wenn Sie nicht an die richtige Stelle zurückkehren können oder die Seite nicht korrekt weiterleitet, wenden Sie sich bitte per E-Mail an das Forschungsteam: <strong>raven-study@mpib-berlin.mpg.de</strong>.",
+            "Bitte beachten Sie, dass Sie aufgrund der Art dieser Studie, <strong>wenn Sie nicht innerhalb von 3 Minuten an den Punkt zurückkehren können, an dem Sie aufgehört haben, als nicht teilnehmend an der Sitzung (bzw. an der Studie) gelten</strong>. Um dieses Problem zu vermeiden, achten Sie bitte darauf, die Webseite während der Sitzung nicht zu schließen oder neu zu laden."
+          ]
+        },
+        "note": "Wichtiger Hinweis: Das Verlassen des Vollbildmodus während der Sitzung oder das Nichtabschließen der Studie innerhalb von 48–72 Stunden nach der vorherigen Sitzung wird als Rücktritt vom Experiment betrachtet.",
+        "thankYou": "Vielen Dank für Ihre Unterstützung! Ihre Teilnahme ist für den Fortschritt unserer Forschung zur Gedächtnisentwicklung von entscheidender Bedeutung."
+      }
+    }
+  },
+  "demographics": {
+    "title": "Demografische Daten und Checks",
+    "subtitle": "Bitte geben Sie einige grundlegende Informationen über sich an",
+    "age": "Alter",
+    "selectAge": "Wählen Sie Ihr Alter",
+    "gender": "Geschlecht",
+    "genderOptions": {
+      "male": "Männlich",
+      "female": "Weiblich",
+      "nonBinary": "Nicht-binär",
+      "preferNotToSay": "Möchte nicht angeben"
+    },
+    "audioCheck": {
+      "title": "Audio-Check",
+      "description": "Bitte klicken Sie auf die Schaltfläche unten, um einen Testsound abzuspielen. Stellen Sie sicher, dass Ihre Lautsprecher oder Kopfhörer ordnungsgemäß funktionieren.",
+      "playButton": "Testsound abspielen",
+      "stopButton": "Sound stoppen",
+      "playingStatus": "Sound wird abgespielt...",
+      "readyStatus": "Bereit...",
+      "confirmation": "Ich habe den Testsound gehört",
+      "troubleshooting": {
+        "title": "Probleme beim Hören des Sounds?",
+        "checkVolume": "Überprüfen Sie, ob die Lautstärke Ihres Geräts eingeschaltet ist",
+        "checkMute": "Stellen Sie sicher, dass Ihr Gerät nicht stummgeschaltet ist",
+        "checkSpeakers": "Überprüfen Sie, ob Ihre Lautsprecher oder Kopfhörer angeschlossen sind",
+        "checkBrowser": "Überprüfen Sie, ob Ihr Browser Audio zulässt (suchen Sie nach dem Audio-Symbol in der Adressleiste)",
+        "refreshPage": "Versuchen Sie, die Seite zu aktualisieren und erneut zu testen"
+      }
+    },
+    "continue": "Weiter",
+    "submitting": "Wird gespeichert..."
+  },
+  "login": {
+    "title": "Participant Login/Teilnehmer-Anmeldung",
+    "subtitle": "Please enter your participant ID to continue / Bitte geben Sie Ihre Teilnehmer-ID ein, um fortzufahren",
+    "participantId": "Participant ID / Teilnehmer-ID",
+    "placeholder": "Enter your participant ID/ Geben Sie Ihre Teilnehmer-ID ein",
+    "submit": "Continue / Weiter",
+    "submitting": "Validating... / Wird validiert...",
+    "error": {
+      "required": "Teilnehmer-ID ist erforderlich",
+      "invalid": "Ungültige Teilnehmer-ID. Bitte überprüfen und erneut versuchen.",
+      "network": "Netzwerkfehler. Bitte versuchen Sie es erneut."
+    }
+  },
+  "cityTourStart": {
+    "title": "Willkommen zur Stadtführung!",
+    "subtitle": "Sie beginnen gleich eine interaktive Reise durch unsere magischen Städte",
+    "instructions": {
+      "title": "Anweisungen",
+      "step1": "Schauen Sie sich jedes Stadtführungs-Video sorgfältig an",
+      "step2": "Beantworten Sie die Fragen nach jedem Video",
+      "step3": "Fehlerbehebung: Aktualisieren Sie die Seite, wenn ein Video/Bild nicht lädt",
+      "step4": "Für Eltern: Stellen Sie sicher, dass Ihr Kind alle Fragen selbstständig beantwortet, auch wenn es nicht sicher ist, welche Antwort richtig ist"
+    },
+    "startButton": "Beginne mit der Frage",
+    "loading": "Ihre Tour wird vorbereitet...",
+    "enteringFullscreen": "Vollbild-Modus wird aktiviert..."
+  },
+  "sessionWaiting": {
+    "title": "Vielen Dank!",
+    "message": "Vielen Dank, dass Sie diese Sitzung unserer Studie abgeschlossen haben. Bitte kommen Sie in 48 bis 72 Stunden zurück, um mit der nächsten Sitzung zu beginnen."
+  },
+  "sessionExpired": {
+    "title": "Sitzung abgelaufen",
+    "message": "Ihre Sitzung ist abgelaufen, da Sie länger als 72 Stunden gewartet haben. Wenn Sie der Meinung sind, dass dies ein Fehler ist, wenden Sie sich an einen MPI - Raven Mitarbeiter."
+  },
+  "sessionCompleted": {
+    "title": "Vielen Dank!",
+    "message": "Vielen Dank für Ihre Teilnahme an unserer Studie."
+  },
+  "sessionEnd": {
+    "session12": {
+      "title": "Sitzung abgeschlossen!",
+      "message": "Vielen Dank, dass Sie diese Sitzung unserer Studie abgeschlossen haben. Bitte kommen Sie in 48 bis 72 Stunden zurück, um mit der nächsten Sitzung zu beginnen."
+    },
+    "session3": {
+      "title": "Studie abgeschlossen!",
+      "message": "Vielen Dank für Ihre Teilnahme an unserer Studie. Bitte klicken Sie auf den Link, um Ihre Informationen für die Vergütung einzugeben: https://survey.academiccloud.de/f/936235?lang=de"
+    }
+  },
+  "questionnaire": {
+    "navigation": {
+      "next": "Nächster Teil"
+    }
+  },
+  "media": {
+    "video": {
+      "notSupported": "Ihr Browser unterstützt das Video-Element nicht.",
+      "loading": "Video wird geladen..."
+    },
+    "audio": {
+      "notSupported": "Ihr Browser unterstützt das Audio-Element nicht."
+    }
+  },
+  "feedback": {
+    "correct": "✓ Richtig!",
+    "incorrect": "✗ Falsch"
+  },
+  "experiments": {
+    "common": {
+      "instructions": {
+        "gen_intro": "{{guideName}} führt uns nun durch {{genCityName}}. {{genCityName}} ähnelt {{cityName}} . Wir werden {{guideName}}'s Lieblingsroute durch die Stadt nehmen, die Besucher zum Schatz von {{genCityName}} führen wird. Kannst du mir helfen, die Reihenfolge der Orte zu erraten, die wir auf der Tour besuchen würden, damit Besucher die Schätze finden können?",
+        "ps_intro": "Nun wollen wir mal sehen, wie gut du dich an die Orte erinnern kannst, die {{guideName}} dir in {{cityName}}  gezeigt hat. Ich zeige dir drei Bilder, von denen nur eines genau den Ort zeigt, zu dem {{guideName}} dich in {{cityName}}  mitgenommen hat. Kannst du mir helfen, das richtige auszuwählen?",
+        "pc_intro": "Nun wollen wir mal sehen, ob du dich an die Reihenfolge der Orte erinnern kannst, die du in {{cityName}}  besucht hast. Zuerst warst du mit {{guideName}} in einem U-Boot. Kannst du mir sagen, welchen dieser drei Orte du direkt danach besucht hast?"
+      },
+      "questions": {
+        "gen": {
+          "first": "Welchen dieser Orte würde {{guideName}} zuerst besuchen?",
+          "next": "Welchen dieser Orte würde {{guideName}} als nächstes besuchen?",
+          "middle": "In der Mitte der Tour zeigt dir {{guideName}} die Stadtflagge von {{genCityName}}!"
+        },
+        "ps": {
+          "prompt": "Welches davon hast du auf deiner {{cityName}} Tour gesehen?",
+          "retention": "Welche davon hast du auf deiner Tour gesehen?"
+        },
+        "pc": {
+          "first": "Welchen dieser Orte hast du auf deiner Reise durch {{cityName}} zuerst gesehen?",
+          "next": "Welchen dieser Orte hast du als nächstes auf deiner Reise nach {{cityName}} besucht?",
+          "middle": "In der Mitte der Tour zeigt dir {{guideName}} die Stadtflagge von {{cityName}}!"
+        },
+        "citysorting": "Welcher dieser Reiseführer hat dich an diesen Ort gebracht?"
+      },
+      "interludes": {
+        "next_session": "Komm nächstes Mal wieder, um die nächste Zahl zu holen. Der Rabe zählt auf dich!",
+        "continue": "Großartig! Jetzt werden wir weitere magische Städte erkunden. Bist du bereit?",
+        "end": "Lass uns den Raben retten!",
+        "input_placeholder": "Antwort hier",
+        "attn1": "Fliegen Bienen?",
+        "attn2": "Miauen Katzen?",
+        "attn3": "Legen Kühe Eier?",
+        "attn4": "Ist Feuer warm?",
+        "attn5": "Ist Gras grün?",
+        "attn6": "Haben Pferde 4 Beine?",
+        "attn7": "Ist Eis warm?",
+        "attn8": "Sind Zitronen gelb?",
+        "attn9": "Ist der Mond aus Käse?",
+        "attn10": "Ist der Himmel grün?",
+        "attn11": "Ist Wasser nass?",
+        "attn12": "Ist Milch lila?",
+        "attn13": "Ist Schokolade salzig?",
+        "attn14": "Ist Schnee schwarz?",
+        "attn15": "Können Schweine fliegen?",
+        "attn16": "Ist Eiscreme heiß?",
+        "yes": "Ja",
+        "no": "Nein",
+        "catch1": "Beantworte so gut du kannst: Was ist 5 hoch 2?",
+        "catch2": "Beantworte so gut du kannst: Was ist 6 hoch 2?",
+        "catch3": "Beantworte so gut du kannst: Was ist die Quadratwurzel von 64?",
+        "catch4": "Beantworte so gut du kannst: Was ist die Quadratwurzel von 4?",
+        "catch5": "Beantworte so gut du kannst: Was ist die Quadratwurzel von 49?",
+        "catch6": "Beantworte so gut du kannst: Was ist 2 hoch 2?",
+        "catch7": "Beantworte so gut du kannst: Was ist 3 hoch 2?",
+        "catch8": "Beantworte so gut du kannst: Was ist 3 hoch 3?",
+        "catch9": "Beantworte so gut du kannst: Was ist 4 hoch 2?",
+        "catch10": "Beantworte so gut du kannst: Was ist die Quadratwurzel von 81?",
+        "catch11": "Beantworte so gut du kannst: Was ist 10 hoch 2?",
+        "catch12": "Beantworte so gut du kannst: Was ist die Quadratwurzel von 100?",
+        "catch13": "Beantworten Sie die Frage so genau wie möglich: Was ist 7 hoch 2?",
+        "catch14": "Beantworte so gut du kannst: Was ist die Quadratwurzel von 16?",
+        "catch15": "Beantworte so gut du kannst: Was ist 8 hoch 2?",
+        "prac_hint_q": "Wie viele Augen hat ein Löwe?",
+        "prac_hint_a": "Zwei Augen!",
+        "prac_pinpad": "Hurra! Du hast die erste Zahl des Passworts!",
+        "first_hint_q": "Wie viele Beine hat eine Ameise?",
+        "first_hint_a": "Sechs Beine!",
+        "first_pinpad": "Hurra! Du hast die zweite Zahl des Passworts!",
+        "second_hint_q": "Wie viele Rüssel hat ein Elefant?",
+        "second_hint_a": "Ein Rüssel!",
+        "second_pinpad": "Hurra! Du hast die dritte Zahl des Passworts!",
+        "third_hint_q": "Wie viele Finger hat ein Gorilla an jeder Hand?",
+        "third_hint_a": "Fünf Finger!",
+        "third_pinpad": "Hurra! Jetzt hast du das komplette Passwort!"
+      }
+    },
+    "sessions": {
+      "session1": {
+        "instructions": {
+          "cover_story": {
+            "intro": "Zuerst machen wir eine kurze Aufwärmübung, bevor wir uns aufmachen, weitere magische Städte zu erkunden. Du wirst ein kurzes Video ansehen, das dich durch eine Stadt namens Kieferberg führt. Versuche dir die Reihenfolge der Orte zu merken, die du besuchst. Am Ende der Tour durch Kieferberg wirst du einen Schatz finden! Nach dem Video wirst du ein paar einfache Fragen beantworten. Viel Spaß!"
+          },
+          "prac.gen_questions": {
+            "gen_questions_instructions": "Ich führe uns nun durch Ahornheim. Ahornheim ähnelt Kieferberg. Wir nehmen meine  Lieblingsroute durch die Stadt. Kannst du mir helfen, die Reihenfolge der Orte zu erraten, die ich besuchen werde?"
+          },
+          "prac.ps_questions": {
+            "ps_questions_instructions": "Nun wollen wir sehen, wie gut du dich an die Orte erinnern kannst, die ich dir in Kieferberg gezeigt habe. Ich zeige dir drei Bilder, von denen nur eines genau den Ort zeigt, zu dem ich dich in Kieferberg geführt habe. Kannst du mir helfen, das richtige auszuwählen?"
+          },
+          "prac.pc_questions": {
+            "pc_questions_instructions": "Jetzt wollen wir sehen, ob du dich an die Reihenfolge der Orte erinnern kannst, die wir in Kieferberg besucht haben. Zuerst warst du mit mir in einem Bus. Können Sie mir sagen, welchen dieser drei Orte wir direkt danach besucht haben?"
+          }
+        },
+        "questions": {
+          "prac.gen_questions": {
+            "gen_1": "Welchen dieser Orte würdest du zuerst besuchen?",
+            "gen_2": "Welchen dieser Orte würdest du als Nächstes besuchen?",
+            "gen_3": "Welchen dieser Orte würdest du als Nächstes besuchen?"
+          },
+          "prac.ps_questions": {
+            "ps_1": "Welchen dieser Orte hast du auf deiner Tour gesehen? (Bitte warten Sie, bis der Audio abgeschlossen ist, bevor Sie antworten)",
+            "ps_2": "Welchen dieser Orte hast du auf deiner Tour gesehen? (Bitte warten Sie, bis der Audio abgeschlossen ist, bevor Sie antworten)",
+            "ps_3": "Welchen dieser Orte hast du auf deiner Tour gesehen? (Bitte warten Sie, bis der Audio abgeschlossen ist, bevor Sie antworten)"
+          },
+          "prac.pc_questions": {
+            "pc_1": "Welchen dieser Orte hast du auf deiner Tour zuerst besucht? (Bitte warten Sie, bis der Audio abgeschlossen ist, bevor Sie antworten)",
+            "pc_2": "Welchen dieser Orte hast du auf deiner Tour als Nächstes besucht? (Bitte warten Sie, bis der Audio abgeschlossen ist, bevor Sie antworten)",
+            "pc_3": "Welchen dieser Orte hast du auf deiner Tour als Nächstes besucht? (Bitte warten Sie, bis der Audio abgeschlossen ist, bevor Sie antworten)"
+          }
+        }
+      },
+      "session3": {
+        "instructions": {
+          "citysorting_instructions": "Jetzt sehen wir alle Reiseführer, die uns durch verschiedene Städte geführt haben!",
+          "retention_instruction": "Jetzt gehen wir zurück zu den Städten, die du schon mal besucht hast – {{city1}} und {{city2}}! Mal sehen, ob du dich an die Orte erinnern kannst, die du dort gesehen hast. ",
+          "retention_ps_questions": "Ich zeige dir drei Bilder, aber nur eins zeigt den genauen Ort in {{city1}} oder {{city2}}. Kannst du mir helfen, das richtige auszuwählen?",
+          "retention_first_pc_questions": "Jetzt kehren wir zurück zur ersten Stadt, die du besucht hast. Erinnerst du dich an die Reihenfolge der Orte, die du in {{city1}} erkundet hast? Zuerst warst du in einem U-Boot. Kannst du mir sagen, welchen dieser drei Orte du direkt danach besucht hast?",
+          "retention_second_pc_questions": "Jetzt gehen wir zurück zur zweiten Stadt, die du besucht hast. Erinnerst du dich an die Reihenfolge der Orte, die du in {{city2}} erkundet hast? Zuerst warst du in einem U-Boot. Kannst du mir sagen, welchen dieser drei Orte du direkt danach besucht hast?"
+        },
+        "questions": {
+          "citysorting": {
+            "cs_1": "Kannst du mir sagen, welcher Reiseführer dir die erste Stadt gezeigt hat?",
+            "cs_2": "Kannst du mir sagen, welcher Reiseführer dir die zweite Stadt gezeigt hat?",
+            "cs_3": "Kannst du mir sagen, welcher Reiseführer dir die dritte Stadt gezeigt hat?"
+          }
+        }
+      }
+    }
+  },
+  "end_session": {
+    "next": "Danke, dass du diese Sitzung abgeschlossen hast! Komm bitte in 2–3 Tagen wieder, um die nächste Sitzung zu machen. Wenn du versuchst, vor Ablauf von 2 Tagen auf die Webseite zuzugreifen, wird sie nicht verfügbar sein. Wenn du nach 3 Tagen wiederkommst, gilt das als Nichtabschluss des studie und die Teilnahme wird automatisch zurückgezogen. Du wirst dieselbe ID verwenden, um die Webseite nach 2–3 Tagen wieder aufzurufen. Wenn du Fragen hast, schreib uns einfach an: raven-study@mpib-berlin.mpg.de",
+    "end": "Danke, dass du die Studie abgeschlossen hast! Bitte klick auf den Link unten, um deine Bankdaten einzugeben, damit du für deine Zeit bezahlt werden kannst. "
+  },
+  "city_names": {
+    "c1": "Flossenland",
+    "c2": "Blubberbucht",
+    "c3": "Ozeana",
+    "c4": "Perlantis",
+    "c5": "Aquatropolis",
+    "c6": "Nautarion"
+  }
+}

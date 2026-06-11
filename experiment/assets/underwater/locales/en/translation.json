@@ -1,0 +1,516 @@
+{
+  "app": {
+    "title": "City Tour Study / Stadtrundgang-Studie",
+    "subtitle": "Explore magical cities and answer questions about your journey / Entdecken Sie magische Städte und beantworten Sie Fragen zu Ihrer Reise"
+  },
+  "language": {
+    "selector": "Language / Sprache"
+  },
+  "countries": {
+    "unitedStates": "United States / Vereinigte Staaten",
+    "germany": "Germany / Deutschland"
+  },
+  "participants": {
+    "adult": "Adult / Erwachsener",
+    "child": "Child / Kind"
+  },
+  "start": {
+    "country": "Country / Land",
+    "participant": "Participant Type / Teilnehmertyp",
+    "childNote": "Children should be accompanied by their parents or guardians during the questionnaire. / Kinder sollten während des Fragebogens von ihren Eltern oder Erziehungsberechtigten begleitet werden.",
+    "continue": "Continue / Weiter"
+  },
+  "consent": {
+    "title": "Consent Form",
+    "accept": "I Agree",
+    "decline": "I Decline",
+    "continueNote": "After reading, please click \"I Agree\" to continue.",
+    "us": {
+      "adult": {
+        "title": "Study Information and Statement of Informed Consent",
+        "intro": "Thank you for your interest in participating in our study on memory development. Please take your time to read this text carefully.",
+        "aim": {
+          "title": "1. Aim of the study",
+          "content": "This study is a research project of the Max Planck Institute (MPI) for Human Development, Berlin, Germany. The purpose of this study is to investigate the development of memory capacities across childhood and in adulthood."
+        },
+        "procedure": {
+          "title": "2. Procedure and content of the study",
+          "content": "You will be asked to complete a simple task that involves watching videos, each providing a guided tour of a different magical city. The study consists of three sessions, scheduled 48 to 72 hours (2–3 days) after the previous session.",
+          "details": [
+            "In each session, you will watch a short city tour video lasting about six minutes and then answer questions about the places you saw.",
+            "Each tour will be followed by three sets of questions, with 12 questions in each set (36 in total per tour).",
+            "At the end of the third session, you will answer an additional 84 questions about the two cities visited earlier.",
+            "Each session is expected to take approximately 45 minutes.",
+            "The study should be completed using a laptop with a reliable internet connection (no mobile phones or tablets).",
+            "You are expected to answer the questions independently, without assistance from family or friends."
+          ]
+        },
+        "dataProcessing": {
+          "title": "3. What will happen to the data collected?",
+          "content": "The data collected will be used for research purposes only. The study data will be stored under an individual code number. Upon completion of data collection, the individual anonymized code linking the contact data to the task data will be deleted, making it impossible to link the study data to you in the future. The study data may be shared with cooperation partners for collaborative analysis. The study data may also be made publicly accessible via research databases (Open Science Framework) or scientific publications (typically via the Internet). This enables other researchers to check or replicate the results and enhances the quality of scientific research. The study data may also be used for new research questions going beyond the purposes of this particular study. Study data are only transferred or made publicly accessible without individualized IDs or any data in which persons are identifiable."
+        },
+        "risks": {
+          "title": "4. Risks and compensation for taking part in the study",
+          "risks": "There are no known risks involved.",
+          "compensation": "This study consists of three sessions, each lasting 45 minutes, for a total of approximately 2 hours and 15 minutes. You will be compensated at a rate of $13 per hour, with an additional $5.75 bonus for completing all three sessions, totaling $35. Each session must be scheduled 48 to 72 hours (2–3 days) after the previous one. Please note that you may withdraw from the study at any time. Failure to complete a task within 48–72 hours (2–3 days) after the previous session will also be considered a withdrawal from the study. In such cases, you will receive only partial payment corresponding to the time you participated. For example, if you complete session 1 but not sessions 2 and 3, you will be compensated with $10 (rounding up from $9.75 for 45-minute-long participation). If you complete sessions 1 and 2 but not session 3, you will be compensated with $20 (rounding up from $19.50 for 90-minute-long participation). If you quit the task mid-session, you will be paid proportionally to the time you have completed for each 30-minute increment. At the end of the study, you will receive a virtual Amazon gift card sent to your email with the amount depending on partial or complete participation."
+        },
+        "legal": {
+          "title": "5. Legal basis",
+          "content": "The legal basis for the processing of your data is your consent, in accordance with Article 6(1)(a) of the GDPR. You may withdraw your consent at any time with effect for the future. You may also withdraw your consent to the processing and use of your data at any time without negative consequences. Please note that once the code list has been deleted, it is no longer possible to link your browser-based task entrance code to your study data.",
+          "contact": "If you have any questions or concerns, please contact: Dr. Ying Lin (<strong>raven-study@mpib-berlin.mpg.de</strong>)."
+        },
+        "rights": {
+          "title": "6. Data subject rights",
+          "list": [
+            "Right of access, Art. 15 GDPR",
+            "Right of rectification, Art. 16 GDPR",
+            "Right to erasure, Art. 17 GDPR",
+            "Right to data portability, Art. 20 GDPR",
+            "Right to restriction of processing, Art. 18 GDPR",
+            "Right to object to data processing or use, Art. 21 GDPR"
+          ],
+          "complaint": "Finally, you may complain to the competent data protection authority about what you consider to be unlawful data processing. The competent authority for the Max Planck Society is the Bavarian Data Protection Authority, P.O. Box 606, 91511 Ansbach, Germany."
+        },
+        "voluntary": {
+          "title": "7. Participation is voluntary",
+          "content": "Participation in this study is voluntary. You may withdraw from the study at any time without giving any reason and without any negative consequences. You may also withdraw your consent to data processing and usage at any time with effect for the future and without negative consequences. To do this, please contact Dr. Ying Lin at raven-study@mpib-berlin.mpg.de. Please note that since no personally identifiable information is collected, it will not be possible to link your study data to you. Hence it will not be possible to withdraw your consent."
+        },
+        "consent": {
+          "title": "8. Consent to participate in the study",
+          "list": [
+            "I have been informed of the memory development study, its procedure, significance, scope and risks, and I have read and understood the study information.",
+            "I have had the opportunity to clarify any questions.",
+            "I have the right to request further information about the study at any time.",
+            "I voluntarily agree to participate in the study as described in the study information.",
+            "I have been informed that I can withdraw from this study at any time without any penalty."
+          ]
+        },
+        "dataConsent": {
+          "title": "9. Declaration of consent under data protection law",
+          "list": [
+            "I have read and understood the study information.",
+            "I have been informed that my consent is voluntary and that I may withdraw it before the code list is deleted.",
+            "I have also been informed of my further rights to information, correction, deletion, data transferability, as well as complaint and contact options.",
+            "I consent to the collection, processing, and analysis of my data by the Max Planck Institute for Human Development in the research project of the memory development study. The collected data may be used by the Max Planck Institute for Human Development in the context of scientific research for the purpose explained.",
+            "I consent to research data being stored without mentioning my name for the publication of research results in scientific journals for their review (reanalyses).",
+            "I consent to my anonymized research data being analyzed for related research questions for scientific purposes as described in the study information.",
+            "I consent to my anonymized research data being available for scientific analysis as described in the study information even after the study has ended.",
+            "I consent to my anonymized research data being uploaded to the Open Science Framework platform as described in the study information and used worldwide.",
+            "I consent to my anonymized research data being available for scientific analysis in Open Science Framework platform as described in the study information, even after the end of the study."
+          ]
+        }
+      },
+      "child": {
+        "title": "Study Information and Statement of Informed Consent",
+        "intro": "Thank you for your interest in participating in our study on memory development. Please take your time to read this text carefully.",
+        "aim": {
+          "title": "1. Aim of the Study",
+          "content": "This study is a research project of the Max Planck Institute (MPI) for Human Development, Berlin, Germany. The purpose of this study is to investigate the development of memory capacities across childhood and in adulthood."
+        },
+        "procedure": {
+          "title": "2. Procedure and Content of the Study",
+          "content": "Your child will be asked to complete a simple task that involves watching videos, each providing a guided tour of a different magical city. The study consists of three sessions, scheduled 48 to 72 hours (2–3 days) after the previous session.",
+          "details": [
+            "In each session, your child will watch a short city tour video lasting about six minutes and then answer questions about the places they saw.",
+            "Each tour will be followed by three sets of questions, with 12 questions in each set (36 in total per tour).",
+            "At the end of the third session, your child will answer an additional 84 questions about the two cities visited earlier.",
+            "Each session is expected to take approximately 45 minutes.",
+            "The study should be completed using a laptop computer with a reliable internet connection (no mobile phones or tablets).",
+            "Children are expected to answer the questions independently, without assistance from family or friends. Parents may provide help only with technical aspects such as mouse clicks and volume/screen brightness adjustment."
+          ]
+        },
+        "dataProcessing": {
+          "title": "3. What Will Happen to the Data Collected?",
+          "content": "The data collected will be used for research purposes only. The study data will be stored under an individual code number. Upon completion of data collection, the individual anonymized code linking the contact data to the task data will be deleted, making it impossible to link the study data to you in the future. The study data may be shared with cooperation partners for collaborative analysis. The study data may also be made publicly accessible via research databases (Open Science Framework) or scientific publications (typically via the Internet). This allows other researchers to check or replicate the results and enhances the quality of scientific research. The study data may also be used for new research questions going beyond the purposes of this particular study. Study data are only transferred or made publicly accessible without individualized IDs or any data in which persons are identifiable."
+        },
+        "risks": {
+          "title": "4. Risks and Compensation for Taking Part in the Study",
+          "risks": "There are no known risks involved.",
+          "compensation": "This study consists of three sessions, each lasting 45 minutes, for a total of approximately 2 hours and 15 minutes. Your child will be compensated at a rate of $13 per hour, with an additional $5.75 bonus for completing all three sessions, totaling $35. Each session must be scheduled 48 to 72 hours (2–3 days) after the previous one. Please note that you and your child may withdraw from the study at any time. Failure to complete a task within 48–72 hours after the previous session will also be considered a withdrawal from the study. In such cases, your child will receive only partial payment corresponding to the time they participated: If your child completes session 1 only: $10 (rounded up from $9.75). If your child completes sessions 1 and 2: $20 (rounded up from $19.50). If your child quits mid-session, payment will be proportional to completed time in 30-minute increments. At the end of the study, you will receive a virtual Amazon gift card sent to your email with the amount depending on partial or complete participation."
+        },
+        "legal": {
+          "title": "5. Legal Basis",
+          "content": "The legal basis for the processing of your data is your consent, in accordance with Article 6(1)(a) of the GDPR. You may withdraw your consent at any time with effect for the future. You may also withdraw your consent to the processing and use of your data at any time without negative consequences. Please note that once the code list has been deleted, it is no longer possible to link your browser-based task entrance code to your study data.",
+          "contact": "If you have any questions or concerns, please contact: Dr. Ying Lin (raven-study@mpib-berlin.mpg.de)."
+        },
+        "rights": {
+          "title": "6. Data Subject Rights",
+          "intro": "You have the following rights with regard to your child's personal data:",
+          "list": [
+            "Right of access (Art. 15 GDPR)",
+            "Right of rectification (Art. 16 GDPR)",
+            "Right to erasure (Art. 17 GDPR)",
+            "Right to data portability (Art. 20 GDPR)",
+            "Right to restriction of processing (Art. 18 GDPR)",
+            "Right to object to data processing or use (Art. 21 GDPR)"
+          ],
+          "complaint": "You may also lodge a complaint with the competent data protection authority if you believe your data have been processed unlawfully. The competent authority for the Max Planck Society is the Bavarian Data Protection Authority, P.O. Box 606, 91511 Ansbach, Germany."
+        },
+        "voluntary": {
+          "title": "7. Participation Is Voluntary",
+          "content": "Participation in this study is voluntary. You may withdraw from the study at any time without giving any reason and without any negative consequences. You may also withdraw your consent to data processing and usage at any time with effect for the future and without negative consequences. To do this, please contact Dr. Ying Lin at raven-study@mpib-berlin.mpg.de. Since no personally identifiable information is collected, it will not be possible to link your study data to you; hence, it will not be possible to withdraw your consent retroactively."
+        },
+        "consent": {
+          "title": "8. Consent to Participate in the Study",
+          "list": [
+            "I have been informed of the memory development study, its procedure, significance, scope and risks, and I have read and understood the study information.",
+            "I have had the opportunity to clarify any questions.",
+            "I have the right to request further information about the study at any time.",
+            "I voluntarily agree to enroll my child to participate in the study as described in the study information.",
+            "I have been informed that I can withdraw from this study at any time without any penalty."
+          ]
+        },
+        "dataConsent": {
+          "title": "9. Declaration of Consent Under Data Protection Law",
+          "list": [
+            "I have read and understood the study information.",
+            "I have been informed that my consent is voluntary and that I maywithdraw it before the code list is deleted.",
+            "I have also been informed of my further rights to information, correction, deletion, data portability, as well as complaint and contact options.",
+            "I consent to the collection, processing, and analysis of my child's data by the Max Planck Institute for Human Development in the research project of the memory development study. The collected data may be used by the Max Planck Institute for Human Development in the context of scientific research for the purpose explained.",
+            "I consent to research data being stored without mentioning my child's name for the publication of research results in scientific journals for their review (reanalyses).",
+            "I consent to my child's anonymized research data being analyzed for related research questions for scientific purposes as described in the study information.",
+            "I consent to my child's anonymized research data being available for scientific analysis as described in the study information even after the study has ended.",
+            "I consent to my child's anonymized research data being uploaded to the Open Science Framework platform as described in the study information and used worldwide.",
+            "I consent to my child's anonymized research data being available for scientific analysis in the Open Science Framework platform as described in the study information, even after the end of the study."
+          ]
+        }
+      }
+    }
+  },
+  "instructions": {
+    "continue": "Continue",
+    "startQuestions": "Start Questions",
+    "nextInstruction": "Next Instruction",
+    "us": {
+      "adult": {
+        "title": "Study Instructions",
+        "intro": "Please carefully read the following instructions. Your cooperation is essential for advancing the science of memory development.",
+        "before": {
+          "title": "Before beginning the study, please:",
+          "list": [
+            "Maximize the browser window to full screen.",
+            "Ensure you are seated comfortably and facing the computer screen.",
+            "Set your computer brightness to a comfortable level (brighter is better).",
+            "Adjust the volume to a comfortable level (there will be audio in the animations).",
+            "Make sure the environment is quiet and free from distractions for the entire session (about 45 minutes).",
+            "<strong>If you are using earphones, keep them plugged in and on for the entire session and only remove them during breaks.</strong>",
+            "Please keep your laptop plugged in and charging throughout the entire session."
+          ]
+        },
+        "procedure": {
+          "title": "Study Procedure:",
+          "list": [
+            "First, you will watch an animation for approximately 6 minutes.",
+            "Afterwards, you will answer questions about what you saw. Each question will show three answer choices, displayed from left to right at the bottom of the screen.",
+            "Use the mouse to click on the image that corresponds to your choice.",
+            "The screen will automatically start in full screen mode. Please keep it in full screen mode for the entire session."
+          ]
+        },
+        "important": {
+          "title": "Important:",
+          "list": [
+            "The key goal of our research is that you watch attentively and answer all questions <strong>independently</strong>.",
+            "You should stop the study at any time if you feel uncomfortable, distressed, or wishes to discontinue.",
+            "placeholder (not shown to adults)",
+            "You can take a short break (up to 5 minutes) between subtasks within each session (3 breaks in sessions 1 and 2, and 5 in session 3)."
+          ]
+        },
+        "troubleshooting": {
+          "title": "Troubleshooting:",
+          "list": [
+            "If you accidentally close the webpage, please return to it <strong>immediately</strong> and re-enter your participant ID. The webpage should automatically redirect you to where you left off.",
+            "Please <strong>only</strong> refresh the page if the window is stuck at 'loading video...' or if a video/image does not appear.",
+            "If you are unable to return to the correct point or the page does not redirect properly, please contact the research team at <strong>raven-study@mpib-berlin.mpg.de</strong> for assistance.",
+            "Please note that, due to the nature of this study, <strong>if you are unable to return to your session within 3 minutes, this will be considered as not completing the session (or the study)</strong>. To avoid this issue, please be very careful not to close or refresh the webpage during your session."
+          ]
+        },
+        "note": "Important Note: Exiting full screen during the session or not completing the study within 48–72 hours after the previous session will be considered a withdrawal from the experiment.",
+        "thankYou": "Thank you very much for your support! Your participation is essential to the progress of our research on memory development."
+      },
+      "child": {
+        "title": "Study Instructions for Parents",
+        "intro": "Please carefully read the following instructions. Your cooperation is essential for advancing the science of memory development.",
+        "before": {
+          "title": "Before beginning the study, please:",
+          "list": [
+            "Maximize the browser window to full screen.",
+            "Ensure your child is seated comfortably and facing the computer screen.",
+            "Set your computer brightness to a comfortable level (brighter is better).",
+            "Adjust the volume to a comfortable level (there will be audio in the animations).",
+            "Make sure the environment is quiet and free from distractions for the entire session (about 45 minutes).",
+            "<strong>If you are using earphones, keep them on for the whole session and only remove them during breaks.</strong>",
+            "Please keep your laptop plugged in and charging throughout the entire session."
+          ]
+        },
+        "procedure": {
+          "title": "Study Procedure:",
+          "list": [
+            "First, your child will watch an animation for approximately 6 minutes.",
+            "Afterwards, they will answer questions about what they saw. Each question will show three answer choices, displayed from left to right at the bottom of the screen.",
+            "Use the mouse to click on the image that corresponds to your child's choice.",
+            "The screen will automatically start in full screen mode. Please keep it in full screen mode for the entire session."
+          ]
+        },
+        "important": {
+          "title": "Important:",
+          "list": [
+            "<strong>Do not assist your child in answering any of the questions. It is expected that they may encounter new words or unfamiliar content in the animations. Please do not explain, label, or influence their attention in any way.</strong>",
+            "The key goal of our research is that your child watches attentively and answers all questions <strong>independently</strong>.",
+            "You should stop the study at any time if your child feels uncomfortable, distressed, or wishes to discontinue.",
+            "Your child can take a break (up to 5 minutes) between the subtasks within each session (3 breaks in sessions 1 and 2, and 5 in session 3)."
+          ]
+        },
+        "troubleshooting": {
+          "title": "Troubleshooting:",
+          "list": [
+            "If you or your child accidentally close the webpage, please return to it <strong>immediately</strong> and re-enter your participant ID. The webpage should automatically redirect you to where you left off.",
+            "Please <strong>only</strong> refresh the page if the window is stuck at 'loading video...' or if a video/image does not appear.",
+            "If you are unable to return to the correct point or the page does not redirect properly, please contact the research team at <strong>raven-study@mpib-berlin.mpg.de</strong> for assistance.",
+            "Please note that, due to the nature of this study, <strong>if you are unable to return to your session within 3 minutes, this will be considered as not completing the session (or the study)</strong>. To avoid this issue, please be very careful not to close or refresh the webpage during your session."
+          ]
+        },
+        "note": "Important Note: Exiting full screen during the session or not completing the study within 48–72 hours after the previous session will be considered a withdrawal from the experiment.",
+        "thankYou": "Thank you very much for your support! Your participation is essential to the progress of our research on memory development."
+      }
+    }
+  },
+  "demographics": {
+    "title": "Demographics and Checks",
+    "subtitle": "Please provide some basic information about yourself",
+    "age": "Age",
+    "selectAge": "Select your age",
+    "gender": "Gender",
+    "genderOptions": {
+      "male": "Male",
+      "female": "Female",
+      "nonBinary": "Non-binary",
+      "preferNotToSay": "Prefer not to say"
+    },
+    "audioCheck": {
+      "title": "Audio Check",
+      "description": "Please click the button below to play a test sound. Make sure your speakers or headphones are working properly.",
+      "playButton": "Play Test Sound",
+      "stopButton": "Stop Sound",
+      "playingStatus": "Playing sound...",
+      "readyStatus": "Ready...",
+      "confirmation": "I heard the test sound",
+      "troubleshooting": {
+        "title": "Having trouble hearing the sound?",
+        "checkVolume": "Check that your device volume is turned up",
+        "checkMute": "Make sure your device is not muted",
+        "checkSpeakers": "Verify your speakers or headphones are connected",
+        "checkBrowser": "Check if your browser allows audio (look for audio icon in address bar)",
+        "refreshPage": "Try refreshing the page and testing again"
+      }
+    },
+    "continue": "Continue",
+    "submitting": "Saving..."
+  },
+  "login": {
+    "title": "Participant Login/Teilnehmer-Anmeldung",
+    "subtitle": "Please enter your participant ID to continue / Bitte geben Sie Ihre Teilnehmer-ID ein, um fortzufahren",
+    "participantId": "Participant ID / Teilnehmer-ID",
+    "placeholder": "Enter your participant ID/ Geben Sie Ihre Teilnehmer-ID ein",
+    "submit": "Continue / Weiter",
+    "submitting": "Validating... / Wird validiert...",
+    "error": {
+      "required": "Participant ID is required",
+      "invalid": "Invalid participant ID. Please check and try again.",
+      "network": "Network error. Please try again."
+    }
+  },
+  "cityTourStart": {
+    "title": "Welcome to the City Tour!",
+    "subtitle": "You're about to begin an interactive journey through our magical cities",
+    "instructions": {
+      "title": "Instructions",
+      "step1": "Watch each city tour video carefully",
+      "step2": "Answer the questions that follow each video",
+      "step3": "Troubleshooting: Refresh the page if the video/image does not load",
+      "step4": "For parents: Ensure that your child answers all questions independently, even if they are not sure about the answer"
+    },
+    "startButton": "Start City Tour",
+    "loading": "Preparing your tour...",
+    "enteringFullscreen": "Entering fullscreen..."
+  },
+  "sessionWaiting": {
+    "title": "Thank You!",
+    "message": "Thank you for completing this session of our study. Please come back between 48 to 72 hours to start the next session."
+  },
+  "sessionExpired": {
+    "title": "Session Expired",
+    "message": "Your session is expired because you waited longer than 72 hours to start. If you think this is an error, contact an MPIB - Raven staff member."
+  },
+  "sessionCompleted": {
+    "title": "Thank You!",
+    "message": "Thank you for participating in our study."
+  },
+  "sessionEnd": {
+    "session12": {
+      "title": "Session Complete!",
+      "message": "Thank you for completing this session of our study. Please come back between 48 to 72 hours to start the next session."
+    },
+    "session3": {
+      "title": "Study Complete!",
+      "message": "Thank you for participating in our study. Please click the link to provide your information for compensation: https://survey.academiccloud.de/f/936235?lang=en"
+    }
+  },
+  "questionnaire": {
+    "navigation": {
+      "next": "Next"
+    }
+  },
+  "media": {
+    "video": {
+      "notSupported": "Your browser does not support the video tag.",
+      "loading": "Loading video..."
+    },
+    "audio": {
+      "notSupported": "Your browser does not support the audio element."
+    }
+  },
+  "feedback": {
+    "correct": "✓ Correct!",
+    "incorrect": "✗ Incorrect"
+  },
+  "experiments": {
+    "common": {
+      "instructions": {
+        "gen_intro": "{{guideName}} is now leading us through {{genCityName}}. {{genCityName}} is similar to {{cityName}}. We will take {{guideName}}'s favorite route through the city which would lead visitors to the treasure of {{genCityName}}. Can you help me guess the order of places that we would go on the tour so that visitors would find the treasures?",
+        "ps_intro": "Now let's see how well you remember the places that {{guideName}} showed you in {{cityName}}. I will show you three pictures, only one of them is the exact place that {{guideName}} took you to in {{cityName}}. Can you help me choose the correct one?",
+        "pc_intro": "Now let's see if you remember the order of the places that you visited in {{cityName}}. First you were in a submarine with {{guideName}}. Can you tell me which of these three places you visited right after that?"
+      },
+      "questions": {
+        "gen": {
+          "first": "Which of these places would {{guideName}} visit first?",
+          "next": "Which of these places would {{guideName}} visit next?",
+          "middle": "Halfway through the tour, {{guideName}} shows you the city flag of {{genCityName}}!"
+        },
+        "ps": {
+          "prompt": "Which of these did you see on your {{cityName}} tour?",
+          "retention": "Which of these did you see on your tour?"
+        },
+        "pc": {
+          "first": "Which of these places did you see first on your journey through {{cityName}}?",
+          "next": "Which of these places did you visit next on your journey to {{cityName}}?",
+          "middle": "Halfway through the tour, {{guideName}} shows you the city flag of {{cityName}}!"
+        },
+        "citysorting": "Which of these tour guides took you to this place?"
+      },
+      "interludes": {
+        "next_session": "Let's come back next time to collect the next number. The Raven is counting on you!",
+        "continue": "Great! Now we're going to continue to explore other magical cities, are you ready?",
+        "end": "Let's go save the Raven!",
+        "input_placeholder": "Answer here",
+        "attn1": "Do bees fly?",
+        "attn2": "Do cats meow?",
+        "attn3": "Do cows lay eggs?",
+        "attn4": "Is fire warm?",
+        "attn5": "Is grass green?",
+        "attn6": "Do horses have 4 legs?",
+        "attn7": "Is ice warm?",
+        "attn8": "Are lemons yellow?",
+        "attn9": "Is the moon made of cheese?",
+        "attn10": "Is the sky green?",
+        "attn11": "Is water wet?",
+        "attn12": "Is milk purple?",
+        "attn13": "Is chocolate salty?",
+        "attn14": "Is snow black?",
+        "attn15": "Can pigs fly?",
+        "attn16": "Is ice cream hot?",
+        "yes": "Yes",
+        "no": "No",
+        "catch1": "Answer as best as you can: What is 5 to the power of 2?",
+        "catch2": "Answer as best as you can: What is 6 to the power of 2?",
+        "catch3": "Answer as best as you can: What is the square root of 64?",
+        "catch4": "Answer as best as you can: What is the square root of 4?",
+        "catch5": "Answer as best as you can: What is the square root of 49?",
+        "catch6": "Answer as best as you can: What is 2 to the power of 2?",
+        "catch7": "Answer as best as you can: What is 3 to the power of 2?",
+        "catch8": "Answer as best as you can: What is 3 to the power of 3?",
+        "catch9": "Answer as best as you can: What is 4 to the power of 2?",
+        "catch10": "Answer as best as you can: What is the square root of 81?",
+        "catch11": "Answer as best as you can: What is 10 to the power of 2?",
+        "catch12": "Answer as best as you can: What is the square root of 100?",
+        "catch13": "Answer as best as you can: What is 7 to the power of 2?",
+        "catch14": "Answer as best as you can: What is the square root of 16?",
+        "catch15": "Answer as best as you can: What is 8 to the power of 2?",
+        "prac_hint_q": "How many eyes does a lion have?",
+        "prac_hint_a": "Two eyes!",
+        "prac_pinpad": "Yay! You got the first number of the passcode!",
+        "first_hint_q": "How many legs does an ant have?",
+        "first_hint_a": "Six legs!",
+        "first_pinpad": "Yay! You got the second number of the passcode!",
+        "second_hint_q": "How many trunks does an elephant have?",
+        "second_hint_a": "One trunk!",
+        "second_pinpad": "Yay! You got the third number of the passcode!",
+        "third_hint_q": "How many fingers does a gorilla have on each hand?",
+        "third_hint_a": "Five fingers!",
+        "third_pinpad": "Yay! Now you have the complete passcode!"
+      }
+    },
+    "sessions": {
+      "session1": {
+        "instructions": {
+          "cover_story": {
+            "intro": "First, we’ll do a quick warm-up before our adventure to explore more magical cities. You’ll watch a short video that takes you around a city called Pinehollow. Try to remember the order of the places you visit. At the end of the tour through Pinehollow, we will find a treasure! After the video, you’ll answer a few easy questions. Have fun!"
+          },
+          "prac.gen_questions": {
+            "gen_questions_instructions": "I am now leading us through Maplewood. Maplewood is similar to Pinehollow. We will take my favorite route through the city. Can you help me guess the order of places that we would go on?"
+          },
+          "prac.ps_questions": {
+            "ps_questions_instructions": "Now let's see how well you remember the places that I showed you in Pinehollow. I will show you three pictures, only one of them is the exact place that I took you to in Pinehollow. Can you help me choose the correct one?"
+          },
+          "prac.pc_questions": {
+            "pc_questions_instructions": "Now let's see if you remember the order of the places that you visited in Pinehollow. First you were in a bus with me. Can you tell me which of these three places you visited right after that?"
+          }
+        },
+        "questions": {
+          "prac.gen_questions": {
+            "gen_1": "Which of these places would you visit first?",
+            "gen_2": "Which of these places would you visit next?",
+            "gen_3": "Which of these places would you visit next?"
+          },
+          "prac.ps_questions": {
+            "ps_1": "Which of these did you see on your tour (Please wait for the audio to finish before answering)?",
+            "ps_2": "Which of these did you see on your tour (Please wait for the audio to finish before answering)?",
+            "ps_3": "Which of these did you see on your tour (Please wait for the audio to finish before answering)?"
+          },
+          "prac.pc_questions": {
+            "pc_1": "Which of these places did you visit first on your tour (Please wait for the audio to finish before answering)?",
+            "pc_2": "Which of these places did you visit next on your tour (Please wait for the audio to finish before answering)?",
+            "pc_3": "Which of these places did you visit next on your tour (Please wait for the audio to finish before answering)?"
+          }
+        }
+      },
+      "session3": {
+        "instructions": {
+          "citysorting_instructions": "Now we will see all of the tour guides who have shown us around different cities!",
+          "retention_instruction": "Now we're going back to the cities you visited before, {{city1}} and {{city2}}! Let's see if you can remember the places you saw there.",
+          "retention_ps_questions": "I'll show you three pictures, but only one shows the exact place in either {{city1}} or {{city2}}. Can you help me pick the right one?",
+          "retention_first_pc_questions": "Now let’s go back to the first city you visited. Do you remember the order of the places you explored in {{city1}}? First, you were in a submarine. Can you tell me which of these three places you went to right after that?",
+          "retention_second_pc_questions": "Now let’s go back to the second city you visited. Do you remember the order of the places you explored in {{city2}}? First, you were in a submarine. Can you tell me which of these three places you went to right after that?"
+        },
+        "questions": {
+          "citysorting": {
+            "cs_1": "Can you tell me which tour guide had shown you the first city?",
+            "cs_2": "Can you tell me which tour guide had shown you the second city?",
+            "cs_3": "Can you tell me which tour guide had shown you the third city?"
+          }
+        }
+      }
+    }
+  },
+  "end_session": {
+    "next": "Thank you for completing this session! Please return in 2–3 days to complete the next session. If you try to access the webpage before 2 days have passed, it will not be available. If you visit after 3 days, it will count as a failure to complete the study, and you will be automatically withdrawn. You will use the same ID to re-enter the webpage when you return in 2–3 days. If you have any questions please don't hesitate to contact us at: raven-study@mpib-berlin.mpg.de",
+    "end": "Thank you for completing the study! Please click the link below to enter your email information so that you can be compensated for your time. If you have any questions or concerns please contact us at: raven-study@mpib-berlin.mpg.de"
+  },
+  "city_names": {
+    "c1": "Fintopia",
+    "c2": "Bubblehaven",
+    "c3": "Oceana",
+    "c4": "Shellantis",
+    "c5": "Aquatropolis",
+    "c6": "Nautarion"
+  }
+}

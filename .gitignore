@@ -1,0 +1,4 @@
+experiment/assets/underwater/_full_videos/
+*.psydat
+.DS_Store
+__pycache__/
