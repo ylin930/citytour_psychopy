@@ -1,16 +1,8 @@
 {
-  "ying": {
+  "test1": {
     "cohort": "a",
     "version": 1,
-    "age_group": "11",
-    "completed_sessions": [
-      1
-    ]
-  },
-  "yingg": {
-    "cohort": "a",
-    "version": 1,
-    "age_group": "12",
+    "age_group": "4",
     "completed_sessions": [
       1
     ]

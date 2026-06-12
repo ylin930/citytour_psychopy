@@ -13,7 +13,7 @@ World guide names: edit GUIDE_NAMES below.
 
 from psychopy import visual, core, event, gui, prefs
 from psychopy.hardware import keyboard
-import os, json, csv, datetime, numpy as _np
+import os, json, csv, datetime, re, numpy as _np
 
 # sounddevice is always bundled with PsychoPy and has instant stop()
 try:
@@ -365,17 +365,24 @@ def play_audio(path, win=None):
 def _next_button(win, label=None):
     if label is None:
         label = get_text('instructions.continue') or 'Weiter'
-    # Pill-shaped button via RoundRect (available in PsychoPy as visual.Rect with radius)
+    # Rounded pill button — try cornerRadius (PsychoPy 2022+), fallback to ShapeStim
+    POS  = (0, -0.82)
+    W, H = 0.50, 0.12
     try:
-        btn = visual.RoundRect(win, width=0.50, height=0.12, pos=(0, -0.78),
-                               radius=0.06, fillColor='#006C66',
-                               lineColor='#006C66', units='norm')
-    except AttributeError:
-        # Fallback for older PsychoPy versions
-        btn = visual.Rect(win, width=0.50, height=0.12, pos=(0, -0.78),
-                          fillColor='#006C66', lineColor='#006C66', units='norm')
+        # PsychoPy 2022+ supports cornerRadius on Rect
+        btn = visual.Rect(win, width=W, height=H, pos=POS,
+                          fillColor='#006C66', lineColor='#006C66',
+                          cornerRadius=0.06, units='norm')
+    except (TypeError, AttributeError):
+        try:
+            btn = visual.RoundRect(win, width=W, height=H, pos=POS,
+                                   radius=0.06, fillColor='#006C66',
+                                   lineColor='#006C66', units='norm')
+        except AttributeError:
+            btn = visual.Rect(win, width=W, height=H, pos=POS,
+                              fillColor='#006C66', lineColor='#006C66', units='norm')
     lbl = visual.TextStim(win, text=label, color='white',
-                          pos=(0, -0.78), height=0.065, units='norm', bold=True)
+                          pos=POS, height=0.065, units='norm', bold=True)
     return btn, lbl
 
 def _draw_next(btn, lbl):
@@ -385,7 +392,7 @@ def _clicked_next(mouse, btn):
     if mouse.getPressed()[0]:
         mp = mouse.getPos()
         bx, by = btn.pos
-        return abs(mp[0]-bx) < 0.125 and abs(mp[1]-by) < 0.07
+        return abs(mp[0]-bx) < 0.25 and abs(mp[1]-by) < 0.07
     return False
 
 def show_text(win, text, subtitle=None, wait=True, duration=None):
@@ -416,43 +423,43 @@ def show_text(win, text, subtitle=None, wait=True, duration=None):
                 break
             core.wait(0.01)
 
-def show_image_screen(win, path, text=None, wait=True):
+def show_image_screen(win, path, text=None, wait=True, audio_path=None):
     if not os.path.exists(path):
         show_text(win, f'[Image not found]\n{os.path.basename(path)}')
         return
+    # 1024x1024 images — square, leave room for text above and button below
     asp = image_aspect(path)
-    w, h = fit_size(asp, 1.80, 1.60)
-    y = 0.10 if not text else 0.20
-    visual.ImageStim(win, image=path, pos=(0, y), size=(w, h), units='norm').draw()
-    if text:
-        visual.TextStim(win, text=text, color='black', wrapWidth=1.60,
-                        height=0.07, pos=(0, 0.60), units='norm').draw()
+    max_sz = 1.10  # smaller to leave clear room for text and button
+    w, h = fit_size(asp, max_sz, max_sz)
+    y = -0.05  # image slightly below centre
+
+    def _draw():
+        visual.ImageStim(win, image=path, pos=(0, y), size=(w, h), units='norm').draw()
+        if text:
+            visual.TextStim(win, text=text, color='black', wrapWidth=1.60,
+                            height=0.065, pos=(0, 0.72), units='norm').draw()
+
     if wait:
         btn, lbl = _next_button(win)
-        _draw_next(btn, lbl)
-        win.flip()
+        _draw(); _draw_next(btn, lbl); win.flip()
+        if audio_path:
+            play_audio(audio_path)
         mouse = event.Mouse(win=win); mouse.clickReset()
         while True:
             check_escape(win)
-            visual.ImageStim(win, image=path, pos=(0, y), size=(w, h), units='norm').draw()
-            if text:
-                visual.TextStim(win, text=text, color='black', wrapWidth=1.60,
-                                height=0.07, pos=(0, 0.60), units='norm').draw()
-            _draw_next(btn, lbl)
-            win.flip()
+            _draw(); _draw_next(btn, lbl); win.flip()
             if _clicked_next(mouse, btn):
                 break
             core.wait(0.01)
     else:
-        win.flip()
+        _draw(); win.flip()
 
-def _extract_last_frame(video_path):
-    """Extract last frame of video as a temp PNG. Returns path or None."""
+def _extract_first_frame(video_path):
+    """Extract first frame of video as a temp PNG. Returns path or None."""
     try:
         import cv2, tempfile
         cap = cv2.VideoCapture(video_path)
-        total = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-        cap.set(cv2.CAP_PROP_POS_FRAMES, max(0, total - 2))
+        cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
         ret, frame = cap.read()
         cap.release()
         if ret:
@@ -460,7 +467,7 @@ def _extract_last_frame(video_path):
             cv2.imwrite(tmp.name, frame)
             return tmp.name
     except Exception as e:
-        print(f'  [LAST FRAME ERR] {e}')
+        print(f'  [FIRST FRAME ERR] {e}')
     return None
 
 def play_video(win, path, auto_advance=True):
@@ -500,7 +507,7 @@ def play_video(win, path, auto_advance=True):
         return
     if not auto_advance and finished:
         # Extract last frame to hold on screen instead of blank
-        last_frame = _extract_last_frame(path)
+        last_frame = _extract_first_frame(path)
         mouse.clickReset()
         while True:
             check_escape(win)  # 's' raises _SkipSection here too
@@ -550,17 +557,17 @@ def draw_timeline(win, current_q, total_q):
         if i < total_q - 1:
             x2 = sx + (i+1) * spacing
             visual.Line(win, start=(x+dot_r, y), end=(x2-dot_r, y),
-                        lineColor='#aaaaaa', lineWidth=1.5, units='norm').draw()
+                        lineColor='#aaaaaa', lineWidth=3.0, units='norm').draw()
 
         if i < current_q - 1:        # completed — filled
             visual.Circle(win, radius=dot_r, pos=(x, y), units='norm',
                           fillColor='#5a3010', lineColor='#5a3010').draw()
         elif i == current_q - 1:     # current — open thick
             visual.Circle(win, radius=dot_r, pos=(x, y), units='norm',
-                          fillColor='white', lineColor='#5a3010', lineWidth=2.5).draw()
+                          fillColor='white', lineColor='#5a3010', lineWidth=4.0).draw()
         else:                         # future — open thin
             visual.Circle(win, radius=dot_r, pos=(x, y), units='norm',
-                          fillColor='white', lineColor='#cccccc', lineWidth=1.0).draw()
+                          fillColor='white', lineColor='#cccccc', lineWidth=2.5).draw()
 
 # ─────────────────────────────────────────────
 # INSTRUCTION SCREEN
@@ -576,12 +583,11 @@ def show_instruction(win, instr, base, world, lang, num, gen_num, slot='',
     guide = guide_name(world, session)
     cname = city_name(cohort, session)
     gname = gen_city_name(cohort, session)
+    text  = get_text(text_key, guideName=guide, cityName=cname, genCityName=gname) \
+            if text_key else ''
     print(f'  [INSTR] key={text_key}')
     print(f'          guide={guide} cityName={cname} genCityName={gname}')
     print(f'          text preview: {str(text)[:80]}')
-
-    text = get_text(text_key, guideName=guide, cityName=cname, genCityName=gname) \
-           if text_key else ''
 
     image_tmpls = instr.get('images', [])
     stims = []
@@ -628,13 +634,25 @@ SKIP_IDS = {
     're_first_pc_catch','cs_catch','retention_second_pc_catch',
 }
 
-def handle_interlude(win, content, base, world, lang, num, gen_num, slot):
+def handle_interlude(win, item, base, world, lang, num, gen_num, slot):
+    content = item.get('content', {})
     cid   = content.get('id','')
     ctype = content.get('type','')
     tmpl  = content.get('path','')
     path  = resolve(tmpl, base, world, lang, num, gen_num, slot) if tmpl else ''
+    # Audio lives on the item itself (not inside content)
+    audio_tmpl = item.get('audio', '')
+    if isinstance(audio_tmpl, list):
+        audio_tmpl = audio_tmpl[0] if audio_tmpl else ''
+    audio_path = resolve(audio_tmpl, base, world, lang, num, gen_num, slot) if audio_tmpl else ''
 
-    if cid in SKIP_IDS or 'attn_catch' in path:
+    # Skip attn/catch by content id, resolved path, OR template path
+    _skip_keywords = ('attn', 'catch')
+    if (cid in SKIP_IDS
+            or 'attn_catch' in path
+            or 'attn_catch' in tmpl
+            or any(cid.startswith(k) or cid.endswith(k) for k in _skip_keywords)
+            or any(k in cid for k in _skip_keywords)):
         return
 
     # Get overlay text for known interlude ids
@@ -646,17 +664,18 @@ def handle_interlude(win, content, base, world, lang, num, gen_num, slot):
     }
     overlay = text_map.get(cid, '')
 
-    GAMIFY_IDS = {'coin_1','coin_2','coin_3','coin_4','coin_5','coin_6',
-                  'unlock','pinpad'}
-    print(f'  [INTERLUDE] {cid}')
+    # Detect gamify by path (coin/unlock/pinpad folders) — IDs are inconsistent across versions
+    _is_gamify = any(x in path.lower() for x in ['/gamify/', 'coin_', 'unlock', 'pinpad'])
+    print(f'  [INTERLUDE] {cid} gamify={_is_gamify}')
     if ctype == 'video':
-        if cid in GAMIFY_IDS:
+        if _is_gamify:
             play_video(win, path, auto_advance=True)   # gamify: auto-advance, no button
         else:
             play_video(win, path, auto_advance=False)  # narrative: Next button after
     elif ctype == 'image':
-        # Show image with overlaid text and Next button (no separate blank screen)
-        show_image_screen(win, path, text=overlay if overlay else None, wait=True)
+        # Play audio first, then show image with Next button
+        show_image_screen(win, path, text=overlay if overlay else None,
+                          wait=True, audio_path=audio_path if audio_path else None)
 
 # ─────────────────────────────────────────────
 # GEN QUESTION  (3 videos, sequential, then click)
@@ -1053,7 +1072,7 @@ def run_group(win, group, base, world, lang, num, gen_num, slot,
         itype = item.get('type','question')
         try:
             if itype == 'interlude':
-                handle_interlude(win, item.get('content',{}),
+                handle_interlude(win, item,
                                  base, world, lang, num, gen_num, slot)
             elif itype == 'question':
                 q_num += 1
@@ -1138,80 +1157,147 @@ def main():
     # ─────────────────────────────────────────
     # translations loaded after language confirmed in GUI
 
-    dlg = gui.Dlg(title='City Tour Experiment')
-    dlg.addText('─── Participant ───', color='navy')
-    dlg.addField('Participant ID:',  '')
-    dlg.addField('Age (years):',     '')
-    dlg.addField('Session:',         '', choices=['','1','2','3'])
-    dlg.addField('Language:',        'de', choices=['de','en'])
-    dlg.addText('─── Dev / testing (leave blank for real participants) ───', color='gray')
-    dlg.addField('Override cohort (a / b):',  '')
-    dlg.addField('Override version (1-4):',   '')
-    dlg.addText('─── World ───', color='navy')
-    dlg.addField('World folder:', 'underwater')  # ← update default for each timepoint
-    dlg.addField('Pilot mode (windowed):', False)
+    # Default values — updated on each loop so dialog re-opens pre-filled
+    _vals = dict(pid='', age='', session='', lang='de',
+                 cohort='', version='', world='underwater', pilot=False)
 
-    while True:
-        ok = dlg.show()
-        if not dlg.OK: core.quit()
+    def _build_dlg(v, error_msg=''):
+        d = gui.Dlg(title='City Tour Experiment')
+        if error_msg:
+            d.addText(error_msg, color='red')
+        d.addText('─── Participant ───', color='navy')
+        d.addField('Participant ID (required, 6 chars):', v['pid'])
+        d.addField('Age in years (required):',            v['age'])
+        d.addField('Session (required):',   v['session'], choices=['','1','2','3'])
+        d.addField('Language:',             v['lang'],    choices=['de','en'])
+        d.addText('─── Override (optional — leave blank for auto-assign) ───', color='gray')
+        d.addField('Cohort (a / b):',  v['cohort'])
+        d.addField('Version (1-4):',   v['version'])
+        d.addText('─── World ───', color='navy')
+        d.addField('World folder:',    v['world'])   # ← update default for each timepoint
+        d.addField('Pilot mode (skip enabled, no counter):', v['pilot'])
+        return d
 
-        pid              = ok[0].strip()
-        age_str          = ok[1].strip()
-        session_str      = ok[2].strip()
-        lang             = ok[3]
-        override_cohort  = ok[4].strip().lower()
-        override_version = ok[5].strip()
-        world            = ok[6].strip()
-        pilot_mode       = bool(ok[7])
-        fullscr          = not pilot_mode
+    while True:  # outer — loops back if user clicks Back on confirm
+        _error_msg = ''
+        while True:
+            dlg = _build_dlg(_vals, _error_msg)
+            ok  = dlg.show()
+            if not dlg.OK: core.quit()
 
-        errors = []
-        if not pid:         errors.append('Participant ID is required.')
-        if not age_str:     errors.append('Age is required.')
-        if not session_str: errors.append('Session is required.')
-        if errors:
-            err_dlg = gui.Dlg(title='Missing fields')
-            err_dlg.addText('\n'.join(errors), color='red')
-            err_dlg.show(); continue
+            # Save values so dialog re-opens pre-filled if validation fails
+            _vals['pid']     = ok[0].strip()
+            _vals['age']     = ok[1].strip()
+            _vals['session'] = ok[2].strip()
+            _vals['lang']    = ok[3]
+            _vals['cohort']  = ok[4].strip().lower()
+            _vals['version'] = ok[5].strip()
+            _vals['world']   = ok[6].strip()
+            _vals['pilot']   = bool(ok[7])
 
-        # Skip duplicate check in dev mode
-        is_dev = (ok[4].strip().lower() in ('a','b') and
-                  ok[5].strip() in ('1','2','3','4'))
-        if not is_dev and session_str and session_already_run(pid, int(session_str)):
-            warn_dlg = gui.Dlg(title='Duplicate session')
-            warn_dlg.addText(
-                f'WARNING: {pid} already completed Session {session_str}.'
-                ' Check the ID and session, or use dev overrides to run anyway.',
-                color='red')
-            warn_dlg.show(); continue
-        break
+            pid              = _vals['pid']
+            age_str          = _vals['age']
+            session_str      = _vals['session']
+            lang             = _vals['lang']
+            override_cohort  = _vals['cohort']
+            override_version = _vals['version']
+            world            = _vals['world']
+            pilot_mode       = _vals['pilot']
+            fullscr          = True  # always fullscreen, pilot or not
 
-    session = int(session_str)
+            errors = []
+            # Participant ID: required, max 6 alphanumeric chars
+            if not pid:
+                errors.append('Participant ID is required.')
+            elif not re.match(r'^[A-Za-z0-9]{6}$', pid):
+                errors.append('Participant ID must be exactly 6 letters/numbers (e.g. P00001).')
+            # Age: required, digits only
+            if not age_str:
+                errors.append('Age is required.')
+            elif not age_str.isdigit():
+                errors.append('Age must be a number.')
+            # Session: required
+            if not session_str:
+                errors.append('Session is required.')
+            # Override cohort/version: if one is filled both must be filled and valid
+            cohort_filled  = override_cohort in ('a','b')
+            version_filled = override_version in ('1','2','3','4')
+            if override_cohort and not cohort_filled:
+                errors.append("Cohort override must be 'a' or 'b'.")
+            if override_version and not version_filled:
+                errors.append('Version override must be 1, 2, 3, or 4.')
+            if bool(override_cohort) != bool(override_version):
+                errors.append('Fill in BOTH cohort and version, or leave both blank.')
 
-    # Load translations in the confirmed language
-    load_translations(os.path.join(LOCALES_PATH, lang, 'translation.json'))
+            if errors:
+                # Re-open main dialog with errors shown at top (values pre-filled)
+                _error_msg = '⚠  ' + '   •  '.join(errors)
+                continue
 
-    if override_cohort in ('a','b') and override_version in ('1','2','3','4'):
-        cohort = override_cohort; version = int(override_version); dev_mode = True
-    else:
-        cohort, version = assign_cohort_version(pid, age_str); dev_mode = False
+            # Duplicate session check — skip if override supplied
+            has_override = cohort_filled and version_filled
+            if not has_override and session_str and session_already_run(pid, int(session_str)):
+                _error_msg = (f'⚠  {pid} already completed Session {session_str}. '
+                              f'Check the ID and session, or supply overrides to run anyway.')
+                continue
 
-    global _DEV_MODE
-    _DEV_MODE = dev_mode
+            _error_msg = ''  # clear errors on success
+            break
 
-    confirm = gui.Dlg(title='Assignment Confirmed')
-    confirm.addText(
-        f'{"⚠  DEV MODE — counter not incremented" + chr(10) if dev_mode else ""}'\
-        f'Participant : {pid}\n'
-        f'Age group   : {age_str}\n'
-        f'Cohort      : {cohort.upper()}\n'
-        f'Version     : v{version}\n'
-        f'Session     : {session}\n'
-        f'Language    : {lang}\n'
-        f'World       : {world}\n\n'
-        f'Click OK to begin.')
-    confirm.show()
-    if not confirm.OK: core.quit()
+        session = int(session_str)
+
+        # Load translations in the confirmed language
+        load_translations(os.path.join(LOCALES_PATH, lang, 'translation.json'))
+
+        # dev_mode  = pilot checkbox ticked
+        # has_override = cohort+version manually specified
+        # Skip ('s') enabled only in pilot mode
+        # Counter only incremented for real runs (not pilot, not override)
+        dev_mode     = pilot_mode
+        has_override = cohort_filled and version_filled
+
+        if has_override:
+            # Manual override — use supplied values, do NOT touch counter
+            cohort  = override_cohort
+            version = int(override_version)
+        elif dev_mode:
+            # Pilot mode without override — still auto-assign but do NOT increment counter
+            assignments = load_json_file(ASSIGNMENTS_FILE)
+            if pid in assignments:
+                cohort  = assignments[pid]['cohort']
+                version = assignments[pid]['version']
+            else:
+                counts = load_json_file(COUNTS_FILE)
+                age_key = age_str
+                if age_key not in counts: counts[age_key] = 0
+                idx = counts[age_key] % len(ASSIGNMENT_SEQUENCE)
+                cohort, version = ASSIGNMENT_SEQUENCE[idx]
+                # Do NOT save counts — pilot doesn't advance counter
+        else:
+            # Real participant — auto-assign and increment counter
+            cohort, version = assign_cohort_version(pid, age_str)
+
+        global _DEV_MODE
+        _DEV_MODE = dev_mode  # 's' skip only active in pilot mode
+
+        confirm = gui.Dlg(title='Please confirm')
+        confirm.addText(
+            f'Participant : {pid}\n'
+            f'Age         : {age_str}\n'
+            f'Cohort      : {cohort.upper()}  '
+            f'({"manual" if has_override else "auto-assigned"})\n'
+            f'Version     : v{version}\n'
+            f'Session     : {session}\n'
+            f'Language    : {lang}\n'
+            f'World       : {world}\n'
+            f'Pilot mode  : {"YES — skip enabled, counter unchanged" if dev_mode else "NO"}\n\n'
+            f'OK = start session     Cancel = back to edit')
+        confirm.show()
+        if not confirm.OK:
+            # User wants to go back — loop returns to main dialog, values pre-filled
+            _error_msg = ''
+            continue  # back to outer while True
+        break  # confirm accepted — exit outer loop
 
     json_file = os.path.join(JSON_FOLDER, f'session_{session}_v{version}.json')
     if not os.path.exists(json_file):
@@ -1241,7 +1327,7 @@ def main():
         import traceback; traceback.print_exc()
     finally:
         recorder.save()
-        if not dev_mode:
+        if not dev_mode and not has_override:
             mark_session_complete(pid, session)
 
     _end_title = get_text('sessionEnd.session3.title') if session == 3 \
