@@ -1,2 +1,0 @@
-user_id,age,gender,ageGroup,cohort,language,version,session,city,citySlot,trial,event_id,task_id,choice,choiceContent,correct,rt_seconds
-ying,4,,,cohort_b,en,v3,1,4,,prac_gen_3,3,gen,2,gen_choice_2_3,1,6.9912
