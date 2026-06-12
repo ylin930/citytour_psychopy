@@ -13,38 +13,18 @@ World guide names: edit GUIDE_NAMES below.
 
 from psychopy import visual, core, event, gui, prefs
 from psychopy.hardware import keyboard
-import os, json, csv, datetime
+import os, json, csv, datetime, numpy as _np
 
-# Try to get pygame.mixer — it ships with PsychoPy but the path varies
-_mixer = None
-_MIXER_OK = False
-for _pkg in ['pygame.mixer', 'psychopy.contrib.pygame.mixer']:
-    try:
-        import importlib as _il
-        _mixer = _il.import_module(_pkg)
-        _mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
-        _MIXER_OK = True
-        print(f'[AUDIO] Using {_pkg}')
-        break
-    except Exception:
-        pass
-if not _MIXER_OK:
-    # Last resort: try pip installing pygame into PsychoPy's Python
-    try:
-        import subprocess, sys
-        subprocess.check_call([sys.executable, '-m', 'pip', 'install',
-                               'pygame', '--quiet', '--break-system-packages'],
-                              timeout=30)
-        import importlib as _il2
-        _mixer = _il2.import_module('pygame.mixer')
-        _mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
-        _MIXER_OK = True
-        print('[AUDIO] pygame installed and ready')
-    except Exception as _ie:
-        print(f'[AUDIO] Could not install pygame ({_ie}) — using psychopy.sound')
-        from psychopy import sound
-
-# audioLib prefs not needed — using pygame.mixer directly
+# sounddevice is always bundled with PsychoPy and has instant stop()
+try:
+    import sounddevice as _sd
+    import soundfile as _sf
+    _SD_OK = True
+    print('[AUDIO] Using sounddevice — skip stops audio instantly')
+except Exception as _sde:
+    _SD_OK = False
+    print(f'[AUDIO] sounddevice not available ({_sde}), using psychopy.sound')
+    from psychopy import sound
 
 # ─────────────────────────────────────────────
 # WORLD / GUIDE CONFIG  ← edit for each world
@@ -322,55 +302,65 @@ def fit_size(aspect, max_w, max_h):
 # AUDIO / VIDEO / IMAGE
 # ─────────────────────────────────────────────
 def stop_audio():
-    """Immediately silence any playing audio."""
-    if _MIXER_OK:
-        try: _mixer.stop()
+    """Immediately stop all audio playback."""
+    if _SD_OK:
+        try: _sd.stop()
         except Exception: pass
-    else:
-        pass  # psychopy sound has no reliable global stop
 
 def play_audio(path, win=None):
-    """Play audio file. Polls every 50ms for skip/escape."""
-    if not path:
+    """Play an audio file; polls every 50ms so 's' stops it instantly."""
+    if not path or not os.path.exists(path):
+        if path: print(f'  [AUDIO MISSING] {path}')
         return
-    if not os.path.exists(path):
-        print(f'  [AUDIO MISSING] {path}')
-        return
-    if not _MIXER_OK:
-        # Fallback: psychopy sound, no skip support during audio
+
+    def _get_keys():
+        if _kb is not None:
+            return [k.name for k in _kb.getKeys(
+                keyList=['escape','s'], waitRelease=False, clear=True)]
+        return event.getKeys(keyList=['escape', 's'])
+
+    if _SD_OK:
+        try:
+            data, sr = _sf.read(path, dtype='float32')
+            _sd.play(data, sr)
+            # Poll until done, checking for skip every 50ms
+            while _sd.get_stream().active:
+                core.wait(0.05, hogCPUperiod=0)
+                keys = _get_keys()
+                if 'escape' in keys:
+                    _sd.stop()
+                    if win: win.close()
+                    core.quit()
+                if 's' in keys and _DEV_MODE:
+                    _sd.stop()   # instant — no buffer drain
+                    raise _SkipSection()
+        except _SkipSection:
+            _sd.stop()
+            raise
+        except Exception as e:
+            print(f'  [AUDIO ERR] {path}: {e}')
+            _sd.stop()
+    else:
+        # psychopy.sound fallback — best effort, may bleed on skip
         try:
             s = sound.Sound(path)
             s.play()
-            core.wait(s.getDuration() + 0.1)
+            dur = s.getDuration()
+            clk = core.Clock()
+            while clk.getTime() < dur:
+                core.wait(0.05, hogCPUperiod=0)
+                keys = _get_keys()
+                if 'escape' in keys:
+                    s.stop()
+                    if win: win.close()
+                    core.quit()
+                if 's' in keys and _DEV_MODE:
+                    s.stop()
+                    raise _SkipSection()
+        except _SkipSection:
+            raise
         except Exception as e:
             print(f'  [AUDIO ERR] {path}: {e}')
-        return
-    try:
-        snd = _mixer.Sound(path)
-        channel = snd.play()
-        if channel is None:
-            return
-        # Poll every 50ms — check for skip while audio plays
-        while channel.get_busy():
-            core.wait(0.05, hogCPUperiod=0)
-            if _kb is not None:
-                pressed = _kb.getKeys(keyList=['escape','s'], waitRelease=False, clear=True)
-                key_names = [k.name for k in pressed]
-            else:
-                key_names = event.getKeys(keyList=['escape', 's'])
-            if 'escape' in key_names:
-                stop_audio()
-                if win: win.close()
-                core.quit()
-            if 's' in key_names and _DEV_MODE:
-                stop_audio()  # _mixer.stop() kills it dead
-                raise _SkipSection()
-    except _SkipSection:
-        stop_audio()
-        raise
-    except Exception as e:
-        print(f'  [AUDIO ERR] {path}: {e}')
-        stop_audio()
 
 def _next_button(win, label=None):
     if label is None:
@@ -436,7 +426,7 @@ def show_image_screen(win, path, text=None, wait=True):
     visual.ImageStim(win, image=path, pos=(0, y), size=(w, h), units='norm').draw()
     if text:
         visual.TextStim(win, text=text, color='black', wrapWidth=1.60,
-                        height=0.07, pos=(0, 0.72), units='norm').draw()
+                        height=0.07, pos=(0, 0.60), units='norm').draw()
     if wait:
         btn, lbl = _next_button(win)
         _draw_next(btn, lbl)
@@ -447,7 +437,7 @@ def show_image_screen(win, path, text=None, wait=True):
             visual.ImageStim(win, image=path, pos=(0, y), size=(w, h), units='norm').draw()
             if text:
                 visual.TextStim(win, text=text, color='black', wrapWidth=1.60,
-                                height=0.07, pos=(0, 0.78), units='norm').draw()
+                                height=0.07, pos=(0, 0.60), units='norm').draw()
             _draw_next(btn, lbl)
             win.flip()
             if _clicked_next(mouse, btn):
@@ -536,7 +526,10 @@ def play_session_video(win, ss, base, world, lang, local_path, cohort, auto_adva
         content  = ss.get('content', {})
         path_map = content.get('localizedPath', {})
         vid_id   = (path_map.get(lang,{}) or {}).get(f'cohort_{cohort}', '')
+        # Video not found — show placeholder; 's' dismisses like a click
+        _old_dev = _DEV_MODE; _DEV_MODE = False
         show_text(win, f'[Video not found locally]\nVimeo ID: {vid_id}\n\n{local_path}')
+        _DEV_MODE = _old_dev
 
 # ─────────────────────────────────────────────
 # TIMELINE  (gen and pc)
@@ -551,7 +544,7 @@ def draw_timeline(win, current_q, total_q):
 
     for i in range(total_q):
         x = sx + i * spacing
-        y = 0.76
+        y = 0.64
 
         # Connecting line
         if i < total_q - 1:
@@ -583,7 +576,9 @@ def show_instruction(win, instr, base, world, lang, num, gen_num, slot='',
     guide = guide_name(world, session)
     cname = city_name(cohort, session)
     gname = gen_city_name(cohort, session)
-    print(f'  [INSTR] key={text_key} guide={guide} city={cname} genCity={gname}')
+    print(f'  [INSTR] key={text_key}')
+    print(f'          guide={guide} cityName={cname} genCityName={gname}')
+    print(f'          text preview: {str(text)[:80]}')
 
     text = get_text(text_key, guideName=guide, cityName=cname, genCityName=gname) \
            if text_key else ''
@@ -607,7 +602,7 @@ def show_instruction(win, instr, base, world, lang, num, gen_num, slot='',
     def draw():
         if text:
             visual.TextStim(win, text=text, color='black', wrapWidth=1.60,
-                            height=0.065, pos=(0, 0.70), units='norm').draw()
+                            height=0.065, pos=(0, 0.58), units='norm').draw()
         for s in stims: s.draw()
         _draw_next(btn, lbl)
         win.flip()
@@ -730,7 +725,7 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
         draw_timeline(win, q_num, total_q)
         if prompt:
             visual.TextStim(win, text=prompt, color='black', wrapWidth=1.60,
-                            height=0.065, pos=(0, 0.66), units='norm').draw()
+                            height=0.065, pos=(0, 0.54), units='norm').draw()
         for i, pos in enumerate(positions):
             ff = first_frames[i]
             if ff and os.path.exists(ff):
@@ -800,7 +795,7 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
 
         if prompt:
             visual.TextStim(win, text=prompt, color='black', wrapWidth=1.60,
-                            height=0.065, pos=(0, 0.66), units='norm').draw()
+                            height=0.065, pos=(0, 0.54), units='norm').draw()
         for i, pos in enumerate(positions):
             ff = first_frames[i]
             if ff and os.path.exists(ff):
@@ -934,7 +929,7 @@ def run_mc_question(win, q, base, world, lang, num, gen_num, slot,
 
         if prompt:
             visual.TextStim(win, text=prompt, color='black', wrapWidth=1.60,
-                            height=0.065, pos=(0, 0.62), units='norm').draw()
+                            height=0.065, pos=(0, 0.50), units='norm').draw()
         _draw_next(btn, next_lbl)
         win.flip()
 
@@ -1047,8 +1042,11 @@ def run_group(win, group, base, world, lang, num, gen_num, slot,
     print(f'\n  [GROUP] {gtype} ({total_q} questions)')
 
     for instr in group.get('instructions',[]):
-        show_instruction(win, instr, base, world, lang, num, gen_num, slot,
-                         cohort=cohort, session=session)
+        try:
+            show_instruction(win, instr, base, world, lang, num, gen_num, slot,
+                             cohort=cohort, session=session)
+        except _SkipSection:
+            print(f'[DEV] Skipped group instruction')
 
     q_num = 0
     for item in items:
@@ -1073,7 +1071,10 @@ def run_group(win, group, base, world, lang, num, gen_num, slot,
                                     cohort=cohort, session=session)
         except _SkipSection:
             print(f'[DEV] Skipped item {q_num} in {gtype}')
-    check_escape(win)
+    try:
+        check_escape(win)
+    except _SkipSection:
+        print(f'[DEV] Skip between items in {gtype} — continuing to next group')
 
 # ─────────────────────────────────────────────
 # SUBSESSION RUNNER
@@ -1085,8 +1086,12 @@ def run_subsession(win, ss, base, world, lang, cohort, session_num, version,
     content= ss.get('content',{})
     print(f'\n[SUBSESSION] {name or ss_id}')
 
-    num     = SESSION_CITY.get(session_num,'1')
-    gen_num = num; slot = num
+    # num = actual city folder for this cohort/session
+    # cohort_a: City1/2/3, cohort_b: City4/5/6
+    _sess_base = SESSION_CITY.get(session_num, 1)  # 1, 2, or 3
+    num     = str(int(_sess_base) + (3 if cohort == 'b' else 0))
+    gen_num = str(int(_sess_base) + (0 if cohort == 'b' else 3))
+    slot    = num
 
     if content:
         cid = content.get('id','')
@@ -1218,12 +1223,20 @@ def main():
     win      = make_window(fullscr=fullscr)
     _init_kb()  # start hardware keyboard listener after window is open
 
+    # Welcome screen — 's' does nothing here, only escape works
+    _old_dev = _DEV_MODE
+    _DEV_MODE = False
     show_text(win, f'Session {session}')
+    _DEV_MODE = _old_dev
 
     try:
         for ss in session_data.get('subSessions',[]):
-            run_subsession(win, ss, ASSET_BASE, world, lang,
-                           cohort, session, version, FULL_VIDEOS_DIR, recorder)
+            try:
+                run_subsession(win, ss, ASSET_BASE, world, lang,
+                               cohort, session, version, FULL_VIDEOS_DIR, recorder)
+            except _SkipSection:
+                # 's' pressed between subsections — skip to next subsession
+                print(f'[DEV] Skipped to next subsession')
     except Exception as e:
         import traceback; traceback.print_exc()
     finally:

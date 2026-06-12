@@ -1,0 +1,5 @@
+user_id,age,gender,ageGroup,cohort,language,version,session,city,citySlot,trial,event_id,task_id,choice,choiceContent,correct,rt_seconds
+yingtest,1,,,cohort_b,en,v1,1,4,,prac_gen_1,1,gen,2,gen_choice_2_2,0,1.8542
+yingtest,1,,,cohort_b,en,v1,1,4,,pc_1,1,prac_pc,1,2,0,5.1317
+yingtest,1,,,cohort_b,en,v1,1,4,,pc_2,2,prac_pc,2,3,0,5.1745
+yingtest,1,,,cohort_b,en,v1,1,4,,first_city_gen_1,1,gen,1,2,0,1.2997

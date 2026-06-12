@@ -473,14 +473,14 @@
             "gen_3": "Welchen dieser Orte würdest du als Nächstes besuchen?"
           },
           "prac.ps_questions": {
-            "ps_1": "Welchen dieser Orte hast du auf deiner Tour gesehen? (Bitte warten Sie, bis der Audio abgeschlossen ist, bevor Sie antworten)",
-            "ps_2": "Welchen dieser Orte hast du auf deiner Tour gesehen? (Bitte warten Sie, bis der Audio abgeschlossen ist, bevor Sie antworten)",
-            "ps_3": "Welchen dieser Orte hast du auf deiner Tour gesehen? (Bitte warten Sie, bis der Audio abgeschlossen ist, bevor Sie antworten)"
+            "ps_1": "Welchen dieser Orte hast du auf deiner Tour gesehen?",
+            "ps_2": "Welchen dieser Orte hast du auf deiner Tour gesehen?",
+            "ps_3": "Welchen dieser Orte hast du auf deiner Tour gesehen?"
           },
           "prac.pc_questions": {
-            "pc_1": "Welchen dieser Orte hast du auf deiner Tour zuerst besucht? (Bitte warten Sie, bis der Audio abgeschlossen ist, bevor Sie antworten)",
-            "pc_2": "Welchen dieser Orte hast du auf deiner Tour als Nächstes besucht? (Bitte warten Sie, bis der Audio abgeschlossen ist, bevor Sie antworten)",
-            "pc_3": "Welchen dieser Orte hast du auf deiner Tour als Nächstes besucht? (Bitte warten Sie, bis der Audio abgeschlossen ist, bevor Sie antworten)"
+            "pc_1": "Welchen dieser Orte hast du auf deiner Tour zuerst besucht?",
+            "pc_2": "Welchen dieser Orte hast du auf deiner Tour als Nächstes besucht?",
+            "pc_3": "Welchen dieser Orte hast du auf deiner Tour als Nächstes besucht?"
           }
         }
       },
@@ -503,8 +503,8 @@
     }
   },
   "end_session": {
-    "next": "Danke, dass du diese Sitzung abgeschlossen hast! Komm bitte in 2–3 Tagen wieder, um die nächste Sitzung zu machen. Wenn du versuchst, vor Ablauf von 2 Tagen auf die Webseite zuzugreifen, wird sie nicht verfügbar sein. Wenn du nach 3 Tagen wiederkommst, gilt das als Nichtabschluss des studie und die Teilnahme wird automatisch zurückgezogen. Du wirst dieselbe ID verwenden, um die Webseite nach 2–3 Tagen wieder aufzurufen. Wenn du Fragen hast, schreib uns einfach an: raven-study@mpib-berlin.mpg.de",
-    "end": "Danke, dass du die Studie abgeschlossen hast! Bitte klick auf den Link unten, um deine Bankdaten einzugeben, damit du für deine Zeit bezahlt werden kannst. "
+    "next": "Danke, dass du diese Sitzung abgeschlossen hast!",
+    "end": "Danke, dass du die Studie abgeschlossen hast! "
   },
   "city_names": {
     "c1": "Flossenland",

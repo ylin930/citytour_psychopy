@@ -472,14 +472,14 @@
             "gen_3": "Which of these places would you visit next?"
           },
           "prac.ps_questions": {
-            "ps_1": "Which of these did you see on your tour (Please wait for the audio to finish before answering)?",
-            "ps_2": "Which of these did you see on your tour (Please wait for the audio to finish before answering)?",
-            "ps_3": "Which of these did you see on your tour (Please wait for the audio to finish before answering)?"
+            "ps_1": "Which of these did you see on your tour?",
+            "ps_2": "Which of these did you see on your tour?",
+            "ps_3": "Which of these did you see on your tour?"
           },
           "prac.pc_questions": {
-            "pc_1": "Which of these places did you visit first on your tour (Please wait for the audio to finish before answering)?",
-            "pc_2": "Which of these places did you visit next on your tour (Please wait for the audio to finish before answering)?",
-            "pc_3": "Which of these places did you visit next on your tour (Please wait for the audio to finish before answering)?"
+            "pc_1": "Which of these places did you visit first on your tour?",
+            "pc_2": "Which of these places did you visit next on your tour?",
+            "pc_3": "Which of these places did you visit next on your tour?"
           }
         }
       },
@@ -502,8 +502,8 @@
     }
   },
   "end_session": {
-    "next": "Thank you for completing this session! Please return in 2–3 days to complete the next session. If you try to access the webpage before 2 days have passed, it will not be available. If you visit after 3 days, it will count as a failure to complete the study, and you will be automatically withdrawn. You will use the same ID to re-enter the webpage when you return in 2–3 days. If you have any questions please don't hesitate to contact us at: raven-study@mpib-berlin.mpg.de",
-    "end": "Thank you for completing the study! Please click the link below to enter your email information so that you can be compensated for your time. If you have any questions or concerns please contact us at: raven-study@mpib-berlin.mpg.de"
+    "next": "Thank you for completing this session!",
+    "end": "Thank you for completing the study!"
   },
   "city_names": {
     "c1": "Fintopia",
