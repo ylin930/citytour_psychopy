@@ -406,10 +406,10 @@ def _clicked_next(mouse, btn):
 
 def show_text(win, text, subtitle=None, wait=True, duration=None):
     visual.TextStim(win, text=text, color='black', wrapWidth=1.60,
-                    height=0.08, pos=(0, 0.50), units='norm').draw()
+                    height=0.08, pos=(0, 0.20), units='norm').draw()
     if subtitle:
         visual.TextStim(win, text=subtitle, color='#666666', wrapWidth=1.60,
-                        height=0.055, pos=(0, 0.32), units='norm').draw()
+                        height=0.055, pos=(0, -0.10), units='norm').draw()
     if wait:
         btn, lbl = _next_button(win)
         _draw_next(btn, lbl)
@@ -422,10 +422,10 @@ def show_text(win, text, subtitle=None, wait=True, duration=None):
         while True:
             check_escape(win)
             visual.TextStim(win, text=text, color='black', wrapWidth=1.60,
-                            height=0.08, pos=(0, 0.50), units='norm').draw()
+                            height=0.08, pos=(0, 0.20), units='norm').draw()
             if subtitle:
                 visual.TextStim(win, text=subtitle, color='#666666', wrapWidth=1.60,
-                                height=0.055, pos=(0, 0.32), units='norm').draw()
+                                height=0.055, pos=(0, -0.10), units='norm').draw()
             _draw_next(btn, lbl)
             win.flip()
             if _clicked_next(mouse, btn):
@@ -509,6 +509,8 @@ def play_video(win, path, auto_advance=True):
             win.flip(); check_escape(win)
         finished = True
     except _SkipSection:
+        try: movie.stop()
+        except Exception: pass
         raise   # let skip propagate — don't swallow it
     except Exception as e:
         print(f'  [VIDEO ERR] {path}: {e}')
@@ -554,9 +556,9 @@ def draw_timeline(win, current_q, total_q):
     if total_q == 0:
         return
     # Square dots — visually square by setting w=h/WIN_AR
-    dot_h   = 0.048          # height in norm units
+    dot_h   = 0.100          # height in norm units
     dot_w   = dot_h / WIN_AR # width corrected for screen aspect → visually square
-    spacing = min(0.14, 1.55 / max(total_q-1, 1))
+    spacing = min(0.10, 1.55 / max(total_q-1, 1))
     total_w = spacing * (total_q - 1)
     sx      = -total_w / 2
 
@@ -726,9 +728,9 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
 
     # Layout in height units (window is 1080×1080, units='norm' → 1.0 = full height)
     # box_h = visual height in norm; box_w = norm width for a visually square box
-    box_h  = 0.70
+    box_h  = 0.80
     box_w  = box_h / WIN_AR  # visually square on any monitor
-    gap    = 0.10
+    gap    = 0.08
     total  = n * box_w + (n-1) * gap
     sx     = -total/2 + box_w/2
     positions = [(sx + i*(box_w+gap), -0.05) for i in range(n)]
@@ -760,7 +762,7 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
         draw_timeline(win, q_num, total_q)
         if prompt:
             visual.TextStim(win, text=prompt, color='black', wrapWidth=1.60,
-                            height=0.065, pos=(0, 0.54), units='norm').draw()
+                            height=0.065, pos=(0, 0.50), units='norm').draw()
         for i, pos in enumerate(positions):
             ff = first_frames[i]
             if ff and os.path.exists(ff):
@@ -806,6 +808,8 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
                 win.flip()
                 check_escape(win)
         except _SkipSection:
+            try: movie.stop()
+            except Exception: pass
             raise   # propagate skip
         except Exception as e:
             print(f'  [VIDEO ERR] {rc[play_idx]["path"]}: {e}')
@@ -829,7 +833,7 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
 
         if prompt:
             visual.TextStim(win, text=prompt, color='black', wrapWidth=1.60,
-                            height=0.065, pos=(0, 0.54), units='norm').draw()
+                            height=0.065, pos=(0, 0.50), units='norm').draw()
         for i, pos in enumerate(positions):
             ff = first_frames[i]
             if ff and os.path.exists(ff):
@@ -916,9 +920,9 @@ def run_mc_question(win, q, base, world, lang, num, gen_num, slot,
 
     show_timeline = group_type in ('pc','prac_pc','pc_retention_s1','pc_retention_s2')
 
-    box_h = 0.70
+    box_h = 0.80
     box_w = box_h / WIN_AR  # visually square
-    gap   = 0.10
+    gap   = 0.08
     total = n*box_w + (n-1)*gap
     sx    = -total/2 + box_w/2
     positions = [(sx + i*(box_w+gap), -0.05) for i in range(n)]

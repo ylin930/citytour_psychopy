@@ -724,32 +724,6 @@
               }
             },
             {
-              "id": "prac_hint_q",
-              "type": "interlude",
-              "content": {
-                "id": "hint_question",
-                "type": "image",
-                "path": "src/assets/City0/gamify/hint.png"
-              },
-              "text": "experiments.common.interludes.prac_hint_q",
-              "audio": [
-                "src/assets/City0/gamify/audio/{lang}/question.mp3"
-              ]
-            },
-            {
-              "id": "prac_hint_a",
-              "type": "interlude",
-              "content": {
-                "id": "hint_ans",
-                "type": "image",
-                "path": "src/assets/City0/gamify/hint.png"
-              },
-              "text": "experiments.common.interludes.prac_hint_a",
-              "audio": [
-                "src/assets/City0/gamify/audio/{lang}/ans.mp3"
-              ]
-            },
-            {
               "id": "pinpad",
               "type": "interlude",
               "content": {
