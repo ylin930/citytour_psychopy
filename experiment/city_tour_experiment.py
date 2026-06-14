@@ -32,7 +32,7 @@ except Exception as _sde:
 # Guide name changes per SESSION within a world (from useInterpolatedTranslation.ts)
 GUIDE_NAMES = {
     'underwater': {1: 'Zoxni', 2: 'Pema', 3: 'Maru'},
-    'desert':     {1: 'Sandy', 2: 'Sandy', 3: 'Sandy'},  # placeholder — update for T2
+    'aerial':     {1: 'x', 2: 'x', 3: 'x'},  # placeholder — update for T2
 }
 
 # city_names.c1–c6 come from translation.json at runtime
