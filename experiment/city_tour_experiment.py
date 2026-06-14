@@ -719,12 +719,13 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
     if n == 0: return
 
     # Layout in height units (window is 1080×1080, units='norm' → 1.0 = full height)
-    box_w  = 0.52
-    box_h  = 0.52  # animation frames are 1080×1080 (square)
-    gap    = 0.07
+    # box_h = visual height in norm; box_w = norm width for a visually square box
+    box_h  = 0.70
+    box_w  = box_h / WIN_AR  # visually square on any monitor
+    gap    = 0.05
     total  = n * box_w + (n-1) * gap
     sx     = -total/2 + box_w/2
-    positions = [(sx + i*(box_w+gap), -0.12) for i in range(n)]
+    positions = [(sx + i*(box_w+gap), -0.05) for i in range(n)]
 
     # ── Step 0: show screen with all 3 boxes GRAY, then play audio ────────
     # Capture first frame of each video using PIL / cv2 for "first frame" display
@@ -758,17 +759,16 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
             ff = first_frames[i]
             if ff and os.path.exists(ff):
                 asp = image_aspect(ff)
-                fw, fh = img_size(asp, box_w, box_h)
                 if i < played_up_to:
                     # Played — full colour first frame, no border
                     visual.ImageStim(win, image=ff, pos=pos,
-                                     size=(fw, fh), units='norm').draw()
+                                     size=(box_w, box_h), units='norm').draw()
                 elif i == playing_now:
                     pass  # nothing drawn — movie fills this slot on top
                 else:
                     # Not yet — first frame at low opacity (grayed out), no border
                     visual.ImageStim(win, image=ff, pos=pos,
-                                     size=(fw, fh), opacity=0.30,
+                                     size=(box_w, box_h), opacity=0.30,
                                      units='norm').draw()
             else:
                 # Fallback if no first frame
@@ -828,14 +828,13 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
             ff = first_frames[i]
             if ff and os.path.exists(ff):
                 asp = image_aspect(ff)
-                fw, fh = img_size(asp, box_w, box_h)
                 if i == selected_idx:
                     # Light green border to indicate selection
-                    visual.Rect(win, width=fw+0.03, height=fh+0.03, pos=pos,
+                    visual.Rect(win, width=box_w+0.03, height=box_h+0.03, pos=pos,
                                 fillColor='#ccecea', lineColor='#006C66',
                                 lineWidth=2, units='norm').draw()
                 visual.ImageStim(win, image=ff, pos=pos,
-                                 size=(fw, fh), units='norm').draw()
+                                 size=(box_w, box_h), units='norm').draw()
             else:
                 if i == selected_idx:
                     visual.Rect(win, width=box_w, height=box_h, pos=pos,
@@ -911,19 +910,19 @@ def run_mc_question(win, q, base, world, lang, num, gen_num, slot,
 
     show_timeline = group_type in ('pc','prac_pc','pc_retention_s1','pc_retention_s2')
 
-    box_w = 0.50; box_h = 0.50  # choice images are 1024×1024 (square)
-    gap   = 0.07
+    box_h = 0.70
+    box_w = box_h / WIN_AR  # visually square
+    gap   = 0.05
     total = n*box_w + (n-1)*gap
     sx    = -total/2 + box_w/2
-    positions = [(sx + i*(box_w+gap), -0.15) for i in range(n)]
+    positions = [(sx + i*(box_w+gap), -0.05) for i in range(n)]
 
     img_stims = []
     for i, ch in enumerate(rc):
         if ch['type'] == 'image' and os.path.exists(ch['path']):
-            asp  = image_aspect(ch['path'])
-            w, h = img_size(asp, box_w*0.92, box_h*0.92)
             img_stims.append(visual.ImageStim(win, image=ch['path'],
-                                              pos=positions[i], size=(w,h),
+                                              pos=positions[i],
+                                              size=(box_w, box_h),
                                               units='norm'))
         else:
             img_stims.append(None)
@@ -941,10 +940,7 @@ def run_mc_question(win, q, base, world, lang, num, gen_num, slot,
 
         for i, pos in enumerate(positions):
             if i == selected_idx:
-                # Thin light-green border around selected image
-                iw = img_stims[i].size[0] if img_stims[i] else box_w
-                ih = img_stims[i].size[1] if img_stims[i] else box_h
-                visual.Rect(win, width=iw+0.025, height=ih+0.025, pos=pos,
+                visual.Rect(win, width=box_w+0.025, height=box_h+0.025, pos=pos,
                             fillColor='#ccecea', lineColor='#4CAF9A',
                             lineWidth=2, units='norm').draw()
             if img_stims[i]:
