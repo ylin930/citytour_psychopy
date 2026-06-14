@@ -233,6 +233,8 @@ def _city_for_session(cohort, session_num):
 # ─────────────────────────────────────────────
 # WINDOW  (1080×1080)
 # ─────────────────────────────────────────────
+WIN_AR = 1.0  # set after window opens
+
 def make_window(fullscr=False):
     win = visual.Window(size=[1080, 1080], fullscr=fullscr,
                         color='white', units='norm', allowGUI=True,
@@ -244,6 +246,8 @@ def make_window(fullscr=False):
             win._backend.winHandle.set_maximum_size(1080, 1080)
         except Exception:
             pass
+    global WIN_AR
+    WIN_AR = win.size[0] / win.size[1]
     return win
 
 # Set to True when dev mode is active (override fields filled in GUI)
@@ -297,6 +301,11 @@ def fit_size(aspect, max_w, max_h):
         return max_w, max_w / aspect
     else:
         return max_h * aspect, max_h
+
+def img_size(aspect, max_w, max_h):
+    """Like fit_size but corrects width for non-square norm pixels."""
+    w, h = fit_size(aspect, max_w, max_h)
+    return w / WIN_AR, h
 
 # ─────────────────────────────────────────────
 # AUDIO / VIDEO / IMAGE
@@ -430,7 +439,7 @@ def show_image_screen(win, path, text=None, wait=True, audio_path=None):
     # 1024x1024 images — square, leave room for text above and button below
     asp = image_aspect(path)
     max_sz = 1.10  # smaller to leave clear room for text and button
-    w, h = fit_size(asp, max_sz, max_sz)
+    w, h = img_size(asp, max_sz, max_sz)
     y = -0.05  # image slightly below centre
 
     def _draw():
@@ -597,7 +606,7 @@ def show_instruction(win, instr, base, world, lang, num, gen_num, slot='',
         p = resolve(tmpl, base, world, lang, num, gen_num, slot)
         if os.path.exists(p):
             asp = image_aspect(p)
-            h = 0.90; w = min(h * asp, 1.10 / max(n, 1) * 1.8)
+            h = 0.90; _w, _ = img_size(asp, 1.10/max(n,1)*1.8, 0.90); w = _w
             stims.append(visual.ImageStim(win, image=p, pos=(xs[i], -0.10),
                                           size=(w, h), units='norm'))
         else:
@@ -749,7 +758,7 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
             ff = first_frames[i]
             if ff and os.path.exists(ff):
                 asp = image_aspect(ff)
-                fw, fh = fit_size(asp, box_w, box_h)  # fill box exactly
+                fw, fh = img_size(asp, box_w, box_h)
                 if i < played_up_to:
                     # Played — full colour first frame, no border
                     visual.ImageStim(win, image=ff, pos=pos,
@@ -819,7 +828,7 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
             ff = first_frames[i]
             if ff and os.path.exists(ff):
                 asp = image_aspect(ff)
-                fw, fh = fit_size(asp, box_w, box_h)
+                fw, fh = img_size(asp, box_w, box_h)
                 if i == selected_idx:
                     # Light green border to indicate selection
                     visual.Rect(win, width=fw+0.03, height=fh+0.03, pos=pos,
@@ -912,7 +921,7 @@ def run_mc_question(win, q, base, world, lang, num, gen_num, slot,
     for i, ch in enumerate(rc):
         if ch['type'] == 'image' and os.path.exists(ch['path']):
             asp  = image_aspect(ch['path'])
-            w, h = fit_size(asp, box_w*0.92, box_h*0.92)
+            w, h = img_size(asp, box_w*0.92, box_h*0.92)
             img_stims.append(visual.ImageStim(win, image=ch['path'],
                                               pos=positions[i], size=(w,h),
                                               units='norm'))
@@ -1015,7 +1024,7 @@ def run_citysorting_question(win, q, base, world, lang, num, gen_num, slot,
     img_stim = None
     if img_path and os.path.exists(img_path):
         asp  = image_aspect(img_path)
-        w, h = fit_size(asp, 1.30, 1.00)
+        w, h = img_size(asp, 1.30, 1.00)
         img_stim = visual.ImageStim(win, image=img_path, pos=(0, 0.15),
                                     size=(w, h), units='norm')
 
