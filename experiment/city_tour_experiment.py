@@ -553,7 +553,9 @@ def play_session_video(win, ss, base, world, lang, local_path, cohort, auto_adva
 def draw_timeline(win, current_q, total_q):
     if total_q == 0:
         return
-    dot_r   = 0.042          # slightly larger
+    # Square dots — visually square by setting w=h/WIN_AR
+    dot_h   = 0.048          # height in norm units
+    dot_w   = dot_h / WIN_AR # width corrected for screen aspect → visually square
     spacing = min(0.14, 1.55 / max(total_q-1, 1))
     total_w = spacing * (total_q - 1)
     sx      = -total_w / 2
@@ -565,28 +567,21 @@ def draw_timeline(win, current_q, total_q):
         # Connecting line
         if i < total_q - 1:
             x2 = sx + (i+1) * spacing
-            visual.Line(win, start=(x+dot_r*WIN_AR, y), end=(x2-dot_r*WIN_AR, y),
+            visual.Line(win, start=(x+dot_w/2, y), end=(x2-dot_w/2, y),
                         lineColor='#aaaaaa', lineWidth=3.5, units='norm').draw()
 
-        # Draw circle — use Polygon to approximate since Circle/Ellipse
-        # may render as ovals on non-square norm windows
-        ew = dot_r * WIN_AR  # x-radius corrected for screen aspect
-        eh = dot_r           # y-radius
-        if i < current_q - 1:        # completed — filled
-            visual.ShapeStim(win, vertices='circle', size=(ew*2, eh*2),
-                             pos=(x, y), fillColor='#5a3010',
-                             lineColor='#5a3010', lineWidth=3.0,
-                             units='norm').draw()
+        if i < current_q - 1:        # completed — filled square
+            visual.Rect(win, width=dot_w, height=dot_h, pos=(x, y),
+                        fillColor='#5a3010', lineColor='#5a3010',
+                        lineWidth=3.0, units='norm').draw()
         elif i == current_q - 1:     # current — open thick
-            visual.ShapeStim(win, vertices='circle', size=(ew*2, eh*2),
-                             pos=(x, y), fillColor='white',
-                             lineColor='#5a3010', lineWidth=5.0,
-                             units='norm').draw()
+            visual.Rect(win, width=dot_w, height=dot_h, pos=(x, y),
+                        fillColor='white', lineColor='#5a3010',
+                        lineWidth=5.0, units='norm').draw()
         else:                         # future — open thin
-            visual.ShapeStim(win, vertices='circle', size=(ew*2, eh*2),
-                             pos=(x, y), fillColor='white',
-                             lineColor='#cccccc', lineWidth=3.0,
-                             units='norm').draw()
+            visual.Rect(win, width=dot_w, height=dot_h, pos=(x, y),
+                        fillColor='white', lineColor='#cccccc',
+                        lineWidth=3.0, units='norm').draw()
 
 # ─────────────────────────────────────────────
 # INSTRUCTION SCREEN

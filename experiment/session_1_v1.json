@@ -7,9 +7,24 @@
       "name": "Cover Story",
       "isPractice": false,
       "theme": {
-        "col1": ["#9fd1ff", "#4ea0e6", "#1c5fa0", "#0a2f55"],
-        "col2": ["#ffc1b3", "#ff8a78", "#e55e51", "#a53a3b"],
-        "col3": ["#a8e3d7", "#51b9a6", "#228376", "#0b4a4f"],
+        "col1": [
+          "#9fd1ff",
+          "#4ea0e6",
+          "#1c5fa0",
+          "#0a2f55"
+        ],
+        "col2": [
+          "#ffc1b3",
+          "#ff8a78",
+          "#e55e51",
+          "#a53a3b"
+        ],
+        "col3": [
+          "#a8e3d7",
+          "#51b9a6",
+          "#228376",
+          "#0b4a4f"
+        ],
         "col4": [
           "rgb(113 219 214 / 90%)",
           "rgb(230 173 63 / 89%)",
@@ -36,7 +51,9 @@
           "id": "prac_intro",
           "text": "experiments.sessions.session1.instructions.cover_story.intro",
           "audio": "src/assets/City0/audio/{lang}/instructions/intro.mp3",
-          "images": ["src/assets/City0/images/bus_intro.png"]
+          "images": [
+            "src/assets/City0/images/bus_intro.png"
+          ]
         }
       ]
     },
@@ -45,10 +62,30 @@
       "name": "Practice Tour",
       "isPractice": true,
       "theme": {
-        "col1": ["#53623C", "#2E4431", "#928C5C", "#4A5D23"],
-        "col2": ["#8B4513", "#A0522D", "#CD853F", "#DEB887"],
-        "col3": ["#EEE1A8", "#DFC778", "#F2B743", "#C0A361"],
-        "col4": ["#292014", "#1b160b", "#2a1f15", "#3d2f1f"]
+        "col1": [
+          "#53623C",
+          "#2E4431",
+          "#928C5C",
+          "#4A5D23"
+        ],
+        "col2": [
+          "#8B4513",
+          "#A0522D",
+          "#CD853F",
+          "#DEB887"
+        ],
+        "col3": [
+          "#EEE1A8",
+          "#DFC778",
+          "#F2B743",
+          "#C0A361"
+        ],
+        "col4": [
+          "#292014",
+          "#1b160b",
+          "#2a1f15",
+          "#3d2f1f"
+        ]
       },
       "content": {
         "id": "prac_video",
@@ -264,7 +301,9 @@
               "id": "prac_ps_instructions",
               "text": "experiments.sessions.session1.instructions.prac.ps_questions.ps_questions_instructions",
               "audio": "src/assets/City0/audio/{lang}/instructions/ps_intro.mp3",
-              "images": ["src/assets/City0/images/guide.png"]
+              "images": [
+                "src/assets/City0/images/guide.png"
+              ]
             }
           ],
           "questions": [
@@ -472,7 +511,9 @@
               "id": "pc_questions_instructions",
               "text": "experiments.sessions.session1.instructions.prac.pc_questions.pc_questions_instructions",
               "audio": "src/assets/City0/audio/{lang}/instructions/pc_intro.mp3",
-              "images": ["src/assets/City0/images/bus_intro.png"]
+              "images": [
+                "src/assets/City0/images/bus_intro.png"
+              ]
             }
           ],
           "type": "prac_pc",
@@ -693,47 +734,6 @@
               "text": "experiments.common.interludes.prac_pinpad"
             },
             {
-              "id": "prac_attn",
-              "type": "interlude",
-              "content": {
-                "id": "attn",
-                "type": "image",
-                "path": "src/assets/attn_catch/attn/attn_1.png"
-              },
-              "text": "experiments.common.interludes.attn1",
-              "audio": ["src/assets/attn_catch/attn/{lang}/attn_1.mp3"],
-              "answers": [
-                {
-                  "id": "yes",
-                  "content": {
-                    "id": "yes",
-                    "type": "text",
-                    "text": "experiments.common.interludes.yes"
-                  }
-                },
-                {
-                  "id": "no",
-                  "content": {
-                    "id": "no",
-                    "type": "text",
-                    "text": "experiments.common.interludes.no"
-                  }
-                }
-              ]
-            },
-            {
-              "id": "prac_catch",
-              "type": "interlude",
-              "content": {
-                "id": "catch",
-                "type": "image",
-                "path": "src/assets/attn_catch/catch/catch_1.png"
-              },
-              "text": "experiments.common.interludes.catch1",
-              "audio": ["src/assets/attn_catch/catch/{lang}/catch_1.mp3"],
-              "answers": "FREE_TEXT"
-            },
-            {
               "id": "continue",
               "type": "interlude",
               "content": {
@@ -752,9 +752,24 @@
       "name": "first city tour",
       "isPractice": false,
       "theme": {
-        "col1": ["#9fd1ff", "#4ea0e6", "#1c5fa0", "#0a2f55"],
-        "col2": ["#ffc1b3", "#ff8a78", "#e55e51", "#a53a3b"],
-        "col3": ["#a8e3d7", "#51b9a6", "#228376", "#0b4a4f"],
+        "col1": [
+          "#9fd1ff",
+          "#4ea0e6",
+          "#1c5fa0",
+          "#0a2f55"
+        ],
+        "col2": [
+          "#ffc1b3",
+          "#ff8a78",
+          "#e55e51",
+          "#a53a3b"
+        ],
+        "col3": [
+          "#a8e3d7",
+          "#51b9a6",
+          "#228376",
+          "#0b4a4f"
+        ],
         "col4": [
           "rgb(113 219 214 / 90%)",
           "rgb(230 173 63 / 89%)",
@@ -1238,48 +1253,6 @@
                 }
               ]
             },
-
-            {
-              "id": "first_city_gen_attn",
-              "type": "interlude",
-              "content": {
-                "id": "gen_attn",
-                "type": "image",
-                "path": "src/assets/attn_catch/attn/attn_2.png"
-              },
-              "text": "experiments.common.interludes.attn2",
-              "audio": ["src/assets/attn_catch/attn/{lang}/attn_2.mp3"],
-              "answers": [
-                {
-                  "id": "yes",
-                  "content": {
-                    "id": "yes",
-                    "type": "text",
-                    "text": "experiments.common.interludes.yes"
-                  }
-                },
-                {
-                  "id": "no",
-                  "content": {
-                    "id": "no",
-                    "type": "text",
-                    "text": "experiments.common.interludes.no"
-                  }
-                }
-              ]
-            },
-            {
-              "id": "first_city_gen_catch",
-              "type": "interlude",
-              "content": {
-                "id": "gen_catch",
-                "type": "image",
-                "path": "src/assets/attn_catch/catch/catch_2.png"
-              },
-              "text": "experiments.common.interludes.catch2",
-              "audio": ["src/assets/attn_catch/catch/{lang}/catch_2.mp3"],
-              "answers": "FREE_TEXT"
-            },
             {
               "id": "first_city_coin_1",
               "type": "interlude",
@@ -1300,7 +1273,9 @@
               "id": "first_city_ps_instructions",
               "text": "experiments.common.instructions.ps_intro",
               "audio": "src/assets/{world}/City{num}/audio/{lang}/ps_intro.mp3",
-              "images": ["src/assets/{world}/City{num}/images/guide.png"]
+              "images": [
+                "src/assets/{world}/City{num}/images/guide.png"
+              ]
             }
           ],
           "questions": [
@@ -1736,48 +1711,6 @@
                 }
               ]
             },
-
-            {
-              "id": "first_city_ps_attn",
-              "type": "interlude",
-              "content": {
-                "id": "ps_attn",
-                "type": "image",
-                "path": "src/assets/attn_catch/attn/attn_3.png"
-              },
-              "text": "experiments.common.interludes.attn3",
-              "audio": ["src/assets/attn_catch/attn/{lang}/attn_3.mp3"],
-              "answers": [
-                {
-                  "id": "yes",
-                  "content": {
-                    "id": "yes",
-                    "type": "text",
-                    "text": "experiments.common.interludes.yes"
-                  }
-                },
-                {
-                  "id": "no",
-                  "content": {
-                    "id": "no",
-                    "type": "text",
-                    "text": "experiments.common.interludes.no"
-                  }
-                }
-              ]
-            },
-            {
-              "id": "first_city_ps_catch",
-              "type": "interlude",
-              "content": {
-                "id": "ps_catch",
-                "type": "image",
-                "path": "src/assets/attn_catch/catch/catch_3.png"
-              },
-              "text": "experiments.common.interludes.catch3",
-              "audio": ["src/assets/attn_catch/catch/{lang}/catch_3.mp3"],
-              "answers": "FREE_TEXT"
-            },
             {
               "id": "first_city_coin_2",
               "type": "interlude",
@@ -1796,7 +1729,9 @@
               "id": "first_city_pc_questions_instructions",
               "text": "experiments.common.instructions.pc_intro",
               "audio": "src/assets/{world}/City{num}/audio/{lang}/pc_intro.mp3",
-              "images": ["src/assets/{world}/City{num}/images/submarine.png"]
+              "images": [
+                "src/assets/{world}/City{num}/images/submarine.png"
+              ]
             }
           ],
           "type": "pc",
@@ -2027,7 +1962,9 @@
                 "path": "src/assets/{world}/City{num}/images/flag.png"
               },
               "text": "experiments.common.questions.pc.middle",
-              "audio": ["src/assets/{world}/City{num}/audio/{lang}/flag.mp3"]
+              "audio": [
+                "src/assets/{world}/City{num}/audio/{lang}/flag.mp3"
+              ]
             },
             {
               "id": "first_city_pc_7",
@@ -2246,47 +2183,6 @@
               ]
             },
             {
-              "id": "first_city_pc_attn",
-              "type": "interlude",
-              "content": {
-                "id": "pc_attn",
-                "type": "image",
-                "path": "src/assets/attn_catch/attn/attn_4.png"
-              },
-              "text": "experiments.common.interludes.attn4",
-              "audio": ["src/assets/attn_catch/attn/{lang}/attn_4.mp3"],
-              "answers": [
-                {
-                  "id": "yes",
-                  "content": {
-                    "id": "yes",
-                    "type": "text",
-                    "text": "experiments.common.interludes.yes"
-                  }
-                },
-                {
-                  "id": "no",
-                  "content": {
-                    "id": "no",
-                    "type": "text",
-                    "text": "experiments.common.interludes.no"
-                  }
-                }
-              ]
-            },
-            {
-              "id": "first_city_pc_catch",
-              "type": "interlude",
-              "content": {
-                "id": "pc_catch",
-                "type": "image",
-                "path": "src/assets/attn_catch/catch/catch_4.png"
-              },
-              "text": "experiments.common.interludes.catch4",
-              "audio": ["src/assets/attn_catch/catch/{lang}/catch_4.mp3"],
-              "answers": "FREE_TEXT"
-            },
-            {
               "id": "first_city_pc_coin_3",
               "type": "interlude",
               "content": {
@@ -2313,7 +2209,6 @@
                 "path": "src/assets/{world}/City1/gamify/audio/{lang}/pinpad.mp4"
               },
               "text": "experiments.common.interludes.first_pinpad"
-              
             },
             {
               "id": "first_city_next_session",
@@ -2324,9 +2219,10 @@
                 "path": "src/assets/{world}/cover/cover.png"
               },
               "text": "experiments.common.interludes.next_session",
-              "audio": ["src/assets/{world}/cover/{lang}/nextSession.mp3"]
+              "audio": [
+                "src/assets/{world}/cover/{lang}/nextSession.mp3"
+              ]
             }
-            
           ]
         }
       ]

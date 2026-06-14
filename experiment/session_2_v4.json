@@ -552,51 +552,6 @@
               ]
             },
             {
-              "id": "second_city_gen_attn",
-              "type": "interlude",
-              "content": {
-                "id": "gen_attn",
-                "type": "image",
-                "path": "src/assets/attn_catch/attn/attn_5.png"
-              },
-              "text": "experiments.common.interludes.attn5",
-              "audio": [
-                "src/assets/attn_catch/attn/{lang}/attn_5.mp3"
-              ],
-              "answers": [
-                {
-                  "id": "yes",
-                  "content": {
-                    "id": "yes",
-                    "type": "text",
-                    "text": "experiments.common.interludes.yes"
-                  }
-                },
-                {
-                  "id": "no",
-                  "content": {
-                    "id": "no",
-                    "type": "text",
-                    "text": "experiments.common.interludes.no"
-                  }
-                }
-              ]
-            },
-            {
-              "id": "second_city_gen_catch",
-              "type": "interlude",
-              "content": {
-                "id": "gen_catch",
-                "type": "image",
-                "path": "src/assets/attn_catch/catch/catch_5.png"
-              },
-              "text": "experiments.common.interludes.catch5",
-              "audio": [
-                "src/assets/attn_catch/catch/{lang}/catch_5.mp3"
-              ],
-              "answers": "FREE_TEXT"
-            },
-            {
               "id": "second_city_coin_1",
               "type": "interlude",
               "content": {
@@ -1053,51 +1008,6 @@
                   "isCorrect": true
                 }
               ]
-            },
-            {
-              "id": "second_city_ps_attn",
-              "type": "interlude",
-              "content": {
-                "id": "ps_attn",
-                "type": "image",
-                "path": "src/assets/attn_catch/attn/attn_6.png"
-              },
-              "text": "experiments.common.interludes.attn6",
-              "audio": [
-                "src/assets/attn_catch/attn/{lang}/attn_6.mp3"
-              ],
-              "answers": [
-                {
-                  "id": "yes",
-                  "content": {
-                    "id": "yes",
-                    "type": "text",
-                    "text": "experiments.common.interludes.yes"
-                  }
-                },
-                {
-                  "id": "no",
-                  "content": {
-                    "id": "no",
-                    "type": "text",
-                    "text": "experiments.common.interludes.no"
-                  }
-                }
-              ]
-            },
-            {
-              "id": "second_city_ps_catch",
-              "type": "interlude",
-              "content": {
-                "id": "ps_catch",
-                "type": "image",
-                "path": "src/assets/attn_catch/catch/catch_6.png"
-              },
-              "text": "experiments.common.interludes.catch6",
-              "audio": [
-                "src/assets/attn_catch/catch/{lang}/catch_6.mp3"
-              ],
-              "answers": "FREE_TEXT"
             },
             {
               "id": "second_city_coin_2",
@@ -1569,51 +1479,6 @@
                   }
                 }
               ]
-            },
-            {
-              "id": "second_city_pc_attn",
-              "type": "interlude",
-              "content": {
-                "id": "pc_attn",
-                "type": "image",
-                "path": "src/assets/attn_catch/attn/attn_7.png"
-              },
-              "text": "experiments.common.interludes.attn7",
-              "audio": [
-                "src/assets/attn_catch/attn/{lang}/attn_7.mp3"
-              ],
-              "answers": [
-                {
-                  "id": "yes",
-                  "content": {
-                    "id": "yes",
-                    "type": "text",
-                    "text": "experiments.common.interludes.yes"
-                  }
-                },
-                {
-                  "id": "no",
-                  "content": {
-                    "id": "no",
-                    "type": "text",
-                    "text": "experiments.common.interludes.no"
-                  }
-                }
-              ]
-            },
-            {
-              "id": "second_city_pc_catch",
-              "type": "interlude",
-              "content": {
-                "id": "pc_cath",
-                "type": "image",
-                "path": "src/assets/attn_catch/catch/catch_7.png"
-              },
-              "text": "experiments.common.interludes.catch7",
-              "audio": [
-                "src/assets/attn_catch/catch/{lang}/catch_7.mp3"
-              ],
-              "answers": "FREE_TEXT"
             },
             {
               "id": "second_city_coin_3",
