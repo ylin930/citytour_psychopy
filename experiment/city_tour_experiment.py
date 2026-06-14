@@ -565,18 +565,28 @@ def draw_timeline(win, current_q, total_q):
         # Connecting line
         if i < total_q - 1:
             x2 = sx + (i+1) * spacing
-            visual.Line(win, start=(x+dot_r, y), end=(x2-dot_r, y),
-                        lineColor='#aaaaaa', lineWidth=3.0, units='norm').draw()
+            visual.Line(win, start=(x+dot_r*WIN_AR, y), end=(x2-dot_r*WIN_AR, y),
+                        lineColor='#aaaaaa', lineWidth=3.5, units='norm').draw()
 
+        # Draw circle — use Polygon to approximate since Circle/Ellipse
+        # may render as ovals on non-square norm windows
+        ew = dot_r * WIN_AR  # x-radius corrected for screen aspect
+        eh = dot_r           # y-radius
         if i < current_q - 1:        # completed — filled
-            visual.Circle(win, radius=dot_r, pos=(x, y), units='norm',
-                          fillColor='#5a3010', lineColor='#5a3010').draw()
+            visual.ShapeStim(win, vertices='circle', size=(ew*2, eh*2),
+                             pos=(x, y), fillColor='#5a3010',
+                             lineColor='#5a3010', lineWidth=3.0,
+                             units='norm').draw()
         elif i == current_q - 1:     # current — open thick
-            visual.Circle(win, radius=dot_r, pos=(x, y), units='norm',
-                          fillColor='white', lineColor='#5a3010', lineWidth=4.0).draw()
+            visual.ShapeStim(win, vertices='circle', size=(ew*2, eh*2),
+                             pos=(x, y), fillColor='white',
+                             lineColor='#5a3010', lineWidth=5.0,
+                             units='norm').draw()
         else:                         # future — open thin
-            visual.Circle(win, radius=dot_r, pos=(x, y), units='norm',
-                          fillColor='white', lineColor='#cccccc', lineWidth=2.5).draw()
+            visual.ShapeStim(win, vertices='circle', size=(ew*2, eh*2),
+                             pos=(x, y), fillColor='white',
+                             lineColor='#cccccc', lineWidth=3.0,
+                             units='norm').draw()
 
 # ─────────────────────────────────────────────
 # INSTRUCTION SCREEN
@@ -656,12 +666,13 @@ def handle_interlude(win, item, base, world, lang, num, gen_num, slot):
     audio_path = resolve(audio_tmpl, base, world, lang, num, gen_num, slot) if audio_tmpl else ''
 
     # Skip attn/catch by content id, resolved path, OR template path
+    item_id = item.get('id', '')  # item-level id (e.g. 'prac_attn')
     _skip_keywords = ('attn', 'catch')
     if (cid in SKIP_IDS
             or 'attn_catch' in path
             or 'attn_catch' in tmpl
-            or any(cid.startswith(k) or cid.endswith(k) for k in _skip_keywords)
-            or any(k in cid for k in _skip_keywords)):
+            or any(k in cid for k in _skip_keywords)
+            or any(k in item_id for k in _skip_keywords)):
         return
 
     # Get overlay text for known interlude ids
@@ -722,7 +733,7 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
     # box_h = visual height in norm; box_w = norm width for a visually square box
     box_h  = 0.70
     box_w  = box_h / WIN_AR  # visually square on any monitor
-    gap    = 0.05
+    gap    = 0.10
     total  = n * box_w + (n-1) * gap
     sx     = -total/2 + box_w/2
     positions = [(sx + i*(box_w+gap), -0.05) for i in range(n)]
@@ -912,7 +923,7 @@ def run_mc_question(win, q, base, world, lang, num, gen_num, slot,
 
     box_h = 0.70
     box_w = box_h / WIN_AR  # visually square
-    gap   = 0.05
+    gap   = 0.10
     total = n*box_w + (n-1)*gap
     sx    = -total/2 + box_w/2
     positions = [(sx + i*(box_w+gap), -0.05) for i in range(n)]
