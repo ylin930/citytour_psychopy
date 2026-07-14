@@ -1255,6 +1255,8 @@ def main():
             override_cohort  = _vals['cohort']
             override_version = _vals['version']
             world            = _vals['world']
+            start_ss         = _vals.get('start_ss', '')
+            start_trial      = int(_vals['start_trial']) if str(_vals.get('start_trial','')).isdigit() else 0
             pilot_mode       = _vals['pilot']
             fullscr          = True  # always fullscreen, pilot or not
 
