@@ -1,2 +1,0 @@
-user_id,age,gender,ageGroup,cohort,language,version,session,city,citySlot,trial,event_id,task_id,choice,choiceContent,correct,rt_seconds
-12345f,1,,,cohort_a,en,v1,1,1,,first_city_pc_12,12,pc,2,12,1,4.4717

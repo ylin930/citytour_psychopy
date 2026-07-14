@@ -32,7 +32,7 @@ except Exception as _sde:
 # Guide name changes per SESSION within a world (from useInterpolatedTranslation.ts)
 GUIDE_NAMES = {
     'underwater': {1: 'Zoxni', 2: 'Pema', 3: 'Maru'},
-    'aerial':     {1: 'x', 2: 'x', 3: 'x'},  # placeholder — update for T2
+    'desert':     {1: 'Sandy', 2: 'Sandy', 3: 'Sandy'},  # placeholder — update for T2
 }
 
 # city_names.c1–c6 come from translation.json at runtime
@@ -169,13 +169,16 @@ def get_encoding_video_path(full_videos_dir, cohort, session, version, lang):
 # ─────────────────────────────────────────────
 def resolve(template, base, world, lang, num='', gen_num='', slot=''):
     p = template
-    p = p.replace('src/assets/', base.rstrip('/') + '/')
+    # Normalise base to use forward slashes for consistent replacement
+    base_fwd = base.replace(os.sep, '/').rstrip('/')
+    p = p.replace('src/assets/', base_fwd + '/')
     p = p.replace('{world}',    world)
     p = p.replace('{lang}',     lang)
     p = p.replace('{num}',      num)
     p = p.replace('{gen_num}',  gen_num)
     p = p.replace('{slot}',     slot)
-    return p
+    # Convert to OS-native separators so file operations work on Windows
+    return os.path.normpath(p)
 
 # ─────────────────────────────────────────────
 # DATA RECORDER
@@ -235,6 +238,21 @@ def _city_for_session(cohort, session_num):
 # ─────────────────────────────────────────────
 WIN_AR = 1.0  # set after window opens
 
+def _get_movie_stim(win, path, pos, size, loop=False):
+    """Get a working MovieStim, trying multiple backends."""
+    kwargs = dict(pos=pos, size=size, units='norm', loop=loop)
+    for cls_name in ['MovieStim', 'MovieStim3', 'VlcMovieStim']:
+        cls = getattr(visual, cls_name, None)
+        if cls is None:
+            continue
+        try:
+            m = cls(win, path, **kwargs)
+            print(f'[VIDEO] Using {cls_name}')
+            return m
+        except Exception as e:
+            print(f'[VIDEO] {cls_name} failed: {e}')
+    raise RuntimeError(f'No working MovieStim backend for: {path}')
+
 def make_window(fullscr=False):
     win = visual.Window(size=[1080, 1080], fullscr=fullscr,
                         color='white', units='norm', allowGUI=True,
@@ -251,7 +269,9 @@ def make_window(fullscr=False):
     return win
 
 # Set to True when dev mode is active (override fields filled in GUI)
-_DEV_MODE = False
+_DEV_MODE    = False
+_START_SS    = ''     # subsession name to resume from
+_START_TRIAL = 0      # trial number to resume from (0 = all)
 
 # Hardware-level keyboard listener — captures keys even during movie playback
 _kb = None
@@ -492,8 +512,8 @@ def play_video(win, path, auto_advance=True):
     movie_w = VIDEO_MAX_W; movie_h = VIDEO_MAX_H
     finished    = False
     try:
-        movie = visual.MovieStim(win, path, pos=(0, VIDEO_Y),
-                                  size=None, units='norm', loop=False)
+        movie = _get_movie_stim(win, path, pos=(0, VIDEO_Y),
+                                 size=(VIDEO_MAX_W, VIDEO_MAX_H))
         try:
             vw, vh = movie.size
             movie_w, movie_h = fit_size(vw/vh, VIDEO_MAX_W, VIDEO_MAX_H)
@@ -552,9 +572,14 @@ def play_session_video(win, ss, base, world, lang, local_path, cohort, auto_adva
 # ─────────────────────────────────────────────
 # TIMELINE  (gen and pc)
 # ─────────────────────────────────────────────
+def draw_trial_number(win, q_num, total_q):
+    visual.TextStim(win, text=f'{q_num}/{total_q}', color='#aaaaaa',
+                    pos=(0.92, 0.90), height=0.04, units='norm').draw()
+
 def draw_timeline(win, current_q, total_q):
     if total_q == 0:
         return
+    draw_trial_number(win, current_q, total_q)
     # Square dots — visually square by setting w=h/WIN_AR
     dot_h   = 0.100          # height in norm units
     dot_w   = dot_h / WIN_AR # width corrected for screen aspect → visually square
@@ -798,10 +823,9 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
             continue
         core.wait(0.1)   # brief pause so audio doesn't overlap video start
         try:
-            movie = visual.MovieStim(win, rc[play_idx]['path'],
-                                      pos=positions[play_idx],
-                                      size=(box_w, box_h),
-                                      units='norm', loop=False)
+            movie = _get_movie_stim(win, rc[play_idx]['path'],
+                                     pos=positions[play_idx],
+                                     size=(box_w, box_h))
             while not movie.isFinished:
                 draw_all_boxes(play_idx, playing_now=play_idx)
                 movie.draw()
@@ -1085,12 +1109,16 @@ def run_group(win, group, base, world, lang, num, gen_num, slot,
     q_num = 0
     for item in items:
         itype = item.get('type','question')
+        if itype == 'question':
+            q_num += 1
+            if _START_TRIAL > 0 and q_num < _START_TRIAL:
+                print(f'[RESUME] Skipping trial {q_num}')
+                continue
         try:
             if itype == 'interlude':
                 handle_interlude(win, item,
                                  base, world, lang, num, gen_num, slot)
             elif itype == 'question':
-                q_num += 1
                 if gtype == 'gen':
                     run_gen_question(win, item, base, world, lang, num, gen_num, slot,
                                      subsession_name, q_num, total_q, recorder,
@@ -1164,17 +1192,19 @@ def run_subsession(win, ss, base, world, lang, cohort, session_num, version,
 # ─────────────────────────────────────────────
 def main():
     # ── Hardcoded paths — edit once ──────────
-    BASE_PATH        = '/Users/ylin/Desktop/Raven_tasks/citytour_psychopy/experiment'
+    # Use script location so paths work on both Mac and Windows
+    BASE_PATH        = os.path.dirname(os.path.abspath(__file__))
     ASSET_BASE       = os.path.join(BASE_PATH, 'assets')
     JSON_FOLDER      = BASE_PATH
     FULL_VIDEOS_DIR  = os.path.join(ASSET_BASE, 'underwater', '_full_videos')
-    LOCALES_PATH = '/Users/ylin/Desktop/Raven_tasks/citytour_psychopy/experiment/assets/underwater/locales'
+    LOCALES_PATH = os.path.join(BASE_PATH, 'assets', 'underwater', 'locales')
     # ─────────────────────────────────────────
     # translations loaded after language confirmed in GUI
 
     # Default values — updated on each loop so dialog re-opens pre-filled
     _vals = dict(pid='', age='', session='', lang='de',
-                 cohort='', version='', world='underwater', pilot=False)
+                 cohort='', version='', world='underwater',
+                 start_ss='', start_trial='', pilot=False)
 
     def _build_dlg(v, error_msg=''):
         d = gui.Dlg(title='City Tour Experiment')
@@ -1190,6 +1220,12 @@ def main():
         d.addField('Version (1-4):',   v['version'])
         d.addText('─── World ───', color='navy')
         d.addField('World folder:',    v['world'])   # ← update default for each timepoint
+        d.addText('─── Resume (blank = start from beginning) ───', color='gray')
+        d.addField('Start from subsession:', v.get('start_ss',''),
+                   choices=['','Cover Story','Practice Tour',
+                            'first city tour','second city tour',
+                            'third city tour','Retention'])
+        d.addField('Start from trial # (0 = beginning):', v.get('start_trial',''))
         d.addField('Pilot mode (skip enabled, no counter):', v['pilot'])
         return d
 
@@ -1207,8 +1243,10 @@ def main():
             _vals['lang']    = ok[3]
             _vals['cohort']  = ok[4].strip().lower()
             _vals['version'] = ok[5].strip()
-            _vals['world']   = ok[6].strip()
-            _vals['pilot']   = bool(ok[7])
+            _vals['world']       = ok[6].strip()
+            _vals['start_ss']    = ok[7].strip()
+            _vals['start_trial'] = ok[8].strip()
+            _vals['pilot']       = bool(ok[9])
 
             pid              = _vals['pid']
             age_str          = _vals['age']
@@ -1292,8 +1330,10 @@ def main():
             # Real participant — auto-assign and increment counter
             cohort, version = assign_cohort_version(pid, age_str)
 
-        global _DEV_MODE
-        _DEV_MODE = dev_mode  # 's' skip only active in pilot mode
+        global _DEV_MODE, _START_SS, _START_TRIAL
+        _DEV_MODE    = dev_mode
+        _START_SS    = start_ss
+        _START_TRIAL = start_trial
 
         confirm = gui.Dlg(title='Please confirm')
         confirm.addText(
@@ -1331,12 +1371,19 @@ def main():
     _DEV_MODE = _old_dev
 
     try:
+        _reached_ss = not bool(_START_SS)
         for ss in session_data.get('subSessions',[]):
+            ss_name = ss.get('name', ss.get('id',''))
+            if not _reached_ss:
+                if ss_name == _START_SS:
+                    _reached_ss = True
+                else:
+                    print(f'[RESUME] Skipping subsession: {ss_name}')
+                    continue
             try:
                 run_subsession(win, ss, ASSET_BASE, world, lang,
                                cohort, session, version, FULL_VIDEOS_DIR, recorder)
             except _SkipSection:
-                # 's' pressed between subsections — skip to next subsession
                 print(f'[DEV] Skipped to next subsession')
     except Exception as e:
         import traceback; traceback.print_exc()

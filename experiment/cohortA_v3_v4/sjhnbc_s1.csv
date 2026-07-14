@@ -1,6 +1,0 @@
-user_id,age,gender,ageGroup,cohort,language,version,session,city,citySlot,trial,event_id,task_id,choice,choiceContent,correct,rt_seconds
-sjhnbc,1,,,cohort_a,en,v3,1,1,,pc_1,1,prac_pc,2,1,1,4.5051
-sjhnbc,1,,,cohort_a,en,v3,1,1,,first_city_ps_3,2,ps,1,2_1,1,3.4251
-sjhnbc,1,,,cohort_a,en,v3,1,1,,first_city_pc_1,7,pc,3,10,0,4.7932
-sjhnbc,1,,,cohort_a,en,v3,1,1,,first_city_pc_2,8,pc,2,10,0,4.6213
-sjhnbc,1,,,cohort_a,en,v3,1,1,,first_city_pc_12,6,pc,2,3,0,4.3402
