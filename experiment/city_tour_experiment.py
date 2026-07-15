@@ -296,6 +296,30 @@ WIN_AR = 1.0  # set after window opens
 
 def _get_movie_stim(win, path, pos, size, loop=False):
     """Get a working MovieStim, trying multiple backends."""
+    # Pre-check with OpenCV first. On Windows, handing a malformed/incompatible
+    # file straight to the ffpyplayer-based MovieStim backend has been observed
+    # to hard-crash the whole process (exits with no Python traceback) rather
+    # than raise a catchable exception. cv2 uses a different decoder (Media
+    # Foundation on Windows) and fails on bad files far more gracefully, so use
+    # it as a canary: if cv2 can't even open/read a frame, don't risk MovieStim.
+    try:
+        import cv2 as _cv2_check
+        _cap = _cv2_check.VideoCapture(path)
+        _readable = _cap.isOpened()
+        if _readable:
+            _readable, _ = _cap.read()
+        _cap.release()
+        if not _readable:
+            raise RuntimeError(
+                f'Failed OpenCV pre-check (likely corrupt/incompatible codec — '
+                f're-encode this file, e.g. via ffmpeg to H.264/yuv420p+AAC): {path}')
+    except RuntimeError:
+        raise
+    except Exception as _precheck_err:
+        # The pre-check itself broke (not the video) — don't block a possibly-fine
+        # file over that; just note it and fall through to the real attempt.
+        print(f'  [VIDEO PRECHECK] cv2 check errored, proceeding anyway: {_precheck_err}')
+
     kwargs = dict(pos=pos, size=size, units='norm', loop=loop)
     for cls_name in ['MovieStim', 'MovieStim3', 'VlcMovieStim']:
         cls = getattr(visual, cls_name, None)
@@ -399,6 +423,17 @@ def play_audio(path, win=None):
         if path: print(f'  [AUDIO MISSING] {path}')
         return
 
+    # Prefer a .wav sibling if one exists next to the .mp3. The doubled/garbled
+    # onset some clips have on Windows ("its it's the raining...") looks like a
+    # libsndfile MP3-decode bug mishandling the LAME/Xing header — WAV decoding
+    # has no such ambiguity. Batch-convert your narration files once with
+    # convert_audio_to_wav.py (or plain ffmpeg) to get these .wav files; nothing
+    # changes here if they don't exist, it just keeps using the .mp3 as before.
+    if path.lower().endswith('.mp3'):
+        _wav_sibling = os.path.splitext(path)[0] + '.wav'
+        if os.path.exists(_wav_sibling):
+            path = _wav_sibling
+
     def _get_keys():
         if _kb is not None:
             return [k.name for k in _kb.getKeys(
@@ -408,6 +443,16 @@ def play_audio(path, win=None):
     if _SD_OK:
         try:
             data, sr = _sf.read(path, dtype='float32')
+            # Secondary safety net: pad with a touch of silence in case the
+            # output stream itself needs a moment to spin up on this machine.
+            # (This alone did not fix the MP3-onset glitch — the .wav
+            # preference above is the real fix for that.)
+            _pad_n = int(sr * 0.15)
+            if data.ndim > 1:
+                _pad = _np.zeros((_pad_n, data.shape[1]), dtype='float32')
+            else:
+                _pad = _np.zeros(_pad_n, dtype='float32')
+            data = _np.concatenate([_pad, data], axis=0)
             _sd.play(data, sr)
             # Poll until done, checking for skip every 50ms
             while _sd.get_stream().active:
@@ -834,7 +879,18 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
                     frame_rgb = _cv2.cvtColor(frame, _cv2.COLOR_BGR2RGB)
                     tmp = tempfile.NamedTemporaryFile(suffix='.png', delete=False)
                     _cv2.imwrite(tmp.name, _cv2.cvtColor(frame_rgb, _cv2.COLOR_RGB2BGR))
-                    frame_img = tmp.name
+                    tmp.close()
+                    # Verify the written PNG is actually valid before trusting it —
+                    # a malformed file here has been seen to crash pyglet's texture
+                    # upload (GLException: invalid operation) instead of raising a
+                    # catchable Python error.
+                    if (os.path.exists(tmp.name) and os.path.getsize(tmp.name) > 0
+                            and _cv2.imread(tmp.name) is not None):
+                        frame_img = tmp.name
+                    else:
+                        print(f'  [FIRST FRAME ERR] wrote invalid PNG for {ch["path"]}')
+                        try: os.remove(tmp.name)
+                        except Exception: pass
             except Exception as e:
                 print(f'  [FIRST FRAME ERR] {e}')
         first_frames.append(frame_img)
@@ -872,8 +928,15 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
     ff_stims = {}
     for i, ff in enumerate(first_frames):
         if ff and os.path.exists(ff):
-            ff_stims[i] = visual.ImageStim(win, image=ff, pos=positions[i],
-                                            size=(box_w, box_h), units='norm')
+            try:
+                ff_stims[i] = visual.ImageStim(win, image=ff, pos=positions[i],
+                                                size=(box_w, box_h), units='norm')
+            except Exception as e:
+                # A bad texture upload here can otherwise crash the whole
+                # process (pyglet GLException) rather than raise something
+                # catchable later — fall back to the placeholder box instead.
+                print(f'  [FIRST FRAME ERR] failed to build image stim: {e}')
+                first_frames[i] = None
 
     def draw_boxes_fast(played_up_to, playing_now=-1):
         draw_timeline(win, q_num, total_q)
@@ -949,8 +1012,14 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
                     visual.Rect(win, width=box_w+0.03, height=box_h+0.03, pos=pos,
                                 fillColor='#ccecea', lineColor='#006C66',
                                 lineWidth=2, units='norm').draw()
-                visual.ImageStim(win, image=ff, pos=pos,
-                                 size=(box_w, box_h), units='norm').draw()
+                try:
+                    visual.ImageStim(win, image=ff, pos=pos,
+                                     size=(box_w, box_h), units='norm').draw()
+                except Exception as e:
+                    print(f'  [FIRST FRAME ERR] failed to draw image stim: {e}')
+                    first_frames[i] = None
+                    visual.TextStim(win, text=str(i+1), color='#444444',
+                                    pos=pos, height=0.10, units='norm').draw()
             else:
                 if i == selected_idx:
                     visual.Rect(win, width=box_w, height=box_h, pos=pos,
