@@ -58,20 +58,47 @@ def save_json_file(path, data):
     with open(path, 'w') as f:
         json.dump(data, f, indent=2)
 
-def assign_cohort_version(pid, age_group):
-    """Return (cohort, version). Reuses existing assignment for returning participants."""
+def get_participant_record(pid):
+    """Return the stored assignment record for pid, or None if never seen."""
+    assignments = load_json_file(ASSIGNMENTS_FILE)
+    return assignments.get(pid)
+
+def assign_cohort_version(pid, age_group, lang=None, advance_counter=True):
+    """Return (cohort, version). Reuses existing assignment for returning participants.
+
+    If advance_counter=False (pilot runs), a participant record is still saved —
+    so the same pilot ID keeps reusing the same cohort/version on a resume, and
+    autofill/mismatch-checking still works for them — but participant_counts.json
+    (which drives real counterbalancing) is left untouched.
+    """
     assignments = load_json_file(ASSIGNMENTS_FILE)
     if pid in assignments:
-        return assignments[pid]['cohort'], assignments[pid]['version']
+        rec = assignments[pid]
+        # Backfill lang on older records that predate this field — not a mismatch,
+        # just filling in data we didn't used to track.
+        if lang and not rec.get('lang'):
+            rec['lang'] = lang
+            save_json_file(ASSIGNMENTS_FILE, assignments)
+        return rec['cohort'], rec['version']
+
     counts = load_json_file(COUNTS_FILE)
-    if age_group not in counts:
-        counts[age_group] = 0
-    idx = counts[age_group] % len(ASSIGNMENT_SEQUENCE)
-    cohort, version = ASSIGNMENT_SEQUENCE[idx]
-    counts[age_group] += 1
-    save_json_file(COUNTS_FILE, counts)
+    if advance_counter:
+        if age_group not in counts:
+            counts[age_group] = 0
+        idx = counts[age_group] % len(ASSIGNMENT_SEQUENCE)
+        cohort, version = ASSIGNMENT_SEQUENCE[idx]
+        counts[age_group] += 1
+        save_json_file(COUNTS_FILE, counts)
+    else:
+        # Pilot: peek at the current counter (read-only) to still spread pilots
+        # across conditions, but never bump the counter real participants rely on.
+        idx = counts.get(age_group, 0) % len(ASSIGNMENT_SEQUENCE)
+        cohort, version = ASSIGNMENT_SEQUENCE[idx]
+
     assignments[pid] = {'cohort': cohort, 'version': version,
-                        'age_group': age_group, 'completed_sessions': []}
+                        'age_group': age_group, 'lang': lang,
+                        'pilot': (not advance_counter),
+                        'completed_sessions': []}
     save_json_file(ASSIGNMENTS_FILE, assignments)
     return cohort, version
 
@@ -81,6 +108,32 @@ def session_already_run(pid, session):
     if pid not in assignments:
         return False
     return session in assignments[pid].get('completed_sessions', [])
+
+def save_progress(pid, session, subsession, group, trial):
+    """Record exactly where this participant is, live, as they move through a
+    session — so a crash-resume can find this without anyone reading logs."""
+    assignments = load_json_file(ASSIGNMENTS_FILE)
+    rec = assignments.setdefault(pid, {})
+    rec.setdefault('progress', {})[str(session)] = {
+        'subsession': subsession, 'group': group, 'trial': trial}
+    save_json_file(ASSIGNMENTS_FILE, assignments)
+
+def get_progress(pid, session):
+    """Return {'subsession','group','trial'} for the last known position in
+    this session, or None if there's nothing saved (never started / finished)."""
+    rec = get_participant_record(pid)
+    if not rec:
+        return None
+    return (rec.get('progress') or {}).get(str(session))
+
+def clear_progress(pid, session):
+    """Drop the saved position once a session finishes normally, so a future
+    override-rerun doesn't get offered a stale mid-session resume point."""
+    assignments = load_json_file(ASSIGNMENTS_FILE)
+    rec = assignments.get(pid)
+    if rec and 'progress' in rec and str(session) in rec['progress']:
+        del rec['progress'][str(session)]
+        save_json_file(ASSIGNMENTS_FILE, assignments)
 
 def mark_session_complete(pid, session):
     """Record that this participant has finished this session."""
@@ -224,6 +277,9 @@ class DataRecorder:
     def save(self):
         print(f'\u2713 Data saved \u2192 {self.path}')
 
+    def save_progress(self, subsession, group, trial):
+        save_progress(self.meta['user_id'], self.meta['session'], subsession, group, trial)
+
 
 def _choice_number(rc, chosen_idx):
     """Return the 1-based display position of the chosen option."""
@@ -271,7 +327,8 @@ def make_window(fullscr=False):
 # Set to True when dev mode is active (override fields filled in GUI)
 _DEV_MODE    = False
 _START_SS    = ''     # subsession name to resume from
-_START_TRIAL = 0      # trial number to resume from (0 = all)
+_START_GROUP = ''     # subtask/group type to resume from within that subsession (e.g. 'gen','ps','pc')
+_START_TRIAL = 0      # trial number to resume from within that subtask (0 = beginning of subtask)
 
 # Hardware-level keyboard listener — captures keys even during movie playback
 _kb = None
@@ -504,8 +561,9 @@ def play_video(win, path, auto_advance=True):
     if not os.path.exists(path):
         show_text(win, f'[Video not found]\n{os.path.basename(path)}')
         return
-    VIDEO_MAX_W = 1.80
+    # Max video size: 1.60 norm height, width corrected for screen aspect
     VIDEO_MAX_H = 1.60
+    VIDEO_MAX_W = VIDEO_MAX_H / WIN_AR  # visually square pixels
     VIDEO_Y     = 0.10
     btn, lbl    = _next_button(win)
     mouse       = event.Mouse(win=win); mouse.clickReset()
@@ -810,8 +868,33 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
                             fillColor=col, lineColor=None,
                             lineWidth=0, units='norm').draw()
 
-    # Show all gray boxes and play audio question
-    draw_all_boxes(0)
+    # Pre-create ImageStim objects once (not on every frame)
+    ff_stims = {}
+    for i, ff in enumerate(first_frames):
+        if ff and os.path.exists(ff):
+            ff_stims[i] = visual.ImageStim(win, image=ff, pos=positions[i],
+                                            size=(box_w, box_h), units='norm')
+
+    def draw_boxes_fast(played_up_to, playing_now=-1):
+        draw_timeline(win, q_num, total_q)
+        if prompt:
+            visual.TextStim(win, text=prompt, color='black', wrapWidth=1.60,
+                            height=0.065, pos=(0, 0.50), units='norm').draw()
+        for i, pos in enumerate(positions):
+            stim = ff_stims.get(i)
+            if i < played_up_to:
+                if stim: stim.setOpacity(1.0); stim.draw()
+            elif i == playing_now:
+                pass  # movie draws on top
+            else:
+                if stim: stim.setOpacity(0.30); stim.draw()
+                else:
+                    visual.Rect(win, width=box_w, height=box_h, pos=pos,
+                                fillColor='#cccccc', lineColor=None,
+                                units='norm').draw()
+
+    # Show all gray boxes and play question audio
+    draw_boxes_fast(0)
     win.flip()
     play_audio(audio_path)
 
@@ -821,26 +904,25 @@ def run_gen_question(win, q, base, world, lang, num, gen_num, slot,
             print(f'  [VIDEO MISSING] {rc[play_idx]["path"]}')
             core.wait(0.5)
             continue
-        core.wait(0.1)   # brief pause so audio doesn't overlap video start
         try:
             movie = _get_movie_stim(win, rc[play_idx]['path'],
                                      pos=positions[play_idx],
                                      size=(box_w, box_h))
             while not movie.isFinished:
-                draw_all_boxes(play_idx, playing_now=play_idx)
+                draw_boxes_fast(play_idx, playing_now=play_idx)
                 movie.draw()
                 win.flip()
                 check_escape(win)
         except _SkipSection:
             try: movie.stop()
             except Exception: pass
-            raise   # propagate skip
+            raise
         except Exception as e:
             print(f'  [VIDEO ERR] {rc[play_idx]["path"]}: {e}')
             core.wait(0.5)
 
         # After this video ends: show its first frame, rest still gray
-        draw_all_boxes(play_idx + 1)
+        draw_boxes_fast(play_idx + 1)
         win.flip()
         core.wait(0.3)
 
@@ -1093,26 +1175,34 @@ def run_citysorting_question(win, q, base, world, lang, num, gen_num, slot,
 # GROUP RUNNER
 # ─────────────────────────────────────────────
 def run_group(win, group, base, world, lang, num, gen_num, slot,
-              subsession_name, recorder, cohort='a', session=1):
+              subsession_name, recorder, cohort='a', session=1, start_trial=0):
     gtype   = group.get('type','unknown')
     items   = group.get('questions',[])
     total_q = sum(1 for it in items if it.get('type')=='question')
     print(f'\n  [GROUP] {gtype} ({total_q} questions)')
 
-    for instr in group.get('instructions',[]):
-        try:
-            show_instruction(win, instr, base, world, lang, num, gen_num, slot,
-                             cohort=cohort, session=session)
-        except _SkipSection:
-            print(f'[DEV] Skipped group instruction')
+    # Entered this group — nothing completed in it yet (unless we're resuming
+    # straight into the middle of it, in which case the loop below will
+    # overwrite this with the real trial number as soon as it processes one).
+    recorder.save_progress(subsession_name, gtype, 0)
+
+    # start_trial only applies to the specific group we're resuming into —
+    # skipping its instructions too, since those were already seen before the crash.
+    if not (start_trial > 0):
+        for instr in group.get('instructions',[]):
+            try:
+                show_instruction(win, instr, base, world, lang, num, gen_num, slot,
+                                 cohort=cohort, session=session)
+            except _SkipSection:
+                print(f'[DEV] Skipped group instruction')
 
     q_num = 0
     for item in items:
         itype = item.get('type','question')
         if itype == 'question':
             q_num += 1
-            if _START_TRIAL > 0 and q_num < _START_TRIAL:
-                print(f'[RESUME] Skipping trial {q_num}')
+            if start_trial > 0 and q_num < start_trial:
+                print(f'[RESUME] Skipping trial {q_num} in {gtype}')
                 continue
         try:
             if itype == 'interlude':
@@ -1133,6 +1223,10 @@ def run_group(win, group, base, world, lang, num, gen_num, slot,
                                     cohort=cohort, session=session)
         except _SkipSection:
             print(f'[DEV] Skipped item {q_num} in {gtype}')
+        if itype == 'question':
+            # Completed (or deliberately skipped) — either way we've moved past
+            # it, so a resume should pick up at the next trial.
+            recorder.save_progress(subsession_name, gtype, q_num)
     try:
         check_escape(win)
     except _SkipSection:
@@ -1148,6 +1242,9 @@ def run_subsession(win, ss, base, world, lang, cohort, session_num, version,
     content= ss.get('content',{})
     print(f'\n[SUBSESSION] {name or ss_id}')
 
+    # Entered this subsession — group/trial unknown until run_group updates it.
+    recorder.save_progress(name or ss_id, '', 0)
+
     # num = actual city folder for this cohort/session
     # cohort_a: City1/2/3, cohort_b: City4/5/6
     _sess_base = SESSION_CITY.get(session_num, 1)  # 1, 2, or 3
@@ -1155,7 +1252,14 @@ def run_subsession(win, ss, base, world, lang, cohort, session_num, version,
     gen_num = str(int(_sess_base) + (0 if cohort == 'b' else 3))
     slot    = num
 
-    if content:
+    # Are we resuming INTO this subsession specifically (vs. just running it
+    # normally because we already passed the resume point)?
+    resuming_this_ss = bool(_START_SS) and (name == _START_SS or ss_id == _START_SS)
+    # If a subtask was also given, skip this subsession's intro video/instructions
+    # entirely and jump straight to that subtask's group.
+    skip_intro = resuming_this_ss and bool(_START_GROUP)
+
+    if content and not skip_intro:
         cid = content.get('id','')
         if ss_id == 'cover_story':
             local_path = os.path.join(base, world, 'cover', lang, 'cover.mp4')
@@ -1172,20 +1276,36 @@ def run_subsession(win, ss, base, world, lang, cohort, session_num, version,
                                auto_advance=False)
         except _SkipSection:
             print(f'[DEV] Skipped video: {os.path.basename(local_path)}')
+    elif skip_intro:
+        print(f'[RESUME] Skipping intro video for {name or ss_id} (resuming at subtask "{_START_GROUP}")')
 
-    for instr in ss.get('instructions',[]):
-        try:
-            show_instruction(win, instr, base, world, lang, num, gen_num, slot,
-                             cohort=cohort, session=session_num)
-        except _SkipSection:
-            print(f'[DEV] Skipped instruction')
+    if not skip_intro:
+        for instr in ss.get('instructions',[]):
+            try:
+                show_instruction(win, instr, base, world, lang, num, gen_num, slot,
+                                 cohort=cohort, session=session_num)
+            except _SkipSection:
+                print(f'[DEV] Skipped instruction')
 
+    # If resuming with a target subtask, skip groups until we reach it.
+    _group_target_found = not (resuming_this_ss and _START_GROUP)
     for group in ss.get('questionsGroups',[]):
+        gtype = group.get('type','unknown')
+        if not _group_target_found:
+            if gtype == _START_GROUP:
+                _group_target_found = True
+            else:
+                print(f'[RESUME] Skipping subtask: {gtype} (waiting for "{_START_GROUP}")')
+                continue
+        # Only the exact group we resumed into gets the trial-skip; any group
+        # after it in the same subsession starts from its own beginning.
+        this_group_start_trial = _START_TRIAL if (resuming_this_ss and gtype == _START_GROUP) else 0
         try:
             run_group(win, group, base, world, lang, num, gen_num, slot,
-                      name or ss_id, recorder, cohort=cohort, session=session_num)
+                      name or ss_id, recorder, cohort=cohort, session=session_num,
+                      start_trial=this_group_start_trial)
         except _SkipSection:
-            print(f'[DEV] Skipped group: {group.get("type","?")}')
+            print(f'[DEV] Skipped group: {gtype}')
 
 # ─────────────────────────────────────────────
 # MAIN
@@ -1204,12 +1324,98 @@ def main():
     # Default values — updated on each loop so dialog re-opens pre-filled
     _vals = dict(pid='', age='', session='', lang='de',
                  cohort='', version='', world='underwater',
-                 start_ss='', start_trial='', pilot=False)
+                 start_ss='', start_group='', start_trial='', pilot=False)
 
-    def _build_dlg(v, error_msg=''):
+    # Subsession choices exposed to the resume dropdown, and — per subsession —
+    # which subtask/group types actually exist in that subsession's JSON.
+    # NB: the practice tour's third group is typed 'prac_pc' in the JSON
+    # (not 'pc') — that's the value actually matched against, even though
+    # it plays the same role as 'pc' in the real sessions.
+    SS_CHOICES = ['', 'Practice Tour', 'first city tour',
+                  'second city tour', 'third city tour']
+    SUBTASK_CHOICES_BY_SS = {
+        'Practice Tour':     ['', 'gen', 'ps', 'prac_pc'],
+        'first city tour':   ['', 'gen', 'ps', 'pc'],
+        'second city tour':  ['', 'gen', 'ps', 'pc'],
+        'third city tour':   ['', 'gen', 'ps', 'pc',
+                               'citysorting', 'pc_retention_s1', 'pc_retention_s2'],
+    }
+
+    # ── Stage 0: participant ID + session lookup ─────────────────────
+    # Ask for these two first, on their own, so returning participants (e.g.
+    # after a crash) don't have to retype age/language, risk a cohort/version
+    # typo, or hunt through logs to find where they left off.
+    _id_error = ''
+    while True:
+        iddlg = gui.Dlg(title='City Tour Experiment — Participant')
+        if _id_error:
+            iddlg.addText(_id_error, color='red')
+        iddlg.addText('Enter the participant ID and session. If this participant has\n'
+                      'run before, their info — and where they left off, if a session\n'
+                      'was interrupted — will be filled in automatically.',
+                      color='gray')
+        iddlg.addField('Participant ID (required, 6 chars):', _vals['pid'])
+        iddlg.addField('Session (required):', _vals['session'], choices=['','1','2','3'])
+        iok = iddlg.show()
+        if not iddlg.OK: core.quit()
+        _pid_lookup     = iok[0].strip()
+        _session_lookup = iok[1].strip()
+        if not _pid_lookup:
+            _id_error = '⚠  Participant ID is required.'; continue
+        if not re.match(r'^[A-Za-z0-9]{6}$', _pid_lookup):
+            _id_error = '⚠  Participant ID must be exactly 6 letters/numbers (e.g. P00001).'; continue
+        if not _session_lookup:
+            _id_error = '⚠  Session is required.'; continue
+        break
+
+    _vals['pid']     = _pid_lookup
+    _vals['session'] = _session_lookup
+    _returning_note = ''
+    _prior_rec = get_participant_record(_pid_lookup)
+    if _prior_rec:
+        if _prior_rec.get('age_group'):
+            _vals['age'] = str(_prior_rec['age_group'])
+        if _prior_rec.get('lang'):
+            _vals['lang'] = _prior_rec['lang']
+        _returning_note = (
+            f"✓ Returning participant — prior record found: "
+            f"Age {_prior_rec.get('age_group','?')}, "
+            f"Lang {_prior_rec.get('lang') or '?'}, "
+            f"Cohort {_prior_rec.get('cohort','?').upper()}, "
+            f"Version v{_prior_rec.get('version','?')}.\n"
+            f"Age/Language pre-filled below — leave Cohort/Version overrides blank "
+            f"to reuse the same assignment automatically.\n")
+
+        # Was Session {_session_lookup} left mid-way? Auto-fill the resume fields.
+        if not session_already_run(_pid_lookup, int(_session_lookup)):
+            _progress = get_progress(_pid_lookup, int(_session_lookup))
+            if _progress and _progress.get('subsession') in SS_CHOICES:
+                _vals['start_ss'] = _progress['subsession']
+                if _progress.get('group'):
+                    _vals['start_group'] = _progress['group']
+                    # trial=0 in the saved progress means nothing in that group
+                    # was completed yet (instructions may not have been seen) —
+                    # leave start_trial at 0 so they replay from the group's own
+                    # beginning, instead of skipping straight past its intro.
+                    if _progress.get('trial', 0) > 0:
+                        _vals['start_trial'] = str(_progress['trial'] + 1)
+                _resume_bits = _progress['subsession']
+                if _progress.get('group'):
+                    _resume_bits += f" → {_progress['group']}"
+                    if _vals['start_trial']:
+                        _resume_bits += f" → trial {_vals['start_trial']}"
+                _returning_note += (
+                    f"⏸ Session {_session_lookup} looks unfinished — last seen at: "
+                    f"{_resume_bits}.\n"
+                    f"Resume fields pre-filled below — clear them if you'd rather "
+                    f"restart this session from the top.\n")
+
+    def _build_main_dlg(v, error_msg=''):
         d = gui.Dlg(title='City Tour Experiment')
         if error_msg:
             d.addText(error_msg, color='red')
+        if _returning_note:
+            d.addText(_returning_note, color='#006C66')
         d.addText('─── Participant ───', color='navy')
         d.addField('Participant ID (required, 6 chars):', v['pid'])
         d.addField('Age in years (required):',            v['age'])
@@ -1221,18 +1427,26 @@ def main():
         d.addText('─── World ───', color='navy')
         d.addField('World folder:',    v['world'])   # ← update default for each timepoint
         d.addText('─── Resume (blank = start from beginning) ───', color='gray')
-        d.addField('Start from subsession:', v.get('start_ss',''),
-                   choices=['','Cover Story','Practice Tour',
-                            'first city tour','second city tour',
-                            'third city tour','Retention'])
-        d.addField('Start from trial # (0 = beginning):', v.get('start_trial',''))
+        d.addField('Start from subsession:', v.get('start_ss',''), choices=SS_CHOICES)
         d.addField('Pilot mode (skip enabled, no counter):', v['pilot'])
         return d
 
-    while True:  # outer — loops back if user clicks Back on confirm
+    def _build_subtask_dlg(v, subtask_choices, error_msg=''):
+        d = gui.Dlg(title='Resume — pick subtask')
+        if error_msg:
+            d.addText(error_msg, color='red')
+        d.addText(f"Subsession: {v['start_ss']}", color='navy')
+        d.addField('Start from subtask (blank = beginning of subsession):',
+                   v.get('start_group','') if v.get('start_group','') in subtask_choices else '',
+                   choices=subtask_choices)
+        d.addField('Start from trial # within that subtask (0 = its beginning):',
+                   v.get('start_trial',''))
+        return d
+
+    while True:  # outer — loops back if user clicks Back/Cancel further down
         _error_msg = ''
         while True:
-            dlg = _build_dlg(_vals, _error_msg)
+            dlg = _build_main_dlg(_vals, _error_msg)
             ok  = dlg.show()
             if not dlg.OK: core.quit()
 
@@ -1245,8 +1459,7 @@ def main():
             _vals['version'] = ok[5].strip()
             _vals['world']       = ok[6].strip()
             _vals['start_ss']    = ok[7].strip()
-            _vals['start_trial'] = ok[8].strip()
-            _vals['pilot']       = bool(ok[9])
+            _vals['pilot']       = bool(ok[8])
 
             pid              = _vals['pid']
             age_str          = _vals['age']
@@ -1256,7 +1469,6 @@ def main():
             override_version = _vals['version']
             world            = _vals['world']
             start_ss         = _vals.get('start_ss', '')
-            start_trial      = int(_vals['start_trial']) if str(_vals.get('start_trial','')).isdigit() else 0
             pilot_mode       = _vals['pilot']
             fullscr          = True  # always fullscreen, pilot or not
 
@@ -1296,8 +1508,65 @@ def main():
                               f'Check the ID and session, or supply overrides to run anyway.')
                 continue
 
+            # Consistency check for returning participants — catches a typo'd
+            # age/language/cohort/version that would otherwise silently diverge
+            # from what this participant actually ran before.
+            _rec = get_participant_record(pid)
+            if _rec:
+                mismatches = []
+                if age_str and _rec.get('age_group') and age_str != str(_rec['age_group']):
+                    mismatches.append(f"Age — entered {age_str}, prior record has {_rec['age_group']}")
+                if _rec.get('lang') and lang != _rec['lang']:
+                    mismatches.append(f"Language — entered {lang}, prior record has {_rec['lang']}")
+                if override_cohort and override_cohort != _rec.get('cohort'):
+                    mismatches.append(f"Cohort override — entered {override_cohort.upper()}, "
+                                      f"prior record has {str(_rec.get('cohort','?')).upper()}")
+                if override_version and override_version != str(_rec.get('version','')):
+                    mismatches.append(f"Version override — entered v{override_version}, "
+                                      f"prior record has v{_rec.get('version','?')}")
+                if mismatches:
+                    warn = gui.Dlg(title='⚠ Mismatch for returning participant')
+                    warn.addText(
+                        f'{pid} has a prior record, but this does not match it:\n\n' +
+                        '\n'.join(f'  •  {m}' for m in mismatches) +
+                        '\n\nOK = proceed with the values just entered '
+                        '(only if that mismatch is really intended)\n'
+                        'Cancel = go back and fix')
+                    warn.show()
+                    if not warn.OK:
+                        _error_msg = ''
+                        continue  # back to main dialog, values still pre-filled
+
             _error_msg = ''  # clear errors on success
             break
+
+        # ── Stage 2: subtask, ONLY shown (and only offering choices that
+        # actually exist) once a subsession has been picked ─────────────
+        if start_ss:
+            subtask_choices = SUBTASK_CHOICES_BY_SS.get(start_ss, [''])
+            _sub_error = ''
+            while True:
+                sdlg = _build_subtask_dlg(_vals, subtask_choices, _sub_error)
+                sok  = sdlg.show()
+                if not sdlg.OK:
+                    # Back — return to the main dialog (subsession, etc. stay pre-filled)
+                    break
+                _vals['start_group'] = sok[0].strip()
+                _vals['start_trial'] = sok[1].strip()
+                start_group = _vals['start_group']
+                start_trial = int(start_trial_s) if (start_trial_s := _vals['start_trial'].strip()).isdigit() else 0
+                if start_trial > 0 and not start_group:
+                    _sub_error = '⚠  Pick a subtask (gen/ps/pc/…) to go with that trial #.'
+                    continue
+                _sub_error = ''
+                break
+            if not sdlg.OK:
+                continue  # back to outer loop → main dialog again
+        else:
+            _vals['start_group'] = ''
+            _vals['start_trial'] = ''
+            start_group = ''
+            start_trial = 0
 
         session = int(session_str)
 
@@ -1316,26 +1585,29 @@ def main():
             cohort  = override_cohort
             version = int(override_version)
         elif dev_mode:
-            # Pilot mode without override — still auto-assign but do NOT increment counter
-            assignments = load_json_file(ASSIGNMENTS_FILE)
-            if pid in assignments:
-                cohort  = assignments[pid]['cohort']
-                version = assignments[pid]['version']
-            else:
-                counts = load_json_file(COUNTS_FILE)
-                age_key = age_str
-                if age_key not in counts: counts[age_key] = 0
-                idx = counts[age_key] % len(ASSIGNMENT_SEQUENCE)
-                cohort, version = ASSIGNMENT_SEQUENCE[idx]
-                # Do NOT save counts — pilot doesn't advance counter
+            # Pilot mode without override — still auto-assign and PERSIST the
+            # record (so a crash-resume or the mismatch-check keeps working for
+            # pilot IDs too), but never advance the real counterbalancing counter.
+            cohort, version = assign_cohort_version(pid, age_str, lang=lang, advance_counter=False)
         else:
             # Real participant — auto-assign and increment counter
-            cohort, version = assign_cohort_version(pid, age_str)
+            cohort, version = assign_cohort_version(pid, age_str, lang=lang)
 
-        global _DEV_MODE, _START_SS, _START_TRIAL
+        global _DEV_MODE, _START_SS, _START_GROUP, _START_TRIAL
         _DEV_MODE    = dev_mode
         _START_SS    = start_ss
+        _START_GROUP = start_group
         _START_TRIAL = start_trial
+
+        if start_ss:
+            resume_line = f'Resume at  : {start_ss}'
+            if start_group:
+                resume_line += f' → {start_group}'
+                if start_trial:
+                    resume_line += f' → trial {start_trial}'
+            resume_line += '\n'
+        else:
+            resume_line = ''
 
         confirm = gui.Dlg(title='Please confirm')
         confirm.addText(
@@ -1347,6 +1619,7 @@ def main():
             f'Session     : {session}\n'
             f'Language    : {lang}\n'
             f'World       : {world}\n'
+            f'{resume_line}'
             f'Pilot mode  : {"YES — skip enabled, counter unchanged" if dev_mode else "NO"}\n\n'
             f'OK = start session     Cancel = back to edit')
         confirm.show()
@@ -1372,6 +1645,7 @@ def main():
     show_text(win, f'Session {session}')
     _DEV_MODE = _old_dev
 
+    _completed_normally = False
     try:
         _reached_ss = not bool(_START_SS)
         for ss in session_data.get('subSessions',[]):
@@ -1387,12 +1661,22 @@ def main():
                                cohort, session, version, FULL_VIDEOS_DIR, recorder)
             except _SkipSection:
                 print(f'[DEV] Skipped to next subsession')
+        _completed_normally = True
     except Exception as e:
         import traceback; traceback.print_exc()
     finally:
         recorder.save()
-        if not dev_mode and not has_override:
-            mark_session_complete(pid, session)
+        # Escape calls core.quit() directly, which raises SystemExit — that
+        # skips 'except Exception' above but still runs this 'finally', so
+        # _completed_normally correctly stays False for an Escape-quit too.
+        # Only a session that actually reached the end should ever be marked
+        # complete or have its resume point cleared.
+        if _completed_normally:
+            if not dev_mode and not has_override:
+                mark_session_complete(pid, session)
+            # Finished for real — a future rerun (e.g. via override) shouldn't
+            # be offered this stale mid-session resume point.
+            clear_progress(pid, session)
 
     _end_title = get_text('sessionEnd.session3.title') if session == 3 \
               else get_text('sessionEnd.session12.title')
