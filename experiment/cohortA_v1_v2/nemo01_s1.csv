@@ -1,0 +1,2 @@
+user_id,age,gender,ageGroup,cohort,language,version,session,city,citySlot,trial,event_id,task_id,choice,choiceContent,correct,rt_seconds
+nemo01,4,,,cohort_a,en,v1,1,1,,prac_gen_3,3,gen,3,gen_choice_3_2,0,1.1322
