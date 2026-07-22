@@ -295,19 +295,36 @@ def _city_for_session(cohort, session_num):
 WIN_AR = 1.0  # set after window opens
 
 def _get_movie_stim(win, path, pos, size, loop=False):
-    """Get a working MovieStim, trying multiple backends."""
+    """Get a working MovieStim, trying multiple backends.
+    Optimized for macOS (AVFoundation) + Windows (VLC hard decode).
+    """
+    import platform
+    is_windows = platform.system() == "Windows"
+    
     kwargs = dict(pos=pos, size=size, units='norm', loop=loop)
-    for cls_name in ['MovieStim', 'MovieStim3', 'VlcMovieStim']:
+
+    # 不同系统优先不同后端
+    if is_windows:
+        # Windows：VLC 最强硬解，必须放第一个
+        backend_order = ['VlcMovieStim', 'MovieStim3', 'MovieStim']
+    else:
+        # macOS：原生 MovieStim / MovieStim3 更流畅
+        backend_order = ['MovieStim3', 'MovieStim', 'VlcMovieStim']
+
+    for cls_name in backend_order:
         cls = getattr(visual, cls_name, None)
         if cls is None:
+            print(f'[VIDEO] {cls_name} not available')
             continue
         try:
             m = cls(win, path, **kwargs)
-            print(f'[VIDEO] Using {cls_name}')
+            print(f'[VIDEO] Successfully loaded with {cls_name}')
             return m
         except Exception as e:
-            print(f'[VIDEO] {cls_name} failed: {e}')
-    raise RuntimeError(f'No working MovieStim backend for: {path}')
+            print(f'[VIDEO] {cls_name} failed: {str(e)}')
+
+    raise RuntimeError(f"[VIDEO ERROR] No working backend found for: {path}\n"
+                       "Install VLC 64-bit on Windows to fix playback.")
 
 def make_window(fullscr=False):
     win = visual.Window(size=[1080, 1080], fullscr=fullscr,
