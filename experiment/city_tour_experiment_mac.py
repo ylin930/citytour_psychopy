@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-City Tour Task — PsychoPy Version
+City Tour Task — PsychoPy Version 1
 
 Hardcoded paths (edit once per lab setup, bottom of main()):
     BASE_PATH        = experiment root folder
